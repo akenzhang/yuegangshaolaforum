@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="8dp"
+    android:scaleType="fitXY"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <TextView
+        android:id="@+id/id_home_fragment_shaoya_mTitle"
+        android:textSize="16sp"
+        android:textColor="#3c3b3b"
+        android:text="家里窗户累积灰尘扫了又来怎么办？教你一方法，灰尘就没了"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:orientation="horizontal"
+        android:layout_width="match_parent">
+
+        <ImageView
+            android:id="@+id/id_home_fragment_shaoya_mImageList01"
+            android:scaleType="fitXY"
+            android:src="@drawable/profile_bg"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:gravity="left"
+        android:layout_width="match_parent">
+
+        <ImageView
+            android:id="@+id/id_home_fragment_shaoya_mCategoryImgage"
+            android:layout_height="15dp"
+            android:src="@drawable/xh_05"
+            android:gravity="left"
+            android:layout_gravity="center"
+            android:layout_width="20dp" />
+
+        <TextView
+            android:id="@+id/id_home_fragment_shaoya_mViews"
+            android:text="浏览2000"
+            android:textColor="#7b7676"
+            android:layout_gravity="center"
+            android:gravity="left"
+            android:layout_marginLeft="5dp"
+            android:textSize="11sp"
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/id_home_fragment_shaoya_mReplies"
+            android:text="5455评论"
+            android:textSize="11sp"
+            android:textColor="#7b7676"
+            android:gravity="left"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/id_home_fragment_shaoya_mPostDatetime"
+            android:text="5分钟前"
+            android:textSize="11sp"
+            android:textColor="#7b7676"
+            android:gravity="left"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    
+    <View
+        android:layout_marginTop="2dp"
+        android:background="#d0cdcd"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
+</LinearLayout>

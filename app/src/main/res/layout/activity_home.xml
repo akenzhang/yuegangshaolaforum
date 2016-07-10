@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.ui.HomeActivity">
+
+    <com.yuegangshaola.common.CustomViewPager
+        android:id="@+id/id_home_customviewpage"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+    />
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:background="#f7f6f6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <RadioGroup
+            android:id="@+id/id_home_tab"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!--首页-->
+            <RadioButton
+                android:id="@+id/id_home_radiobutton_homepage"
+                style="@style/home_tab"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:drawableTop="@drawable/home_bottom_tab_home_bg"
+                android:textColor="@drawable/home_bottom_tab_home_text"
+                android:text="主页"
+                android:checked="true"
+                />
+
+            <View
+                android:background="#e0dede"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="1dp"
+                android:layout_height="40dp"/>
+
+            <!--视频-->
+            <RadioButton
+                android:id="@+id/id_home_radiobutton_video"
+                style="@style/home_tab"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:drawableTop="@drawable/home_bottom_tab_video_bg"
+                android:textColor="@drawable/home_bottom_tab_home_text"
+                android:text="视频"/>
+
+            <View
+                android:background="#e0dede"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="1dp"
+                android:layout_height="40dp"/>
+
+            <!--联系-->
+            <RadioButton
+                android:id="@+id/id_home_radiobutton_contact"
+                style="@style/home_tab"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:drawableTop="@drawable/home_bottom_tab_contact_bg"
+                android:textColor="@drawable/home_bottom_tab_home_text"
+                android:text="联系"/>
+
+            <View
+                android:background="#e0dede"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_width="1dp"
+                android:layout_height="40dp"/>
+
+            <!--我-->
+            <RadioButton
+                android:id="@+id/id_home_radiobutton_me"
+                style="@style/home_tab"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:drawableTop="@drawable/home_bottom_tab_mine_bg"
+                android:textColor="@drawable/home_bottom_tab_home_text"
+                android:text="我"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+</RelativeLayout>

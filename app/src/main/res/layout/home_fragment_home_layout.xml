@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/id_home_fragment_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:tabBackground="@drawable/home_top_tab_bg"
+        app:tabMaxWidth="80dp"
+        app:tabMinWidth="30dp"
+        android:background="#F2F2F2"
+        app:tabIndicatorColor="@null"
+        app:tabSelectedTextColor="#f4fd00"
+        app:tabTextColor="#ffffff"></android.support.design.widget.TabLayout>
+
+    <com.yuegangshaola.common.CustomViewPager
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/id_home_fragment_top_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.yuegangshaola.common.CustomViewPager>
+
+</LinearLayout>
