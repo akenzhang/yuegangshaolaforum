@@ -15,7 +15,6 @@ public class Article {
     private String mViews;
     private String mReplies;
 
-
     public void setMTitle(String mTitle){
         this.mTitle = mTitle;
     }

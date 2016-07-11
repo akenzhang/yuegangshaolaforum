@@ -1,7 +1,10 @@
 package com.yuegangshaola.common;
 
 import android.content.Context;
+import android.widget.ImageView;
 
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -97,4 +100,40 @@ public class SingletonImageCollection {
             return false;
         }
     }
+
+    /*
+    无缓存加载图片
+     */
+    public static void loadImage(Context mContext, String mUrl, ImageView mImageView){
+
+        int intStart = mUrl.indexOf("[");
+        int intEnd = mUrl.indexOf("]")+1;
+        String strWidthHeight = mUrl.substring(intStart,intEnd);
+
+        int intDouhao = strWidthHeight.indexOf(",");
+        String strWidth = strWidthHeight.substring(0,intDouhao).replace("[","");
+        String strHeight = strWidthHeight.replace("["+ strWidth +",", "").replace("]", "");
+
+        int intWidth = Integer.parseInt(strWidth);
+        int intHeight = Integer.parseInt(strHeight);
+
+        Picasso.with(mContext)
+                .load(mUrl.replace(strWidthHeight,""))
+                //.memoryPolicy(MemoryPolicy.NO_CACHE )
+                //.networkPolicy(NetworkPolicy.NO_CACHE)
+                .resize(500,500*intHeight/intWidth)
+                .noFade()
+                .into(mImageView);
+    }
+
+    public static String parseImageUrl(String url){
+
+        int intStart = url.indexOf("[");
+        int intEnd = url.indexOf("]")+1;
+        String strWidthHeight = url.substring(intStart,intEnd);
+
+        return url.replace(strWidthHeight,"");
+    }
+
+
 }
