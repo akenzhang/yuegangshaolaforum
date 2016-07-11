@@ -15,7 +15,7 @@ public class HomeDefaultFragmentXianchang extends YuegangshaolaBaseFragment {
 
     @Override
     protected int getFid() {
-        return 0;
+        return 13;
     }
 
     @Override
