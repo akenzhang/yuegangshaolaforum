@@ -1,12 +1,11 @@
 package com.yuegangshaola.common;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
-
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,11 +57,11 @@ public class SingletonImageCollection {
         return picCollection.containsKey(intKey);
     }
 
-    //内存中最多保存100张图片
+    //内存中最多保存50张图片
     public void recycleCollection(Context mContext){
 
         int intSize = picCollection.size();
-        if(intSize>200) {
+        if(intSize>80) {
             Map newpicCollection = new HashMap<Object,String>();
 
             int j = 1;
@@ -72,11 +71,11 @@ public class SingletonImageCollection {
             }
 
             picCollection.clear();
-            for(int k=1;k<=100;k++){
+            for(int k=1;k<=50;k++){
                 picCollection.put(k,newpicCollection.get(k));
             }
 
-            for(int k=101;k<=intSize;k++){
+            for(int k=51;k<=intSize;k++){
                 Picasso.with(mContext).invalidate(newpicCollection.get(k).toString());
             }
 
@@ -117,12 +116,17 @@ public class SingletonImageCollection {
         int intWidth = Integer.parseInt(strWidth);
         int intHeight = Integer.parseInt(strHeight);
 
+        String strFinalImageUrl = mUrl.replace(strWidthHeight,"");
+
+
+        Picasso.with(mContext).setIndicatorsEnabled(true);
         Picasso.with(mContext)
-                .load(mUrl.replace(strWidthHeight,""))
+                .load(strFinalImageUrl)
                 //.memoryPolicy(MemoryPolicy.NO_CACHE )
                 //.networkPolicy(NetworkPolicy.NO_CACHE)
-                .resize(500,500*intHeight/intWidth)
+                //.resize(450,500*intHeight/intWidth).centerCrop()
                 .noFade()
+                .config(Bitmap.Config.RGB_565)
                 .into(mImageView);
     }
 

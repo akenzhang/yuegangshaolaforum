@@ -55,7 +55,8 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
     获取 Fragment Context
      */
     protected  Context getFragmentContext(){
-        return getContext();
+        //return getContext();
+        return this.getActivity();
     }
 
     /*
@@ -91,7 +92,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
                         //LogUtil.e("findLastVisibleItemPosition() + 1:"+(mLayoutManager.findLastVisibleItemPosition() + 1)+"  getTotalrowcont():"+articleset.getTotalrowcont());
                         if (!hasmore && newState == RecyclerView.SCROLL_STATE_IDLE && mLayoutManager.findLastVisibleItemPosition() + 1 >= Integer.valueOf(articleset.getTotalrowcont())) {
                             //弹出提示对话框
-                            DialogUtil.showDialog(YuegangshaolaBaseFragment.this.getContext(),R.layout.home_fragment_loadall_dialogackground,600);
+                            DialogUtil.showDialog(YuegangshaolaBaseFragment.this.getFragmentContext(),R.layout.home_fragment_loadall_dialogackground,600);
                         }
                     }
                 }
@@ -109,7 +110,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
                             }
 
                             //加载数据，提示对话框
-                            final DialogUtil dialog2 = new DialogUtil(YuegangshaolaBaseFragment.this.getContext(),"正在加载数据......");
+                            final DialogUtil dialog2 = new DialogUtil(YuegangshaolaBaseFragment.this.getFragmentContext(),"正在加载数据......");
                             LogUtil.e("intPageNext:"+String.valueOf(intPageNext));
                             String strRequestUrl = "http://www.1316818.com/jsonserver.aspx?fid=" + getFid() + "&newspageno=" + String.valueOf(intPageNext) + "&newspagesize=" + NEWS_PAGE_SIZE;
                             OkHttpUtils.getAsync(strRequestUrl, new OkHttpUtils.DataCallBack() {
@@ -155,7 +156,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
             String strRequestUrl = "http://www.1316818.com/jsonserver.aspx?fid="+ getFid() +"&newspageno="+ intPageNext +"&newspagesize="+NEWS_PAGE_SIZE;  //为了加快速度，第一次加载6条
 
             //弹出提示对话框
-            final DialogUtil dialog1 = new DialogUtil(YuegangshaolaBaseFragment.this.getContext(),"正在加载数据......");
+            final DialogUtil dialog1 = new DialogUtil(YuegangshaolaBaseFragment.this.getFragmentContext(),"正在加载数据......");
 
             OkHttpUtils.getAsync(strRequestUrl, new OkHttpUtils.DataCallBack() {
             @Override
@@ -166,7 +167,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
                 }
 
                 //弹出异常对话框
-                DialogUtil.showDialog(YuegangshaolaBaseFragment.this.getContext(),"数据加载异常......",1000);
+                DialogUtil.showDialog(YuegangshaolaBaseFragment.this.getFragmentContext(),"数据加载异常......",1000);
             }
 
             @Override

@@ -38,12 +38,11 @@ public class HomeDefaultFragment extends BaseFragment {
         mTabLayout = (TabLayout) this.getActivity().findViewById(R.id.id_home_fragment_tablayout);
 
         tabTitles = new String[]{
-                "烧鸭烧鹅" //HomeDefaultFragmentShaoya
+                "最新资讯" //HomeDefaultFragmentRedian
+                ,"烧鸭烧鹅" //HomeDefaultFragmentShaoya
                 ,"隆江猪脚" //HomeDefaultFragmentZhujiao
                 ,"烧猪烧肉" //HomeDefaultFragmentShaozhu
                 ,"叉烧烧骨" //HomeDefaultFragmentChashao
-                ,"各种鸡类" //HomeDefaultFragmentJilei
-                ,"其它品类" //HomeDefaultFragmentQita
                 ,"精彩视频" //HomeDefaultFragmentShipin
                 ,"学员作品" //HomeDefaultFragmentZuopin
                 ,"现场点滴" //HomeDefaultFragmentXianchang
@@ -51,15 +50,16 @@ public class HomeDefaultFragment extends BaseFragment {
                 ,"潮州肉卷" //HomeDefaultFragmentRoujuan
                 ,"经验分享" //HomeDefaultFragmentJingyan
                 ,"街头巷尾"  //HomeDefaultFragmentJietou
+                ,"各种鸡类" //HomeDefaultFragmentJilei
+                ,"其它品类" //HomeDefaultFragmentQita
         };
 
         fragments = new Fragment[]{
-                new HomeDefaultFragmentShaoya()
+                new HomeDefaultFragmentRedian()
+                ,new HomeDefaultFragmentShaoya()
                 ,new HomeDefaultFragmentZhujiao()
                 ,new HomeDefaultFragmentShaozhu()
                 ,new HomeDefaultFragmentChashao()
-                ,new HomeDefaultFragmentJilei()
-                ,new HomeDefaultFragmentQita()
                 ,new HomeDefaultFragmentShipin()
                 ,new HomeDefaultFragmentZuopin()
                 ,new HomeDefaultFragmentXianchang()
@@ -67,6 +67,8 @@ public class HomeDefaultFragment extends BaseFragment {
                 ,new HomeDefaultFragmentRoujuan()
                 ,new HomeDefaultFragmentJingyan()
                 ,new HomeDefaultFragmentJietou()
+                ,new HomeDefaultFragmentJilei()
+                ,new HomeDefaultFragmentQita()
         };
 
     }
