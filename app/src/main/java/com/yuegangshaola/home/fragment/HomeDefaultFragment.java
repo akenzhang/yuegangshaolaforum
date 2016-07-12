@@ -40,7 +40,7 @@ public class HomeDefaultFragment extends BaseFragment {
         tabTitles = new String[]{
                 "最新资讯" //HomeDefaultFragmentRedian
                 ,"烧腊技术分享" //HomeDefaultFragmentShaolajishu   7,8,9,20,21,17
-                ,"现场点滴" //HomeDefaultFragmentXianchangdiandi  13,11,22,15,18
+                ,"培训现场点滴" //HomeDefaultFragmentXianchangdiandi  13,11,22,15,18
                 ,"隆江猪脚" //HomeDefaultFragmentLongjiangzhujiao  22,19
         };
 
