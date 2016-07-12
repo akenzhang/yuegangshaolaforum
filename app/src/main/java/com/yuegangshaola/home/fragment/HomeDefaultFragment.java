@@ -39,36 +39,16 @@ public class HomeDefaultFragment extends BaseFragment {
 
         tabTitles = new String[]{
                 "最新资讯" //HomeDefaultFragmentRedian
-                ,"烧鸭烧鹅" //HomeDefaultFragmentShaoya
-                ,"隆江猪脚" //HomeDefaultFragmentZhujiao
-                ,"烧猪烧肉" //HomeDefaultFragmentShaozhu
-                ,"叉烧烧骨" //HomeDefaultFragmentChashao
-                ,"精彩视频" //HomeDefaultFragmentShipin
-                ,"学员作品" //HomeDefaultFragmentZuopin
-                ,"现场点滴" //HomeDefaultFragmentXianchang
-                ,"有问必答" //HomeDefaultFragmentYinan
-                ,"潮州肉卷" //HomeDefaultFragmentRoujuan
-                ,"经验分享" //HomeDefaultFragmentJingyan
-                ,"街头巷尾"  //HomeDefaultFragmentJietou
-                ,"各种鸡类" //HomeDefaultFragmentJilei
-                ,"其它品类" //HomeDefaultFragmentQita
+                ,"烧腊技术分享" //HomeDefaultFragmentShaolajishu   7,8,9,20,21,17
+                ,"教学现场点滴" //HomeDefaultFragmentXianchangdiandi  13,11,22,15,18
+                ,"隆江猪脚" //HomeDefaultFragmentLongjiangzhujiao  22,19
         };
 
         fragments = new Fragment[]{
                 new HomeDefaultFragmentRedian()
-                ,new HomeDefaultFragmentShaoya()
-                ,new HomeDefaultFragmentZhujiao()
-                ,new HomeDefaultFragmentShaozhu()
-                ,new HomeDefaultFragmentChashao()
-                ,new HomeDefaultFragmentShipin()
-                ,new HomeDefaultFragmentZuopin()
-                ,new HomeDefaultFragmentXianchang()
-                ,new HomeDefaultFragmentYinan()
-                ,new HomeDefaultFragmentRoujuan()
-                ,new HomeDefaultFragmentJingyan()
-                ,new HomeDefaultFragmentJietou()
-                ,new HomeDefaultFragmentJilei()
-                ,new HomeDefaultFragmentQita()
+                ,new HomeDefaultFragmentShaolajishu()
+                ,new HomeDefaultFragmentXianchangdiandi()
+                ,new HomeDefaultFragmentLongjiangzhujiao()
         };
 
     }

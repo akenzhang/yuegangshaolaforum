@@ -62,7 +62,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
     /*
     获取 fid
      */
-    protected abstract int getFid();
+    protected abstract String getFids();
 
     @Override
     protected void initView() {
@@ -102,7 +102,6 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
                     if(articleset!=null) {
                         int intTotalrowcont = Integer.valueOf(articleset.getTotalrowcont());
                         int intTotalPagers = intTotalrowcont%NEWS_PAGE_SIZE>0?intTotalrowcont/NEWS_PAGE_SIZE+1:intTotalrowcont/NEWS_PAGE_SIZE;
-                        //int intPageNext = lastItem %(NEWS_PAGE_SIZE-1)==0?lastItem /(NEWS_PAGE_SIZE-1)+1:lastItem /(NEWS_PAGE_SIZE-1)+2;
                         intPageNext++;
                         if(intPageNext<=intTotalPagers) {
                             if(intPageNext==intTotalPagers) {
@@ -110,16 +109,16 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
                             }
 
                             //加载数据，提示对话框
-                            final DialogUtil dialog2 = new DialogUtil(YuegangshaolaBaseFragment.this.getFragmentContext(),"正在加载数据......");
-                            LogUtil.e("intPageNext:"+String.valueOf(intPageNext));
-                            String strRequestUrl = "http://www.1316818.com/jsonserver.aspx?fid=" + getFid() + "&newspageno=" + String.valueOf(intPageNext) + "&newspagesize=" + NEWS_PAGE_SIZE;
+                            //final DialogUtil dialog2 = new DialogUtil(YuegangshaolaBaseFragment.this.getFragmentContext(),"正在加载数据......");
+                            //LogUtil.e("intPageNext:"+String.valueOf(intPageNext));
+                            String strRequestUrl = "http://www.1316818.com/jsonserver.aspx?fid=" + getFids() + "&newspageno=" + String.valueOf(intPageNext) + "&newspagesize=" + NEWS_PAGE_SIZE;
                             OkHttpUtils.getAsync(strRequestUrl, new OkHttpUtils.DataCallBack() {
                                 @Override
                                 public void requestFailure(Request request, IOException e) {
                                     //数据加载失败，也要关闭对话框
-                                    if(dialog2!=null) {
-                                        dialog2.closeDialog();
-                                    }
+                                    //if(dialog2!=null) {
+                                    //    dialog2.closeDialog();
+                                    //}
                                 }
 
                                 @Override
@@ -132,9 +131,9 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
                                     mListArticle.addAll(moreListArticle);
                                     adapter.notifyDataSetChanged();
 
-                                    if(dialog2!=null) {
-                                        dialog2.closeDialog();
-                                    }
+                                    //if(dialog2!=null) {
+                                    //    dialog2.closeDialog();
+                                    //}
                                 }
                             });
                         }
@@ -153,7 +152,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
 
     @Override
     protected void bindData() {
-            String strRequestUrl = "http://www.1316818.com/jsonserver.aspx?fid="+ getFid() +"&newspageno="+ intPageNext +"&newspagesize="+NEWS_PAGE_SIZE;  //为了加快速度，第一次加载6条
+            String strRequestUrl = "http://www.1316818.com/jsonserver.aspx?fid="+ getFids() +"&newspageno="+ intPageNext +"&newspagesize="+NEWS_PAGE_SIZE;  //为了加快速度，第一次加载6条
 
             //弹出提示对话框
             final DialogUtil dialog1 = new DialogUtil(YuegangshaolaBaseFragment.this.getFragmentContext(),"正在加载数据......");

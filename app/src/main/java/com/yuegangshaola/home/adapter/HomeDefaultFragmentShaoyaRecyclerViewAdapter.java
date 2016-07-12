@@ -33,7 +33,6 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
     private static final  int FOOTER=4;
 
     private SingletonImageCollection picCollection;
-    private static int intThreecontinuum=0; //专门统计三个图片连续出现的次数
 
     /*
     构造函数，可以通过构造函数传递外面的数据进来
@@ -185,8 +184,8 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
         Article article = mListArticle.get(position); //temp/nopic.gif
         int intImageCount = article.getMImageList().length()-article.getMImageList().replace("|","").length()+1;
 
-        if(intImageCount>=3){
-            intImageCount=3;
+        if(intImageCount>3){
+            intImageCount=1;
         }
 
         //if (position + 1 == getItemCount()){
@@ -194,23 +193,15 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
         //}else {
                 switch (intImageCount){
                     case ONE_IMAGE:
-                        intThreecontinuum=0;
                         if(article.getMImageList().contains("nopic.gif")){
                             return TOP;
                         }
                         return ONE_IMAGE;
                     case TWO_IMAGE:
-                        intThreecontinuum=0;
                         return TWO_IMAGE;
                     case THREE_IMAGE:
-                        intThreecontinuum++;
-                        if(intThreecontinuum>=3){
-                            intThreecontinuum=0;
-                            return ONE_IMAGE;
-                        }
                         return THREE_IMAGE;
                     default:
-                        intThreecontinuum=0;
                         return TOP;
                 }
             }
