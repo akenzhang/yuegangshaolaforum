@@ -14,7 +14,6 @@ import com.yuegangshaola.bean.Article;
 import com.yuegangshaola.common.SingletonImageCollection;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by new pc on 2016/7/6.
@@ -54,23 +53,23 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
         if(view==null) {
             switch (viewType) {
                 case TOP:
-                    view = mInflater.inflate(R.layout.home_fragment_common_top_layout, parent,false);
+                    view = mInflater.inflate(R.layout.home_fragment_common_top, parent,false);
                     return new ArticleNoImageViewHolder(view);
 
                 case THREE_IMAGE:
-                    view = mInflater.inflate(R.layout.home_fragment_common_threeimage_layout, parent,false);
+                    view = mInflater.inflate(R.layout.home_fragment_common_threeimage, parent,false);
                     return new ArticleThreeImageViewHolder(view);
 
                 case TWO_IMAGE:
-                    view = mInflater.inflate(R.layout.home_fragment_common_twoimage_layout, parent,false);
+                    view = mInflater.inflate(R.layout.home_fragment_common_twoimage, parent,false);
                     return new ArticleTwoImageViewHolder(view);
 
                 case ONE_IMAGE:
-                    view = mInflater.inflate(R.layout.home_fragment_common_oneimage_layout, parent,false);
+                    view = mInflater.inflate(R.layout.home_fragment_common_oneimage, parent,false);
                     return new ArticleOneImageViewHolder(view);
 
                 case FOOTER:
-                    view = mInflater.inflate(R.layout.home_fragment_common_footer_layout, parent,false);
+                    view = mInflater.inflate(R.layout.home_fragment_common_footer, parent,false);
                     return new ArticleFooterImageViewHolder(view);
 
                 default:

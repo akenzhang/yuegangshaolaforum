@@ -1,7 +1,6 @@
 package com.yuegangshaola.home.fragment;
 
 import com.yuegangshaola.R;
-import com.yuegangshaola.common.BaseFragment;
 
 /**
  * Created by new pc on 2016/7/5.
@@ -20,6 +19,6 @@ public class HomeDefaultFragmentShaolajishu extends YuegangshaolaBaseFragment {
 
     @Override
     protected int getLayout() {
-        return R.layout.home_fragment_shaolajishu_layout;
+        return R.layout.home_fragment_shaolajishu;
     }
 }

@@ -25,7 +25,7 @@ public class HomeDefaultFragment extends BaseFragment {
 
     @Override
     protected int getLayout() {
-        return R.layout.home_fragment_home_layout;
+        return R.layout.home_fragment_home;
     }
 
     @Override

@@ -19,6 +19,6 @@ public class HomeDefaultFragmentLongjiangzhujiao extends YuegangshaolaBaseFragme
 
     @Override
     protected int getLayout() {
-        return R.layout.home_fragment_longjiangzhujiao_layout;
+        return R.layout.home_fragment_longjiangzhujiao;
     }
 }

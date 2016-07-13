@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 public class MineHomeFragment extends BaseFragment {
     @Override
     protected int getLayout() {
-        return R.layout.mine_fragment_home_layout;
+        return R.layout.mine_fragment_home;
     }
 
     @Override

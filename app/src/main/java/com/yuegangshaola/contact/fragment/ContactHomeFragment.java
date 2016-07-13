@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 public class ContactHomeFragment extends BaseFragment {
     @Override
     protected int getLayout() {
-        return R.layout.contact_fragment_home_layout;
+        return R.layout.contact_fragment_home;
     }
 
     @Override

@@ -19,6 +19,6 @@ public class HomeDefaultFragmentXianchangdiandi extends YuegangshaolaBaseFragmen
 
     @Override
     protected int getLayout() {
-        return R.layout.home_fragment_xianchangdiandi_layout;
+        return R.layout.home_fragment_xianchangdiandi;
     }
 }

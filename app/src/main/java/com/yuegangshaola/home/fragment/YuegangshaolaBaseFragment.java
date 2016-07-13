@@ -92,7 +92,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
                         //LogUtil.e("findLastVisibleItemPosition() + 1:"+(mLayoutManager.findLastVisibleItemPosition() + 1)+"  getTotalrowcont():"+articleset.getTotalrowcont());
                         if (!hasmore && newState == RecyclerView.SCROLL_STATE_IDLE && mLayoutManager.findLastVisibleItemPosition() + 1 >= Integer.valueOf(articleset.getTotalrowcont())) {
                             //弹出提示对话框
-                            DialogUtil.showDialog(YuegangshaolaBaseFragment.this.getFragmentContext(),R.layout.home_fragment_loadall_dialogackground,600);
+                            DialogUtil.showDialog(YuegangshaolaBaseFragment.this.getFragmentContext(),R.layout.home_fragment_loadall_dialogackground,2000);
                         }
                     }
                 }

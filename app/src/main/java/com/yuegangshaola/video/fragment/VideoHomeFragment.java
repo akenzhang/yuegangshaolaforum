@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 public class VideoHomeFragment extends BaseFragment {
     @Override
     protected int getLayout() {
-        return R.layout.video_fragment_home_layout;
+        return R.layout.video_fragment_home;
     }
 
     @Override

@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:tabBackground="@drawable/home_top_tab_bg"
-
         android:background="#F2F2F2"
         app:tabIndicatorColor="@null"
         app:tabSelectedTextColor="#f4fd00"
