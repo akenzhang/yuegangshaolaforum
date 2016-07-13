@@ -47,6 +47,33 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp">
+
+        <EditText
+            android:background="@drawable/home_article_bottom_comment"
+            android:layout_marginLeft="10dp"
+            android:padding="8dp"
+            android:textSize="13sp"
+            android:layout_gravity="center"
+            android:hint="写评论..."
+            android:layout_weight="5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:src="@drawable/topic_tabbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:src="@drawable/topic_icon_share_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </RelativeLayout>

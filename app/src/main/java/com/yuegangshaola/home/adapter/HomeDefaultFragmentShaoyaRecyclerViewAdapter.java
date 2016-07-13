@@ -1,6 +1,7 @@
 package com.yuegangshaola.home.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.yuegangshaola.R;
 import com.yuegangshaola.bean.Article;
 import com.yuegangshaola.common.SingletonImageCollection;
+import com.yuegangshaola.home.activity.HomeArticleDetailActivity;
 
 import java.util.List;
 
@@ -160,6 +162,8 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext,artitle.getMTitle(),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext,HomeArticleDetailActivity.class);
+                mContext.startActivity(intent);
             }
         });
 
