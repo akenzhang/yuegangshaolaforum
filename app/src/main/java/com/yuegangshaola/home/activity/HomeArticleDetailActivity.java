@@ -94,7 +94,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 ArticledetailRoot root = gson.fromJson(strResult,ArticledetailRoot.class);
                 List<Articledetail> detaillist = root.getArticledetail();
                 String strLoadText = TextUtil.parseJason(detaillist.get(0).getMContent());
-                LogUtil.e(strLoadText);
+               // LogUtil.e(strLoadText);
+                strLoadText ="<style>*{font-size:16px;line-height:20px;color:#6c6666;}</style>"+strLoadText;
                 article_detail_webview.loadDataWithBaseURL(null,strLoadText,"text/html","utf-8",null);
             }
         });
