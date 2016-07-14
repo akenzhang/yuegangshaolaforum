@@ -15,6 +15,7 @@ import com.yuegangshaola.R;
 import com.yuegangshaola.bean.Articledetail;
 import com.yuegangshaola.bean.ArticledetailRoot;
 import com.yuegangshaola.common.BaseActivity;
+import com.yuegangshaola.common.LogUtil;
 import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.TextUtil;
 
@@ -93,6 +94,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 ArticledetailRoot root = gson.fromJson(strResult,ArticledetailRoot.class);
                 List<Articledetail> detaillist = root.getArticledetail();
                 String strLoadText = TextUtil.parseJason(detaillist.get(0).getMContent());
+                LogUtil.e(strLoadText);
                 article_detail_webview.loadDataWithBaseURL(null,strLoadText,"text/html","utf-8",null);
             }
         });
