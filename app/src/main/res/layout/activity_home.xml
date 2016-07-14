@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home.ui.HomeActivity">
+    tools:context=".home.activity.HomeActivity">
 
     <com.yuegangshaola.common.CustomViewPager
         android:id="@+id/id_home_customviewpage"

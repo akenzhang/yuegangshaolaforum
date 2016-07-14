@@ -1,4 +1,4 @@
-package com.yuegangshaola.home.ui;
+package com.yuegangshaola.home.activity;
 
 import android.support.v4.app.Fragment;
 import android.widget.RadioButton;

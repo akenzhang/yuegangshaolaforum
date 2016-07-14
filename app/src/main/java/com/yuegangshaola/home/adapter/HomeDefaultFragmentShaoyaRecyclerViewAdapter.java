@@ -2,6 +2,7 @@ package com.yuegangshaola.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -161,8 +162,12 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,artitle.getMTitle(),Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(mContext,artitle.getMTid(),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext,HomeArticleDetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("tid",artitle.getMTid().toString());
+                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });
