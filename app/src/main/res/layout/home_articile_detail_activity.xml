@@ -65,18 +65,22 @@
 
             <!-- 文章标题 -->
             <TextView
+                android:id="@+id/id_article_detail_title"
                 android:text="文章标题:这里填写文章的标题"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
                 android:textStyle="bold"
-                android:textSize="16dp"
+                android:textColor="#020000"
+                android:textSize="18dp"
                 android:textAlignment="center"
                 android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_height="wrap_content" />
 
             <!-- 作者，关注 -->
             <LinearLayout
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -88,10 +92,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:text="作者：张学强"
+                        android:id="@+id/id_article_detail_category"
+                        android:textColor="#020000"
+                        android:text="类别：烧鸭烧鹅"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
+                        android:id="@+id/id_article_detail_postdatetime"
+                        android:textColor="#020000"
                         android:text="日期：2016.7.13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -106,9 +114,17 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
+            
+            <View
+                android:background="#e5e3e3"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
 
             <WebView
-
                 android:id="@+id/id_article_detail_webview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
