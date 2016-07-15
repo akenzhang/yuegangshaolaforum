@@ -144,18 +144,17 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
 
             <!-- 其它相关板块 -->
             <LinearLayout
-                android:background="#d1cccc"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ListView
+                <com.yuegangshaola.common.ListViewForScrollView
+                    android:divider="@null"
                     android:id="@+id/id_article_detail_ListView"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="8dp"

@@ -2,6 +2,7 @@ package com.yuegangshaola.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -32,12 +33,18 @@ public class HomeArticleDetailCategoryAdapter extends CommonAdapter<String> {
 
         TextView view = (TextView)vh.getViews(R.id.id_article_detail_category);
         view.setText(item);
+        view.setTag(1,item);
 
         //设置点击事件
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("category",v.getTag().toString());
                 Intent intent = new Intent(mContext, HomeActivity.class);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
             }
         });
 
