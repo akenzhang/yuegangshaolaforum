@@ -1,5 +1,7 @@
 package com.yuegangshaola.home.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
@@ -86,27 +88,12 @@ public class HomeDefaultFragment extends BaseFragment {
         mTabLayout.setupWithViewPager(mHome_fragment_toptab_viewpager);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 
-        //mHome_fragment_toptab_viewpager.setCurrentItem(2);
-        String strCategory = this.getActivity().getIntent().getExtras().getString("cagegory");
-        switch (strCategory){
-            case "最新资讯":
-                mHome_fragment_toptab_viewpager.setCurrentItem(0);
-                break;
-
-            case "烧腊技术分享":
-                mHome_fragment_toptab_viewpager.setCurrentItem(1);
-                break;
-
-            case "培训现场点滴":
-                mHome_fragment_toptab_viewpager.setCurrentItem(2);
-                break;
-
-            case "隆江猪脚":
-                mHome_fragment_toptab_viewpager.setCurrentItem(3);
-                break;
-            default:
-                mHome_fragment_toptab_viewpager.setCurrentItem(0);
-                break;
+        //从文章页面接过传递的参数，决定跳转到那个Fragment页面
+        Intent intent = this.getActivity().getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle!=null) {
+            String strCategory = bundle.get("category").toString();
+            mHome_fragment_toptab_viewpager.setCurrentItem(Integer.valueOf(strCategory));
         }
 
     }
