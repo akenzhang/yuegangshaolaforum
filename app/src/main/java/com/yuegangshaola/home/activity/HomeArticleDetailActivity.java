@@ -39,6 +39,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private TextView article_detail_category;
     private TextView article_detail_postdatetime;
     private ListView article_detail_ListView;
+    private TextView article_detail_views;
+    private TextView article_detail_poster;
 
     @Override
     protected int getLayout() {
@@ -54,6 +56,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_category = (TextView) this.findViewById(R.id.id_article_detail_category);
         article_detail_postdatetime = (TextView) this.findViewById(R.id.id_article_detail_postdatetime);
         article_detail_ListView = (ListView) this.findViewById(R.id.id_article_detail_ListView);
+        article_detail_views = (TextView) this.findViewById(R.id.id_article_detail_views);
+        article_detail_poster = (TextView) this.findViewById(R.id.id_article_detail_poster);
 
     }
 
@@ -123,6 +127,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 article_detail_category.setText("类别："+articleDetail.getMCategory());
                 article_detail_postdatetime.setText("发布时间："+articleDetail.getMPostDatetime());
                 article_detail_webview.loadDataWithBaseURL(null,"<style>*{line-height:22px;color:#6c6666;}</style>"+strLoadText,"text/html","utf-8",null); //将字体设置成灰色
+                article_detail_views.setText("浏览："+articleDetail.getMViews());
+                article_detail_poster.setText("作者："+articleDetail.getMPoster());
 
                 dialog.closeDialog();
             }
