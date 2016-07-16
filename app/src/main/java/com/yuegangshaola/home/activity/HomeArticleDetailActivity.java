@@ -191,6 +191,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
         更改id_article_detail_replies_ListView
         服务器连接XXXXXXXXXXXXXXXX
         jasonserver.aspx数据获取
+        home_article_detail_replyinner.xml
         */
 
         /*

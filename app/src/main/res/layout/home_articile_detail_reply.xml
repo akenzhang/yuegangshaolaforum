@@ -4,6 +4,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_marginRight="15dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/xh_05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="别问为什么喜欢"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="飞机到宝安机场后：转乘 机场10路 车过来，在 西乡步行街 站台下车，然后按照地址走过来即可"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="15sp"
+                android:textColor="#a5a1a1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+                <com.yuegangshaola.common.ListViewForScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <!--  填充 home_article_detail_replyinner.xml  -->
+                </com.yuegangshaola.common.ListViewForScrollView>
+
+            <TextView
+                android:textColor="#710b0b"
+                android:layout_gravity="right"
+                android:text="回复本评论"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
