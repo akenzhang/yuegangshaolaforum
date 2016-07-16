@@ -13,15 +13,20 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Request;
 import com.yuegangshaola.R;
+import com.yuegangshaola.bean.Article;
 import com.yuegangshaola.bean.Articledetail;
 import com.yuegangshaola.bean.ArticledetailRoot;
+import com.yuegangshaola.bean.Articleset;
+import com.yuegangshaola.bean.Root;
 import com.yuegangshaola.common.BaseActivity;
 import com.yuegangshaola.common.DialogUtil;
 import com.yuegangshaola.common.HorizontalListView;
+import com.yuegangshaola.common.ListViewForScrollView;
 import com.yuegangshaola.common.LogUtil;
 import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.TextUtil;
 import com.yuegangshaola.home.adapter.HomeArticleDetailCategoryAdapter;
+import com.yuegangshaola.home.adapter.HomeArticleDetailRelatedArticlesAdapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +43,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private TextView article_detail_title;
     private TextView article_detail_category;
     private TextView article_detail_postdatetime;
-    private ListView article_detail_ListView;
+    private ListViewForScrollView article_detail_ListView;
+    private ListViewForScrollView article_detail_relatednews_ListView;
     private TextView article_detail_views;
     private TextView article_detail_poster;
 
@@ -55,7 +61,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_title = (TextView) this.findViewById(R.id.id_article_detail_title);
         article_detail_category = (TextView) this.findViewById(R.id.id_article_detail_category);
         article_detail_postdatetime = (TextView) this.findViewById(R.id.id_article_detail_postdatetime);
-        article_detail_ListView = (ListView) this.findViewById(R.id.id_article_detail_ListView);
+        article_detail_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_ListView);
+        article_detail_relatednews_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_relatednews_ListView);
         article_detail_views = (TextView) this.findViewById(R.id.id_article_detail_views);
         article_detail_poster = (TextView) this.findViewById(R.id.id_article_detail_poster);
 
@@ -115,9 +122,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
 
             @Override
             public void requestSuccess(String result) {
-                String strResult = result;
                 Gson gson = new Gson();
-                ArticledetailRoot root = gson.fromJson(strResult,ArticledetailRoot.class);
+                ArticledetailRoot root = gson.fromJson(result,ArticledetailRoot.class);
                 List<Articledetail> detaillist = root.getArticledetail();
 
                 Articledetail articleDetail = detaillist.get(0);
@@ -126,32 +132,47 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 article_detail_title.setText(articleDetail.getMTitle());
                 article_detail_category.setText("类别："+articleDetail.getMCategory());
                 article_detail_postdatetime.setText("发布时间："+articleDetail.getMPostDatetime());
-                article_detail_webview.loadDataWithBaseURL(null,"<style>*{line-height:22px;color:#6c6666;}</style>"+strLoadText,"text/html","utf-8",null); //将字体设置成灰色
                 article_detail_views.setText("浏览："+articleDetail.getMViews());
                 article_detail_poster.setText("作者："+articleDetail.getMPoster());
+                article_detail_webview.loadDataWithBaseURL(null,"<style>*{line-height:22px;color:#6c6666;}</style>"+strLoadText,"text/html","utf-8",null); //将字体设置成灰色
 
                 dialog.closeDialog();
             }
         });
 
         //////////////////////////////////////////////////////////
-        ////////////// 加载相关类别数据  ///////////////////////
+        ////////////// 加载相关类别数据  ////////////////////////
         //////////////////////////////////////////////////////////
-        /*
-        "最新资讯" //HomeDefaultFragmentRedian
-        "烧腊技术分享" //HomeDefaultFragmentShaolajishu   7,8,9,20,21,17
-        "培训现场点滴" //HomeDefaultFragmentXianchangdiandi  13,11,22,15,18
-        "隆江猪脚" //HomeDefaultFragmentLongjiangzhujiao  22,19
-        */
         List categoryList = new ArrayList<String>();
         categoryList.add("最新资讯");
         categoryList.add("烧腊技术分享");
         categoryList.add("培训现场点滴");
         categoryList.add("隆江猪脚");
-
         HomeArticleDetailCategoryAdapter categoryAdapter = new HomeArticleDetailCategoryAdapter(categoryList,R.layout.home_articile_detail_category,this);
         article_detail_ListView.setAdapter(categoryAdapter);
 
+
+        //////////////////////////////////////////////////////////
+        ////////////// 加载相关文章  /////////////////////////////
+        //////////////////////////////////////////////////////////
+
+        //参考showtopic.aspx内的相关SQL,获取某tid的相关新闻，并通过异步获得数据，明天实现   2016.7.16
+        OkHttpUtils.getAsync("http://www.1316818.com/jsonserver.aspx?relatedtid="+String.valueOf(intTid), new OkHttpUtils.DataCallBack() {
+            @Override
+            public void requestFailure(Request request, IOException e) {}
+
+            @Override
+            public void requestSuccess(String result) {
+                Gson gson = new Gson();
+                Root root = gson.fromJson(result,Root.class);
+                Articleset  articleset = root.getArticleset();
+                List<Article> listArticle = articleset.getArticle();
+
+                HomeArticleDetailRelatedArticlesAdapter relatedArticlesAdapter = new HomeArticleDetailRelatedArticlesAdapter(listArticle,R.layout.home_articile_detail_relatednews,HomeArticleDetailActivity.this);
+                article_detail_relatednews_ListView.setAdapter(relatedArticlesAdapter);
+
+            }
+        });
     }
 
 }
