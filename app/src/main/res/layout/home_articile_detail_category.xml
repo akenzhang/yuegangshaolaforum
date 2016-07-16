@@ -6,12 +6,13 @@
 
     <TextView
         android:id="@+id/id_article_detail_category"
+        android:textColor="#600606"
         android:textSize="15sp"
         android:layout_gravity="center"
         android:gravity="center"
         android:background="@drawable/home_article_category_bg"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_width="match_parent"

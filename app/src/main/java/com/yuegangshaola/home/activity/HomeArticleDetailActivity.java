@@ -17,6 +17,7 @@ import com.yuegangshaola.bean.Article;
 import com.yuegangshaola.bean.Articledetail;
 import com.yuegangshaola.bean.ArticledetailRoot;
 import com.yuegangshaola.bean.Articleset;
+import com.yuegangshaola.bean.Reply;
 import com.yuegangshaola.bean.Root;
 import com.yuegangshaola.common.BaseActivity;
 import com.yuegangshaola.common.DialogUtil;
@@ -27,6 +28,7 @@ import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.TextUtil;
 import com.yuegangshaola.home.adapter.HomeArticleDetailCategoryAdapter;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRelatedArticlesAdapter;
+import com.yuegangshaola.home.adapter.HomeArticleDetailRepliesAdapter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private TextView article_detail_postdatetime;
     private ListViewForScrollView article_detail_ListView;
     private ListViewForScrollView article_detail_relatednews_ListView;
+    private ListViewForScrollView article_detail_replies_ListView;
     private TextView article_detail_views;
     private TextView article_detail_poster;
 
@@ -63,6 +66,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_postdatetime = (TextView) this.findViewById(R.id.id_article_detail_postdatetime);
         article_detail_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_ListView);
         article_detail_relatednews_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_relatednews_ListView);
+        article_detail_replies_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_replies_ListView);
         article_detail_views = (TextView) this.findViewById(R.id.id_article_detail_views);
         article_detail_poster = (TextView) this.findViewById(R.id.id_article_detail_poster);
 
@@ -155,7 +159,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
         //////////////////////////////////////////////////////////
         ////////////// 加载相关文章  /////////////////////////////
         //////////////////////////////////////////////////////////
-
         //参考showtopic.aspx内的相关SQL,获取某tid的相关新闻，并通过异步获得数据，明天实现   2016.7.16
         OkHttpUtils.getAsync("http://www.1316818.com/jsonserver.aspx?relatedtid="+String.valueOf(intTid), new OkHttpUtils.DataCallBack() {
             @Override
@@ -168,11 +171,45 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 Articleset  articleset = root.getArticleset();
                 List<Article> listArticle = articleset.getArticle();
 
-                HomeArticleDetailRelatedArticlesAdapter relatedArticlesAdapter = new HomeArticleDetailRelatedArticlesAdapter(listArticle,R.layout.home_articile_detail_relatednews,HomeArticleDetailActivity.this);
+                HomeArticleDetailRelatedArticlesAdapter relatedArticlesAdapter = new HomeArticleDetailRelatedArticlesAdapter(
+                        listArticle
+                        ,R.layout.home_articile_detail_relatednews
+                        ,HomeArticleDetailActivity.this);
                 article_detail_relatednews_ListView.setAdapter(relatedArticlesAdapter);
-
             }
         });
+
+
+        //////////////////////////////////////////////////////////
+        ////////////// 加载相关回复  /////////////////////////////
+        //////////////////////////////////////////////////////////
+        /*
+        需要实现的：
+        HomeArticleDetailRepliesAdapter
+        Reply
+        home_articile_detail_reply.xml
+        更改id_article_detail_replies_ListView
+        服务器连接XXXXXXXXXXXXXXXX
+        jasonserver.aspx数据获取
+        */
+
+        /*
+        OkHttpUtils.getAsync("XXXXXXXXXXXXXXXX", new OkHttpUtils.DataCallBack() {
+            @Override
+            public void requestFailure(Request request, IOException e) {}
+
+            @Override
+            public void requestSuccess(String result) {
+                List<Reply> listReply = null;
+                HomeArticleDetailRepliesAdapter repliesAdapter = new HomeArticleDetailRepliesAdapter(
+                        listReply
+                        ,R.layout.home_articile_detail_reply
+                        ,HomeArticleDetailActivity.this
+                );
+                article_detail_replies_ListView.setAdapter(repliesAdapter);
+            }
+        });
+        */
     }
 
 }
