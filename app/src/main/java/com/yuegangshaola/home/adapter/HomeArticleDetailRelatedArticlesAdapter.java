@@ -34,7 +34,7 @@ public class HomeArticleDetailRelatedArticlesAdapter extends CommonAdapter<Artic
     public void setContent(ViewHolder vh, final Article item) {
 
         TextView view = (TextView)vh.getViews(R.id.id_article_detail_relatednews_item);
-        view.setText(item.getMTitle());
+        view.setText(subTitle(item.getMTitle()));
 
         //每个Item的点击事件
         view.setOnClickListener(new View.OnClickListener() {
@@ -47,5 +47,13 @@ public class HomeArticleDetailRelatedArticlesAdapter extends CommonAdapter<Artic
                 mContext.startActivity(intent);
             }
         });
+    }
+
+    private String subTitle(String strTitle){
+        if(strTitle.length()<=21){
+            return strTitle;
+        }else {
+            return strTitle.substring(0, 21)+"...";
+        }
     }
 }

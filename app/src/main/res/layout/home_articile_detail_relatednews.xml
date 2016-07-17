@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/id_article_detail_relatednews_item"
-        android:textColor="#600606"
+        android:textColor="#393a3c"
         android:textSize="15sp"
         android:layout_gravity="left"
         android:gravity="left"
