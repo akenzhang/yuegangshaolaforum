@@ -212,7 +212,7 @@
                 android:paddingTop="10dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent"/>
 
             <!-- 电话，公众号。 -->
             <TextView
