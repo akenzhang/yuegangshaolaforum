@@ -3,6 +3,7 @@ package com.yuegangshaola.home.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -20,6 +21,7 @@ import com.yuegangshaola.common.ListViewForScrollView;
 import com.yuegangshaola.common.ViewHolder;
 import com.yuegangshaola.home.activity.HomeArticleDetailActivity;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -45,15 +47,16 @@ public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Commentset> {
         ListViewForScrollView listReplies = (ListViewForScrollView) vh.getViews(R.id.id_home_article_detail_reply_replies);
         ImageView img = (ImageView) vh.getViews(R.id.id_home_article_detail_reply_imgid);
 
-
         ip.setText(item.getIp());
         message.setText(item.getMessage());
-        /*img.setImageResource(R.drawable.a1);*/
         List<Replies> listinnerReplies = item.getReplies();
 
-        //ApplicationInfo appInfo = mContext.getApplicationInfo();
-        //int resID = mContext.getResources().getIdentifier("a11.jpg", null, appInfo.packageName);
-        //Bitmap bm =  BitmapFactory.decodeResource(mContext.getResources(), resID);
+        AssetManager assetManager=mContext.getAssets();
+        try {
+            InputStream in=assetManager.open(item.getImgid()+".jpg");
+            Bitmap bmp=BitmapFactory.decodeStream(in);
+            img.setImageBitmap(bmp);
+        } catch (Exception e) {}
 
         //取出该comment的相关回复
         HomeArticleDetailRepliesInnerAdapter repliesInnerAdapter = new HomeArticleDetailRepliesInnerAdapter(listinnerReplies,R.layout.home_articile_detail_replyinner,mContext);
