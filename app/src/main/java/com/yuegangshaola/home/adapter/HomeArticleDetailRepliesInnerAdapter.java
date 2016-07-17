@@ -3,6 +3,7 @@ package com.yuegangshaola.home.adapter;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yuegangshaola.R;
@@ -33,6 +34,8 @@ public class HomeArticleDetailRepliesInnerAdapter extends CommonAdapter<Replies>
             message.setText(item.getMessage2() + "(" + item.getPostdatetime2() + ")");
         }else
         {
+            LinearLayout linearLayout = (LinearLayout) vh.getViews(R.id.id_home_article_detail_replyinner_linearlayout);
+            linearLayout.setVisibility(View.GONE);
             message.setVisibility(View.GONE);
         }
     }

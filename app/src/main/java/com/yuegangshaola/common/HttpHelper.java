@@ -41,7 +41,7 @@ public class HttpHelper
             //定义一个输出流，将输入流中的字节数组循环的写到该输出流中
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-            //循环的读取输入流中的字节，并存入指定的数组中，inputStream.read(bytes)返回的是每次读入的长度，如果读入长度为-1，表示读完了，只有大于零，才是正常读取操作
+            //循环的读取输入流中的字节，并存入指定的数组中，inputStream.read(bytes)返回的是每次读入的长度，如果读入长度为-a1，表示读完了，只有大于零，才是正常读取操作
             int len=-1;
             if (conn.getResponseCode() == 200)
             {
@@ -98,7 +98,7 @@ public class HttpHelper
             //定义一个输出流，将输入流中的字节数组循环的写到该输出流中
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-            //循环的读取输入流中的字节，并存入指定的数组中，inputStream.read(bytes)返回的是每次读入的长度，如果读入长度为-1，表示读完了，只有大于零，才是正常读取操作
+            //循环的读取输入流中的字节，并存入指定的数组中，inputStream.read(bytes)返回的是每次读入的长度，如果读入长度为-a1，表示读完了，只有大于零，才是正常读取操作
             int len=-1;
             if (conn.getResponseCode() == 200)
             {
@@ -152,7 +152,7 @@ public class HttpHelper
             //定义一个输出流，将输入流中的字节数组循环的写到该输出流中
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
-            //循环的读取输入流中的字节，并存入指定的数组中，inputStream.read(bytes)返回的是每次读入的长度，如果读入长度为-1，表示读完了，只有大于零，才是正常读取操作
+            //循环的读取输入流中的字节，并存入指定的数组中，inputStream.read(bytes)返回的是每次读入的长度，如果读入长度为-a1，表示读完了，只有大于零，才是正常读取操作
             int len=-1;
             if (conn.getResponseCode() == 200)
             {

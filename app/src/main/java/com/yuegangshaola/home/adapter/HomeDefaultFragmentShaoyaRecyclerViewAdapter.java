@@ -99,7 +99,7 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
             ((ArticleThreeImageViewHolder) holder).mReplies.setText("回复:"+artitle.getMReplies());
             ((ArticleThreeImageViewHolder) holder).mPostDatetime.setText("日期:"+artitle.getMPostDatetime());
             //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[0]).into(((ArticleThreeImageViewHolder) holder).mImageList01);
-            //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[1]).into(((ArticleThreeImageViewHolder) holder).mImageList02);
+            //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[a1]).into(((ArticleThreeImageViewHolder) holder).mImageList02);
             //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[2]).into(((ArticleThreeImageViewHolder) holder).mImageList03);
             SingletonImageCollection.loadImage(mContext,"http://www.1316818.com/upload/" + images[0],((ArticleThreeImageViewHolder) holder).mImageList01);
             SingletonImageCollection.loadImage(mContext,"http://www.1316818.com/upload/" + images[1],((ArticleThreeImageViewHolder) holder).mImageList02);
@@ -196,7 +196,7 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
             intImageCount=1;
         }
 
-        //if (position + 1 == getItemCount()){
+        //if (position + a1 == getItemCount()){
         //    return FOOTER;
         //}else {
                 switch (intImageCount){

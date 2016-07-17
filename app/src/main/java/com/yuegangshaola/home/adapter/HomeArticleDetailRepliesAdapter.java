@@ -2,8 +2,13 @@ package com.yuegangshaola.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yuegangshaola.R;
@@ -38,10 +43,17 @@ public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Commentset> {
         TextView ip = (TextView) vh.getViews(R.id.id_home_article_detail_reply_ip);
         TextView message = (TextView) vh.getViews(R.id.id_home_article_detail_reply_message);
         ListViewForScrollView listReplies = (ListViewForScrollView) vh.getViews(R.id.id_home_article_detail_reply_replies);
+        ImageView img = (ImageView) vh.getViews(R.id.id_home_article_detail_reply_imgid);
+
 
         ip.setText(item.getIp());
         message.setText(item.getMessage());
+        /*img.setImageResource(R.drawable.a1);*/
         List<Replies> listinnerReplies = item.getReplies();
+
+        //ApplicationInfo appInfo = mContext.getApplicationInfo();
+        //int resID = mContext.getResources().getIdentifier("a11.jpg", null, appInfo.packageName);
+        //Bitmap bm =  BitmapFactory.decodeResource(mContext.getResources(), resID);
 
         //取出该comment的相关回复
         HomeArticleDetailRepliesInnerAdapter repliesInnerAdapter = new HomeArticleDetailRepliesInnerAdapter(listinnerReplies,R.layout.home_articile_detail_replyinner,mContext);
