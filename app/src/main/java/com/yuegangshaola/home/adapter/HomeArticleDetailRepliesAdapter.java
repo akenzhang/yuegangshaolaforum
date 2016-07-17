@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import com.yuegangshaola.R;
 import com.yuegangshaola.bean.Article;
-import com.yuegangshaola.bean.Reply;
+import com.yuegangshaola.bean.Commentset;
+import com.yuegangshaola.bean.Replies;
 import com.yuegangshaola.common.CommonAdapter;
+import com.yuegangshaola.common.ListViewForScrollView;
 import com.yuegangshaola.common.ViewHolder;
 import com.yuegangshaola.home.activity.HomeArticleDetailActivity;
 
@@ -18,12 +20,12 @@ import java.util.List;
 /**
  * Created by new pc on 2016/7/15.
  */
-public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Reply> {
+public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Commentset> {
 
-    private List<Reply> mList;
+    private List<Commentset> mList;
     private Context mContext;
 
-    public HomeArticleDetailRepliesAdapter(List<Reply> list, int resId, Context context) {
+    public HomeArticleDetailRepliesAdapter(List<Commentset> list, int resId, Context context) {
         super(list, resId, context);
 
         this.mList = list;
@@ -32,7 +34,17 @@ public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Reply> {
     }
 
     @Override
-    public void setContent(ViewHolder vh, Reply item) {
+    public void setContent(ViewHolder vh, Commentset item) {
+        TextView ip = (TextView) vh.getViews(R.id.id_home_article_detail_reply_ip);
+        TextView message = (TextView) vh.getViews(R.id.id_home_article_detail_reply_message);
+        ListViewForScrollView listReplies = (ListViewForScrollView) vh.getViews(R.id.id_home_article_detail_reply_replies);
 
+        ip.setText(item.getIp());
+        message.setText(item.getMessage());
+        List<Replies> listinnerReplies = item.getReplies();
+
+        //取出该comment的相关回复
+        HomeArticleDetailRepliesInnerAdapter repliesInnerAdapter = new HomeArticleDetailRepliesInnerAdapter(listinnerReplies,R.layout.home_articile_detail_replyinner,mContext);
+        listReplies.setAdapter(repliesInnerAdapter);
     }
 }

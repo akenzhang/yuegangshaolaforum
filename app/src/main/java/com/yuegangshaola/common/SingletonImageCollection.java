@@ -103,7 +103,7 @@ public class SingletonImageCollection {
     /*
     无缓存加载图片
      */
-    public static void loadImage(Context mContext, String mUrl, ImageView mImageView){
+    public static void loadImage(Context mContext, String mUrl,ImageView mImageView){
 
         int intStart = mUrl.indexOf("[");
         int intEnd = mUrl.indexOf("]")+1;
@@ -117,7 +117,6 @@ public class SingletonImageCollection {
         int intHeight = Integer.parseInt(strHeight);
 
         String strFinalImageUrl = mUrl.replace(strWidthHeight,"");
-
 
         Picasso.with(mContext).setIndicatorsEnabled(true);
         Picasso.with(mContext)

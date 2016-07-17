@@ -17,7 +17,8 @@ import com.yuegangshaola.bean.Article;
 import com.yuegangshaola.bean.Articledetail;
 import com.yuegangshaola.bean.ArticledetailRoot;
 import com.yuegangshaola.bean.Articleset;
-import com.yuegangshaola.bean.Reply;
+import com.yuegangshaola.bean.CommentRoot;
+import com.yuegangshaola.bean.Commentset;
 import com.yuegangshaola.bean.Root;
 import com.yuegangshaola.common.BaseActivity;
 import com.yuegangshaola.common.DialogUtil;
@@ -186,31 +187,30 @@ public class HomeArticleDetailActivity extends BaseActivity {
         /*
         需要实现的：
         HomeArticleDetailRepliesAdapter
-        Reply
         home_articile_detail_reply.xml
         更改id_article_detail_replies_ListView
-        服务器连接XXXXXXXXXXXXXXXX
-        jasonserver.aspx数据获取
         home_article_detail_replyinner.xml
         */
 
-        /*
-        OkHttpUtils.getAsync("XXXXXXXXXXXXXXXX", new OkHttpUtils.DataCallBack() {
+        OkHttpUtils.getAsync("http://www.1316818.com/jsonserver.aspx?commenttid="+ String.valueOf(intTid) +"", new OkHttpUtils.DataCallBack() {
             @Override
             public void requestFailure(Request request, IOException e) {}
 
             @Override
             public void requestSuccess(String result) {
-                List<Reply> listReply = null;
+                Gson gson = new Gson();
+                CommentRoot root = gson.fromJson(result,CommentRoot.class);
+                List<Commentset> listComments = root.getCommentset();
+
                 HomeArticleDetailRepliesAdapter repliesAdapter = new HomeArticleDetailRepliesAdapter(
-                        listReply
+                        listComments
                         ,R.layout.home_articile_detail_reply
                         ,HomeArticleDetailActivity.this
                 );
                 article_detail_replies_ListView.setAdapter(repliesAdapter);
             }
         });
-        */
+
     }
 
 }
