@@ -72,13 +72,13 @@
             <TextView
                 android:id="@+id/id_article_detail_title"
                 android:text="文章标题:这里填写文章的标题"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginRight="22dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="18dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:textStyle="bold"
                 android:textColor="#020000"
-                android:textSize="20dp"
+                android:textSize="23dp"
                 android:textAlignment="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -171,22 +171,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp" />
 
-            <!-- 其它相关板块 -->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.yuegangshaola.common.ListViewForScrollView
-                    android:divider="@null"
-                    android:id="@+id/id_article_detail_ListView"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-
             <!-- 相关文章 -->
             <!-- android:divider="@null" -->
             <com.yuegangshaola.common.ListViewForScrollView
@@ -213,6 +197,76 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_height="match_parent"/>
+
+            <!-- 其它相关板块 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--com.yuegangshaola.common.ListViewForScrollView
+                    android:divider="@null"
+                    android:id="@+id/id_article_detail_ListView"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_height="wrap_content"/-->
+
+                <TextView
+                    android:text="最新资讯"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="8dp"
+                    android:background="@drawable/home_article_category_bg"
+                    android:id="@+id/id_article_detail_category_latest"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="技术分享"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="8dp"
+                    android:background="@drawable/home_article_category_bg"
+                    android:id="@+id/id_article_detail_category_share"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="现场点滴"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="8dp"
+                    android:background="@drawable/home_article_category_bg"
+                    android:id="@+id/id_article_detail_category_diandi"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="隆江猪脚"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:padding="8dp"
+                    android:background="@drawable/home_article_category_bg"
+                    android:id="@+id/id_article_detail_category_zhujiao"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <!-- 电话，公众号。 -->
             <TextView

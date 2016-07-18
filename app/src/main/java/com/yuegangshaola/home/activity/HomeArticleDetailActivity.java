@@ -1,14 +1,13 @@
 package com.yuegangshaola.home.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.Request;
@@ -22,17 +21,13 @@ import com.yuegangshaola.bean.Commentset;
 import com.yuegangshaola.bean.Root;
 import com.yuegangshaola.common.BaseActivity;
 import com.yuegangshaola.common.DialogUtil;
-import com.yuegangshaola.common.HorizontalListView;
 import com.yuegangshaola.common.ListViewForScrollView;
-import com.yuegangshaola.common.LogUtil;
 import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.TextUtil;
-import com.yuegangshaola.home.adapter.HomeArticleDetailCategoryAdapter;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRelatedArticlesAdapter;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRepliesAdapter;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,11 +41,15 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private TextView article_detail_title;
     private TextView article_detail_category;
     private TextView article_detail_postdatetime;
-    private ListViewForScrollView article_detail_ListView;
+    //private ListViewForScrollView article_detail_ListView;
     private ListViewForScrollView article_detail_relatednews_ListView;
     private ListViewForScrollView article_detail_replies_ListView;
     private TextView article_detail_views;
     private TextView article_detail_poster;
+    private TextView article_detail_category_latest;
+    private TextView article_detail_category_share;
+    private TextView article_detail_category_diandi;
+    private TextView article_detail_category_zhujiao;
 
     @Override
     protected int getLayout() {
@@ -65,11 +64,15 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_title = (TextView) this.findViewById(R.id.id_article_detail_title);
         article_detail_category = (TextView) this.findViewById(R.id.id_article_detail_category);
         article_detail_postdatetime = (TextView) this.findViewById(R.id.id_article_detail_postdatetime);
-        article_detail_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_ListView);
+        //article_detail_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_ListView);
         article_detail_relatednews_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_relatednews_ListView);
         article_detail_replies_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_replies_ListView);
         article_detail_views = (TextView) this.findViewById(R.id.id_article_detail_views);
         article_detail_poster = (TextView) this.findViewById(R.id.id_article_detail_poster);
+        article_detail_category_latest = (TextView) this.findViewById(R.id.id_article_detail_category_latest);
+        article_detail_category_share = (TextView) this.findViewById(R.id.id_article_detail_category_share);
+        article_detail_category_diandi = (TextView) this.findViewById(R.id.id_article_detail_category_diandi);
+        article_detail_category_zhujiao = (TextView) this.findViewById(R.id.id_article_detail_category_zhujiao);
 
     }
 
@@ -100,6 +103,53 @@ public class HomeArticleDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 HomeArticleDetailActivity.this.finish();
+            }
+        });
+
+        //////////////////////////////////////////////////////////
+        ////////////// 加载相关类别数据点击事件  /////////////////
+        //////////////////////////////////////////////////////////
+        article_detail_category_latest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("category",String.valueOf(0));
+                Intent intent = new Intent(HomeArticleDetailActivity.this, HomeActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        article_detail_category_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("category",String.valueOf(1));
+                Intent intent = new Intent(HomeArticleDetailActivity.this, HomeActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        article_detail_category_diandi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("category",String.valueOf(2));
+                Intent intent = new Intent(HomeArticleDetailActivity.this, HomeActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        article_detail_category_zhujiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("category",String.valueOf(3));
+                Intent intent = new Intent(HomeArticleDetailActivity.this, HomeActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 
@@ -145,17 +195,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
             }
         });
 
-        //////////////////////////////////////////////////////////
-        ////////////// 加载相关类别数据  ////////////////////////
-        //////////////////////////////////////////////////////////
-        List categoryList = new ArrayList<String>();
-        categoryList.add("最新资讯");
-        categoryList.add("烧腊技术分享");
-        categoryList.add("培训现场点滴");
-        categoryList.add("隆江猪脚");
-        HomeArticleDetailCategoryAdapter categoryAdapter = new HomeArticleDetailCategoryAdapter(categoryList,R.layout.home_articile_detail_category,this);
-        article_detail_ListView.setAdapter(categoryAdapter);
-
 
         //////////////////////////////////////////////////////////
         ////////////// 加载相关文章  /////////////////////////////
@@ -184,14 +223,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
         //////////////////////////////////////////////////////////
         ////////////// 加载相关回复  /////////////////////////////
         //////////////////////////////////////////////////////////
-        /*
-        需要实现的：
-        HomeArticleDetailRepliesAdapter
-        home_articile_detail_reply.xml
-        更改id_article_detail_replies_ListView
-        home_article_detail_replyinner.xml
-        */
-
         OkHttpUtils.getAsync("http://www.1316818.com/jsonserver.aspx?commenttid="+ String.valueOf(intTid) +"", new OkHttpUtils.DataCallBack() {
             @Override
             public void requestFailure(Request request, IOException e) {}
