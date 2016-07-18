@@ -31,7 +31,7 @@ public class HomeArticleDetailRepliesInnerAdapter extends CommonAdapter<Replies>
     public void setContent(ViewHolder vh, Replies item) {
         TextView message = (TextView) vh.getViews(R.id.id_home_article_detail_replyinner_message);
         if(!item.getMessage2().equals("")) {
-            message.setText(item.getMessage2() + "(" + item.getPostdatetime2() + ")");
+            message.setText("【"+item.getCity2()+"】:"+item.getMessage2() + "(" + item.getPostdatetime2() + ")");
         }else
         {
             LinearLayout linearLayout = (LinearLayout) vh.getViews(R.id.id_home_article_detail_replyinner_linearlayout);

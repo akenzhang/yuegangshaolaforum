@@ -13,6 +13,7 @@ public class Commentset {
     private String imgid;
     private String parentpid;
     private List<Replies> replies ;
+    private String city;
 
     public void setTid(String tid){
         this.tid = tid;
@@ -68,5 +69,13 @@ public class Commentset {
 
     public List<Replies> getReplies(){
         return this.replies;
+    }
+
+    public void setCity(String city){
+        this.city = city;
+    }
+
+    public String getCity(){
+        return this.city;
     }
 }

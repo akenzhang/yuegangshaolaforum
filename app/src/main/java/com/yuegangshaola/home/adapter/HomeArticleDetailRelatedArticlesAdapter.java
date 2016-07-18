@@ -50,10 +50,10 @@ public class HomeArticleDetailRelatedArticlesAdapter extends CommonAdapter<Artic
     }
 
     private String subTitle(String strTitle){
-        if(strTitle.length()<=21){
+        if(strTitle.length()<=19){
             return strTitle;
         }else {
-            return strTitle.substring(0, 21)+"...";
+            return strTitle.substring(0, 19)+"...";
         }
     }
 }

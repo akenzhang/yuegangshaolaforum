@@ -47,7 +47,7 @@ public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Commentset> {
         ListViewForScrollView listReplies = (ListViewForScrollView) vh.getViews(R.id.id_home_article_detail_reply_replies);
         ImageView img = (ImageView) vh.getViews(R.id.id_home_article_detail_reply_imgid);
 
-        ip.setText(item.getIp());
+        ip.setText(item.getCity());
         message.setText(item.getMessage());
         List<Replies> listinnerReplies = item.getReplies();
 
