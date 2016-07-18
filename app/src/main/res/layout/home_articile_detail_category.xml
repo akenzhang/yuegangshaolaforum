@@ -13,8 +13,8 @@
         android:background="@drawable/home_article_category_bg"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
         android:layout_width="match_parent"
         android:layout_height="30dp" />
 
