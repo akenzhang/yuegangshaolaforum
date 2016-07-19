@@ -20,4 +20,11 @@
         <item name="android:button">@null</item>
     </style>
 
+    <style name="Transparent">
+        <item name="android:windowBackground">@color/transparent_background</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+
+    </style>
+
 </resources>

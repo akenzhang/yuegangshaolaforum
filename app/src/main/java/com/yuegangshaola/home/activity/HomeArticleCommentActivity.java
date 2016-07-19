@@ -1,5 +1,7 @@
 package com.yuegangshaola.home.activity;
 
+import android.view.WindowManager;
+
 import com.yuegangshaola.R;
 import com.yuegangshaola.common.BaseActivity;
 
@@ -14,6 +16,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+
 
     }
 

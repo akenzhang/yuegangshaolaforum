@@ -42,7 +42,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private TextView article_detail_title;
     private TextView article_detail_category;
     private TextView article_detail_postdatetime;
-    //private ListViewForScrollView article_detail_ListView;
     private ListViewForScrollView article_detail_relatednews_ListView;
     private ListViewForScrollView article_detail_replies_ListView;
     private TextView article_detail_views;
@@ -66,7 +65,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_title = (TextView) this.findViewById(R.id.id_article_detail_title);
         article_detail_category = (TextView) this.findViewById(R.id.id_article_detail_category);
         article_detail_postdatetime = (TextView) this.findViewById(R.id.id_article_detail_postdatetime);
-        //article_detail_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_ListView);
         article_detail_relatednews_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_relatednews_ListView);
         article_detail_replies_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_replies_ListView);
         article_detail_views = (TextView) this.findViewById(R.id.id_article_detail_views);
