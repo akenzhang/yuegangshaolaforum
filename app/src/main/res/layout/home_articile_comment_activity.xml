@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_home_article_comment_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/id_home_article_comment_innerlayout"
+        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:background="#f4f5f7"
+        android:background="#ecedf0"
         android:layout_width="match_parent"
-        android:layout_height="250dp"></LinearLayout>
+        android:layout_height="200dp">
+
+        <EditText
+            android:id="@+id/id_home_article_comment_edittext"
+            android:background="@drawable/home_article_comment_bg"
+            android:gravity="top"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="140dp" />
+
+        <TextView
+            android:id="@+id/id_home_article_comment_textview"
+            android:layout_gravity="right"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:background="#8b8b8f"
+            android:text="发  表"
+            android:textColor="#fdfdfe"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="25dp"
+            android:layout_width="55dp"
+            android:layout_height="30dp" />
+
+
+    </LinearLayout>
 
 </RelativeLayout>

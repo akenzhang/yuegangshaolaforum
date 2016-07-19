@@ -160,8 +160,10 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_comment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                Intent intent = new Intent(HomeArticleDetailActivity.this,HomeArticleCommentActivity.class);
-                HomeArticleDetailActivity.this.startActivity(intent);
+                if(hasFocus) {
+                    Intent intent = new Intent(HomeArticleDetailActivity.this, HomeArticleCommentActivity.class);
+                    HomeArticleDetailActivity.this.startActivity(intent);
+                }
             }
         });
 
