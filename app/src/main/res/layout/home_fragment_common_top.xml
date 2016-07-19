@@ -16,9 +16,9 @@
 
         <TextView
             android:id="@+id/id_home_fragment_shaoya_mTitle"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textColor="#3c3b3b"
-            android:text="家里窗户累积灰尘扫了又来怎么办？教你一方法，灰尘就没了"
+            android:text=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

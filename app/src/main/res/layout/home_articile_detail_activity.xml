@@ -71,7 +71,7 @@
             <!-- 文章标题 -->
             <TextView
                 android:id="@+id/id_article_detail_title"
-                android:text="文章标题:这里填写文章的标题"
+                android:text=""
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="18dp"
                 android:layout_marginRight="20dp"
@@ -99,13 +99,13 @@
                     <TextView
                         android:id="@+id/id_article_detail_category"
                         android:textColor="#592102"
-                        android:text="类别：烧鸭烧鹅"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/id_article_detail_postdatetime"
                         android:textColor="#592102"
-                        android:text="日期：2016.7.13"
+                        android:text=""
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -182,15 +182,16 @@
                 android:layout_marginTop="0dp"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
                 android:layout_height="wrap_content"/>
 
+            <!-- 相关评论 -->
             <com.yuegangshaola.common.ListViewForScrollView
                 android:id="@+id/id_article_detail_replies_ListView"
                 android:divider="@null"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="0dp"
                 android:layout_marginTop="0dp"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
@@ -203,16 +204,6 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <!--com.yuegangshaola.common.ListViewForScrollView
-                    android:divider="@null"
-                    android:id="@+id/id_article_detail_ListView"
-                    android:layout_width="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_height="wrap_content"/-->
 
                 <TextView
                     android:text="最新资讯"
@@ -291,6 +282,7 @@
         android:layout_height="50dp">
 
         <EditText
+            android:id="@+id/id_article_detail_comment"
             android:background="@drawable/home_article_bottom_comment"
             android:layout_marginLeft="10dp"
             android:padding="8dp"

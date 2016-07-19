@@ -6,6 +6,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private TextView article_detail_category_share;
     private TextView article_detail_category_diandi;
     private TextView article_detail_category_zhujiao;
+    private EditText article_detail_comment;
 
     @Override
     protected int getLayout() {
@@ -73,6 +75,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_category_share = (TextView) this.findViewById(R.id.id_article_detail_category_share);
         article_detail_category_diandi = (TextView) this.findViewById(R.id.id_article_detail_category_diandi);
         article_detail_category_zhujiao = (TextView) this.findViewById(R.id.id_article_detail_category_zhujiao);
+        article_detail_comment= (EditText) this.findViewById(R.id.id_article_detail_comment);
 
     }
 
@@ -153,6 +156,17 @@ public class HomeArticleDetailActivity extends BaseActivity {
             }
         });
 
+        //////////////////////////////////////////////////////////
+        ////////////// 触发评论界面弹出  /////////////////////////
+        //////////////////////////////////////////////////////////
+        article_detail_comment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Intent intent = new Intent(HomeArticleDetailActivity.this,HomeArticleCommentActivity.class);
+                HomeArticleDetailActivity.this.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -189,7 +203,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 article_detail_postdatetime.setText("发布时间："+articleDetail.getMPostDatetime());
                 article_detail_views.setText("浏览："+articleDetail.getMViews());
                 article_detail_poster.setText("作者："+articleDetail.getMPoster());
-                article_detail_webview.loadDataWithBaseURL(null,"<style>*{line-height:22px;color:#6c6666;}</style>"+strLoadText,"text/html","utf-8",null); //将字体设置成灰色
+                article_detail_webview.loadDataWithBaseURL(null,"<style>*{line-height:25px;font-size:1.1em;color:#6c6666;}</style>"+strLoadText,"text/html","utf-8",null); //将字体设置成灰色
 
                 dialog.closeDialog();
             }

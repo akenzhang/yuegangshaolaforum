@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/id_home_article_detail_reply_ip"
-                android:text="别问为什么喜欢"
+                android:text=""
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
@@ -41,11 +41,12 @@
 
             <TextView
                 android:id="@+id/id_home_article_detail_reply_message"
-                android:text="飞机到宝安机场后：转乘 机场10路 车过来，在 西乡步行街 站台下车，然后按照地址走过来即可"
+                android:lineSpacingMultiplier="1.3"
+                android:text=""
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textColor="#373434"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -69,5 +70,11 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:background="#dededb"
+        android:layout_margin="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
 </LinearLayout>

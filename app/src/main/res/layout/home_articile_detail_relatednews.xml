@@ -7,7 +7,7 @@
     <TextView
         android:id="@+id/id_article_detail_relatednews_item"
         android:textColor="#393a3c"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:layout_gravity="left"
         android:gravity="left"
         android:layout_marginLeft="8dp"

@@ -38,6 +38,7 @@
         </activity>
 
         <activity android:name=".home.activity.HomeArticleDetailActivity" />
+        <activity android:name=".home.activity.HomeArticleCommentActivity" />
     </application>
 
 </manifest>
