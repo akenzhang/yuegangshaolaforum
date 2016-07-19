@@ -201,7 +201,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 article_detail_postdatetime.setText("发布时间："+articleDetail.getMPostDatetime());
                 article_detail_views.setText("浏览："+articleDetail.getMViews());
                 article_detail_poster.setText("作者："+articleDetail.getMPoster());
-                article_detail_webview.loadDataWithBaseURL(null,"<style>*{line-height:25px;font-size:1.1em;color:#6c6666;}</style>"+strLoadText,"text/html","utf-8",null); //将字体设置成灰色
+                article_detail_webview.loadDataWithBaseURL(null,"<style>*{line-height:25px;font-size:1.0em;color:#6c6666;}</style>"+strLoadText,"text/html","utf-8",null); //将字体设置成灰色
 
                 dialog.closeDialog();
             }
