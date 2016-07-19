@@ -52,6 +52,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private TextView article_detail_category_zhujiao;
     private EditText article_detail_comment;
 
+    private int mTid = 1;
+
     @Override
     protected int getLayout() {
         return R.layout.home_articile_detail_activity;
@@ -76,7 +78,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_comment= (EditText) this.findViewById(R.id.id_article_detail_comment);
 
     }
-
 
     @Override
     protected void initVariable() {
@@ -162,7 +163,11 @@ public class HomeArticleDetailActivity extends BaseActivity {
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
                     article_detail_comment.clearFocus();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("tid",mTid);
                     Intent intent = new Intent(HomeArticleDetailActivity.this, HomeArticleCommentActivity.class);
+                    intent.putExtras(bundle);
                     HomeArticleDetailActivity.this.startActivity(intent);
                 }
             }
@@ -179,6 +184,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
         //取出绑定的参数
         Bundle bundle = getIntent().getExtras();
         int intTid = Integer.valueOf(bundle.getString("tid"));
+        mTid = intTid;
 
         //根据tid从数据库获取相应的数据
         //弹出提示对话框

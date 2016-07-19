@@ -40,6 +40,7 @@
         <activity android:name=".home.activity.HomeArticleDetailActivity" />
         <activity android:name=".home.activity.HomeArticleCommentActivity"
             android:theme="@style/myTransparent"
+            android:windowSoftInputMode="adjustResize"
             />
     </application>
 
