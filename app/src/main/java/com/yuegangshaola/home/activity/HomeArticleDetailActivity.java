@@ -161,6 +161,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
+                    article_detail_comment.clearFocus();
                     Intent intent = new Intent(HomeArticleDetailActivity.this, HomeArticleCommentActivity.class);
                     HomeArticleDetailActivity.this.startActivity(intent);
                 }
