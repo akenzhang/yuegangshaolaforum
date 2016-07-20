@@ -5,6 +5,7 @@ import android.os.Looper;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
@@ -16,6 +17,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import okio.BufferedSink;
 
 /**
  * Created by zuliang on 2016/5/20.
@@ -109,24 +112,39 @@ public class OkHttpUtils {
     private void P_postAsync(String url,Map<String,String>parms,final DataCallBack callback){
         //step a1:创建请求体
         RequestBody requestBody = null;
+
         if (parms ==null){
             parms = new HashMap<String,String>();
         }
         FormEncodingBuilder builder = new FormEncodingBuilder();
+        StringBuilder urlBuilder = new StringBuilder();
+        int intFlag = 0;
         for (Map.Entry<String,String> entry:
              parms.entrySet()) {
             String key = entry.getKey().toString();
             String value = null;
-            if (value == null){
+            if (key == null || key.equals("")){
                 value = "";
             } else {
                 value = entry.getValue().toString();
+
+                if(intFlag==0){
+                    urlBuilder.append("?"+key+"="+value);
+                }else{
+                    urlBuilder.append("&"+key+"="+value);
+                }
+                intFlag++;
+
             }
             builder.add(key,value);
-
         }
+
+        requestBody = builder.build();
+
+        String finalUrl = url+urlBuilder.toString();
         //step 2:创建请求
-        final Request request = new Request.Builder().url(url).post(requestBody).build();
+        final Request request = new Request.Builder().url(finalUrl).post(requestBody).build();  //临时将所有的键值都放入url内，正确的方法是将键值封装在requestBody内
+        //final Request request = new Request.Builder().url(url).post(requestBody).build();
         //step 3
         client.newCall(request).enqueue(new Callback() {
             @Override

@@ -3,6 +3,7 @@ package com.yuegangshaola.home.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -62,34 +63,43 @@ public class HomeArticleCommentActivity extends BaseActivity {
                 String strComment = home_article_comment_edittext.getText().toString();
                 //Toast.makeText(HomeArticleCommentActivity.this,strComment,Toast.LENGTH_SHORT).show();
                 Intent intent = getIntent();
-                int intTid = intent.getIntExtra("tid",1);
-
-                //Toast.makeText(HomeArticleCommentActivity.this,"获得用书的输入回复，也获得tid,接下来是将该回复保存到数据库内",Toast.LENGTH_SHORT).show();
+                final int intTid = intent.getIntExtra("tid",1);
 
                 //获得用书的输入回复，也获得tid,接下来是将该回复保存到数据库内
                 String strUrlPost = "http://www.1316818.com/jsonserver.aspx";
                 String struniqueCode=String.valueOf(java.util.Calendar.getInstance().getTimeInMillis());
                 Map<String,String> parms = new HashMap<String, String>();
-                parms.put("tid",String.valueOf(intTid));
-                parms.put("message",strComment);
-                parms.put("ip", IPUtil.getIP(HomeArticleCommentActivity.this));
-                parms.put("city","匿名");
-                parms.put("parentpid","-1");
+                parms.put("tid_comment",String.valueOf(intTid));
+                parms.put("message_comment",strComment);
+                parms.put("uniqueCode_comment",struniqueCode);
+                parms.put("ip_comment", IPUtil.getIP(HomeArticleCommentActivity.this));
+                parms.put("city_comment","匿名");
+                parms.put("parentpid_comment","-1");
 
                 //发邮件通知我有匿名的新信息
+                /*
                 String MailTitle = "【粤港烧腊论坛手机匿名评论】";
                 String strobjniminghuifu = strComment + "<br/><br/>原文链接：<a target=_blank href='http://www.1316818.com/showtopic-" + String.valueOf(intTid) + ".aspx'>showtopic-" + String.valueOf(intTid) + ".aspx</a><br/>";
                 strobjniminghuifu = strobjniminghuifu + "<br/>快速删除：<a target=_blank href=http://www.1316818.com/DeleteNimingPost.aspx?tid=" + String.valueOf(intTid) + "&uniqueCode='" + struniqueCode + "'>点击删除该回复</a>";
                 strobjniminghuifu = strobjniminghuifu + "<br/>更改城市：<a target=_blank href=http://www.1316818.com/DeleteNimingPost.aspx?tid=" + String.valueOf(intTid) + "&uniqueCode='" + struniqueCode + "'&mycode=100>更改成满天红</a>";
-
+                */
 
                 OkHttpUtils.postAsync(strUrlPost,parms, new OkHttpUtils.DataCallBack() {
                     @Override
-                    public void requestFailure(Request request, IOException e) {}
+                    public void requestFailure(Request request, IOException e) {
+                        Toast.makeText(HomeArticleCommentActivity.this,"发生异常，请重新发送...",Toast.LENGTH_SHORT).show();
+                    }
 
                     @Override
                     public void requestSuccess(String result) {
-                        String str="";
+                        //重新加载详情页面
+                        Intent intent = new Intent(HomeArticleCommentActivity.this,HomeArticleDetailActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("tid",String.valueOf(intTid));
+                        intent.putExtras(bundle);
+                        HomeArticleCommentActivity.this.startActivity(intent);
+                        //取消输入框界面
+                        HomeArticleCommentActivity.this.finish();
                     }
                 });
 

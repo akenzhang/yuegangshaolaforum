@@ -23,6 +23,7 @@
             android:id="@+id/id_home_article_comment_edittext"
             android:background="@drawable/home_article_comment_bg"
             android:gravity="top"
+            android:textSize="12sp"
             android:hint="请输入评论内容"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
