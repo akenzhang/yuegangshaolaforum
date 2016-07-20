@@ -23,16 +23,18 @@
             android:id="@+id/id_home_article_comment_edittext"
             android:background="@drawable/home_article_comment_bg"
             android:gravity="top"
+            android:hint="请输入评论内容"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             android:layout_height="100dp" />
 
         <TextView
             android:id="@+id/id_home_article_comment_textview"
+            android:enabled="false"
             android:layout_gravity="right"
             android:textAlignment="center"
             android:gravity="center"
-            android:background="#8b8b8f"
+            android:background="#d1d1d5"
             android:text="发  表"
             android:textColor="#fdfdfe"
             android:layout_marginTop="0dp"
