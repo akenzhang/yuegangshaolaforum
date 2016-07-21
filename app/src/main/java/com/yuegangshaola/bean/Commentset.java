@@ -6,6 +6,15 @@ import java.util.List;
  * Created by new pc on 2016/7/17.
  */
 public class Commentset {
+    public String getPid() {
+        return pid;
+    }
+
+    public void setPid(String pid) {
+        this.pid = pid;
+    }
+
+    private String pid;
     private String tid;
     private String postdatetime;
     private String message;

@@ -56,25 +56,41 @@ public class HomeArticleCommentActivity extends BaseActivity {
     @Override
     protected void initListener() {
 
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        final int intTid = bundle.getInt("tid",1);
+        final int intPid = bundle.getInt("pid",-1);
+
+        /*
+        看看评论来自哪里，如果是新的评论，即不用传送pid,如果是“回复本评论”，那么需要传动pid,同时更改一下相关的文本
+         */
+        if(intPid!=-1 && intPid>0){
+            home_article_comment_edittext.setHint("对本评论，你想说什么?");
+            home_article_comment_textview.setText("回 复");
+        }
+
         home_article_comment_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String strComment = home_article_comment_edittext.getText().toString();
                 //Toast.makeText(HomeArticleCommentActivity.this,strComment,Toast.LENGTH_SHORT).show();
-                Intent intent = getIntent();
-                final int intTid = intent.getIntExtra("tid",1);
 
                 //获得用书的输入回复，也获得tid,接下来是将该回复保存到数据库内
                 String strUrlPost = "http://www.1316818.com/jsonserver.aspx";
                 String struniqueCode=String.valueOf(java.util.Calendar.getInstance().getTimeInMillis());
                 Map<String,String> parms = new HashMap<String, String>();
+                if(intPid!=-1 && intPid>0){
+                    /*
+                    看看评论来自哪里，如果是新的评论，即不用传送pid,如果是“回复本评论”，那么需要传动pid
+                     */
+                    parms.put("pid_comment",String.valueOf(intPid));
+                }
                 parms.put("tid_comment",String.valueOf(intTid));
                 parms.put("message_comment",strComment);
                 parms.put("uniqueCode_comment",struniqueCode);
                 parms.put("ip_comment", IPUtil.getIP(HomeArticleCommentActivity.this));
                 parms.put("city_comment","匿名");
-                parms.put("parentpid_comment","-1");
 
                 //发邮件通知我有匿名的新信息
                 /*
@@ -100,6 +116,8 @@ public class HomeArticleCommentActivity extends BaseActivity {
                         HomeArticleCommentActivity.this.startActivity(intent);
                         //取消输入框界面
                         HomeArticleCommentActivity.this.finish();
+
+                        Toast.makeText(HomeArticleCommentActivity.this,"评论成功发布...",Toast.LENGTH_SHORT).show();
                     }
                 });
 

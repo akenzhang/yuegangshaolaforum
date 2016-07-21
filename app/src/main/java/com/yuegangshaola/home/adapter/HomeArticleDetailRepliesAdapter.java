@@ -19,6 +19,7 @@ import com.yuegangshaola.bean.Replies;
 import com.yuegangshaola.common.CommonAdapter;
 import com.yuegangshaola.common.ListViewForScrollView;
 import com.yuegangshaola.common.ViewHolder;
+import com.yuegangshaola.home.activity.HomeArticleCommentActivity;
 import com.yuegangshaola.home.activity.HomeArticleDetailActivity;
 
 import java.io.InputStream;
@@ -41,16 +42,22 @@ public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Commentset> {
     }
 
     @Override
-    public void setContent(ViewHolder vh, Commentset item) {
+    public void setContent(ViewHolder vh, final Commentset item) {
         TextView ip = (TextView) vh.getViews(R.id.id_home_article_detail_reply_ip);
+        TextView date = (TextView) vh.getViews(R.id.id_home_article_detail_reply_date);
         TextView message = (TextView) vh.getViews(R.id.id_home_article_detail_reply_message);
+        TextView replythis = (TextView) vh.getViews(R.id.id_home_article_detail_replythis);
         ListViewForScrollView listReplies = (ListViewForScrollView) vh.getViews(R.id.id_home_article_detail_reply_replies);
         ImageView img = (ImageView) vh.getViews(R.id.id_home_article_detail_reply_imgid);
 
         ip.setText(item.getCity());
+        date.setText(item.getPostdatetime());
         message.setText(item.getMessage());
         List<Replies> listinnerReplies = item.getReplies();
 
+        /*
+        读取本地assets的图片
+         */
         AssetManager assetManager=mContext.getAssets();
         try {
             InputStream in=assetManager.open(item.getImgid()+".jpg");
@@ -61,5 +68,24 @@ public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Commentset> {
         //取出该comment的相关回复
         HomeArticleDetailRepliesInnerAdapter repliesInnerAdapter = new HomeArticleDetailRepliesInnerAdapter(listinnerReplies,R.layout.home_articile_detail_replyinner,mContext);
         listReplies.setAdapter(repliesInnerAdapter);
+
+        /*
+        为“回复本评论”注册事件
+         */
+        replythis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int intPid = Integer.valueOf(item.getPid());
+                int intTid = Integer.valueOf(item.getTid());
+
+                //弹出评论框框
+                Bundle bundle = new Bundle();
+                bundle.putInt("pid",intPid);
+                bundle.putInt("tid",intTid);
+                Intent intent = new Intent(mContext, HomeArticleCommentActivity.class);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+        });
     }
 }

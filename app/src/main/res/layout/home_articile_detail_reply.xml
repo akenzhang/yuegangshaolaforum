@@ -28,7 +28,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content">
 
-            <TextView
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
                 android:id="@+id/id_home_article_detail_reply_ip"
                 android:text=""
                 android:layout_marginRight="5dp"
@@ -38,6 +46,19 @@
                 android:textColor="#081452"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+                <TextView
+                android:id="@+id/id_home_article_detail_reply_date"
+                android:text=""
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:textSize="13sp"
+                android:textColor="#8d8d92"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/id_home_article_detail_reply_message"
@@ -61,6 +82,8 @@
                 </com.yuegangshaola.common.ListViewForScrollView>
 
             <TextView
+                android:id="@+id/id_home_article_detail_replythis"
+                android:layout_marginTop="8dp"
                 android:textColor="#710b0b"
                 android:layout_gravity="right"
                 android:text="回复本评论"
