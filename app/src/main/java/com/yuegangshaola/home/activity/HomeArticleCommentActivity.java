@@ -109,11 +109,8 @@ public class HomeArticleCommentActivity extends BaseActivity {
                     @Override
                     public void requestSuccess(String result) {
                         //重新加载详情页面
-                        Intent intent = new Intent(HomeArticleCommentActivity.this,HomeArticleDetailActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("tid",String.valueOf(intTid));
-                        intent.putExtras(bundle);
-                        HomeArticleCommentActivity.this.startActivity(intent);
+                        reload(intTid);
+
                         //取消输入框界面
                         HomeArticleCommentActivity.this.finish();
 
@@ -130,6 +127,9 @@ public class HomeArticleCommentActivity extends BaseActivity {
         home_article_comment_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //重新加载详情页面
+                reload(intTid);
+
                 //当点击到输入框的外边的时候，将输入框隐藏起来
                 HomeArticleCommentActivity.this.finish();
             }
@@ -161,7 +161,14 @@ public class HomeArticleCommentActivity extends BaseActivity {
     }
 
     @Override
-    protected void bindData() {
+    protected void bindData() {}
 
+    private void reload(int intTid){
+        //重新加载详情页面
+        Intent intent = new Intent(HomeArticleCommentActivity.this,HomeArticleDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("tid",String.valueOf(intTid));
+        intent.putExtras(bundle);
+        HomeArticleCommentActivity.this.startActivity(intent);
     }
 }
