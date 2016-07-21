@@ -11,9 +11,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.Request;
+import com.tencent.connect.share.QQShare;
+import com.tencent.connect.share.QzoneShare;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 import com.yuegangshaola.R;
 import com.yuegangshaola.bean.Article;
 import com.yuegangshaola.bean.Articledetail;
@@ -30,7 +36,10 @@ import com.yuegangshaola.common.TextUtil;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRelatedArticlesAdapter;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRepliesAdapter;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -56,8 +65,11 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private ImageView article_detail_scrollcomment;
     private ScrollView article_detail_scrollview;
     private LinearLayout article_detail_author;
+    private ImageView article_detail_share;
 
     private int mTid = 1;
+    private static String APP_ID="1105560564";
+    private Tencent mTencent;
 
     @Override
     protected int getLayout() {
@@ -66,6 +78,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+
         home_article_detail_backward = (ImageView) this.findViewById(R.id.id_home_article_detail_backward);
         home_article_detail_backward_text = (TextView) this.findViewById(R.id.id_home_article_detail_backward_text);
         article_detail_webview = (WebView) this.findViewById(R.id.id_article_detail_webview);
@@ -84,7 +97,18 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_scrollcomment = (ImageView) this.findViewById(R.id.id_article_detail_scrollcomment);
         article_detail_scrollview = (ScrollView) this.findViewById(R.id.id_article_detail_scrollview);
         article_detail_author = (LinearLayout) this.findViewById(R.id.id_article_detail_author);
+        article_detail_share = (ImageView) this.findViewById(R.id.id_article_detail_share);
 
+        mTencent = Tencent.createInstance(APP_ID, this.getApplicationContext());
+
+    }
+
+    /*
+    QQ回调的需要
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mTencent.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -103,16 +127,55 @@ public class HomeArticleDetailActivity extends BaseActivity {
     @Override
     protected void initListener() {
 
+        /*
+        分享功能
+         */
+        article_detail_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(HomeArticleDetailActivity.this,"分享到QQ好友，QQ空间里去...",Toast.LENGTH_SHORT).show();
+
+                final Bundle params = new Bundle();
+                /*
+                分享给别的QQ
+                 */
+
+                /*
+                params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+                params.putString(QQShare.SHARE_TO_QQ_TITLE, "要分享的标题");
+                params.putString(QQShare.SHARE_TO_QQ_SUMMARY,  "要分享的摘要");
+                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  "http://www.qq.com/news/1.html");
+                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
+                params.putString(QQShare.SHARE_TO_QQ_APP_NAME,  "测试应用222222");
+                params.putString(QQShare.SHARE_TO_QQ_EXT_INT,  "其他附加功能");
+                mTencent.shareToQQ(HomeArticleDetailActivity.this, params, new BaseUiListener());
+             */
+
+                /*
+                分享给QQ空间
+                 */
+                params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE,QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
+                params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "Test");
+                params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY,  "content infro");
+                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL,  "http://www.hicsg.com");
+                ArrayList imageUrls = new ArrayList();
+                imageUrls.add("http://media-cdn.tripadvisor.com/media/photo-s/01/3e/05/40/the-sandbar-that-links.jpg");
+                params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imageUrls);
+                params.putInt(QzoneShare.SHARE_TO_QQ_EXT_INT,  QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
+                mTencent.shareToQzone(HomeArticleDetailActivity.this, params, new BaseUiListener());
+
+            }
+        });
+
+        //点击滚动到评论区域
         article_detail_scrollcomment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 /*
                 调到评论的位置
                  */
-                int height = article_detail_author.getHeight()+article_detail_webview.getHeight()+article_detail_relatednews_ListView.getHeight()+300;
+                int height = article_detail_author.getHeight()+article_detail_webview.getHeight()+article_detail_relatednews_ListView.getHeight()+article_detail_title.getHeight()+135;
                 article_detail_scrollview.smoothScrollTo(0,height);
-
             }
         });
 
@@ -293,4 +356,27 @@ public class HomeArticleDetailActivity extends BaseActivity {
 
     }
 
+
+    class BaseUiListener implements IUiListener {
+
+        protected void doComplete(JSONObject values) {
+            //这里实现业务逻辑
+
+        }
+
+        @Override
+        public void onComplete(Object response) {
+            doComplete((JSONObject)response);
+        }
+
+        @Override
+        public void onError(UiError e) {}
+
+        @Override
+        public void onCancel() {}
+    }
+
+
 }
+
+

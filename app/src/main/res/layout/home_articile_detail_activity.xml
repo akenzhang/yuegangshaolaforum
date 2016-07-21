@@ -275,10 +275,6 @@
         </ScrollView>
 
     <!--页面尾部：写评论，分享等-->
-    <!--
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    -->
     <LinearLayout
 
         android:background="#f3efef"
@@ -309,6 +305,7 @@
             android:layout_height="wrap_content" />
 
         <ImageView
+            android:id="@+id/id_article_detail_share"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:src="@drawable/topic_icon_share_normal"
