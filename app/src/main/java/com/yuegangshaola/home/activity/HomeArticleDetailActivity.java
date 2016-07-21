@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -54,6 +55,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private EditText article_detail_comment;
     private ImageView article_detail_scrollcomment;
     private ScrollView article_detail_scrollview;
+    private LinearLayout article_detail_author;
 
     private int mTid = 1;
 
@@ -81,6 +83,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_comment= (EditText) this.findViewById(R.id.id_article_detail_comment);
         article_detail_scrollcomment = (ImageView) this.findViewById(R.id.id_article_detail_scrollcomment);
         article_detail_scrollview = (ScrollView) this.findViewById(R.id.id_article_detail_scrollview);
+        article_detail_author = (LinearLayout) this.findViewById(R.id.id_article_detail_author);
 
     }
 
@@ -103,7 +106,13 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_scrollcomment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                article_detail_scrollview.smoothScrollTo(0,600);
+
+                /*
+                调到评论的位置
+                 */
+                int height = article_detail_author.getHeight()+article_detail_webview.getHeight()+article_detail_relatednews_ListView.getHeight()+300;
+                article_detail_scrollview.smoothScrollTo(0,height);
+
             }
         });
 

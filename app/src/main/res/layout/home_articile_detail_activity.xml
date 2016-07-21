@@ -85,6 +85,7 @@
 
             <!-- 作者，关注 -->
             <LinearLayout
+                android:id="@+id/id_article_detail_author"
                 android:layout_marginBottom="10dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
