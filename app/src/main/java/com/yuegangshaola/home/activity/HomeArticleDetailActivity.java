@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -51,6 +52,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private TextView article_detail_category_diandi;
     private TextView article_detail_category_zhujiao;
     private EditText article_detail_comment;
+    private ImageView article_detail_scrollcomment;
+    private ScrollView article_detail_scrollview;
 
     private int mTid = 1;
 
@@ -76,6 +79,8 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_category_diandi = (TextView) this.findViewById(R.id.id_article_detail_category_diandi);
         article_detail_category_zhujiao = (TextView) this.findViewById(R.id.id_article_detail_category_zhujiao);
         article_detail_comment= (EditText) this.findViewById(R.id.id_article_detail_comment);
+        article_detail_scrollcomment = (ImageView) this.findViewById(R.id.id_article_detail_scrollcomment);
+        article_detail_scrollview = (ScrollView) this.findViewById(R.id.id_article_detail_scrollview);
 
     }
 
@@ -94,6 +99,17 @@ public class HomeArticleDetailActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+
+        article_detail_scrollcomment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                article_detail_scrollview.smoothScrollTo(0,600);
+            }
+        });
+
+        /*
+        回到上一界面
+         */
         home_article_detail_backward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,6 +117,9 @@ public class HomeArticleDetailActivity extends BaseActivity {
             }
         });
 
+        /*
+        回到上一界面
+         */
         home_article_detail_backward_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

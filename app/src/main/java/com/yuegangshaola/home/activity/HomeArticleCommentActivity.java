@@ -110,9 +110,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
                     public void requestSuccess(String result) {
                         //重新加载详情页面
                         reload(intTid);
-
-                        //取消输入框界面
-                        HomeArticleCommentActivity.this.finish();
+                        //HomeArticleCommentActivity.this.finish();
 
                         Toast.makeText(HomeArticleCommentActivity.this,"评论成功发布...",Toast.LENGTH_SHORT).show();
                     }
@@ -130,8 +128,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
                 //重新加载详情页面
                 reload(intTid);
 
-                //当点击到输入框的外边的时候，将输入框隐藏起来
-                HomeArticleCommentActivity.this.finish();
+                //HomeArticleCommentActivity.this.finish();
             }
         });
 
@@ -170,5 +167,8 @@ public class HomeArticleCommentActivity extends BaseActivity {
         bundle.putString("tid",String.valueOf(intTid));
         intent.putExtras(bundle);
         HomeArticleCommentActivity.this.startActivity(intent);
+
+        //当点击到输入框的外边的时候，将输入框隐藏起来
+        HomeArticleCommentActivity.this.finish();
     }
 }
