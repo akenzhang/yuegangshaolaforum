@@ -114,11 +114,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
                         //HomeArticleCommentActivity.this.finish();
 
                         //发送邮件
-                        try {
-                            EmailUtils.sendMail(strMailTitle,strContent);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        EmailUtils.sendMail(strMailTitle,strContent);
 
                         Toast.makeText(HomeArticleCommentActivity.this,"评论成功发布...",Toast.LENGTH_SHORT).show();
                     }
