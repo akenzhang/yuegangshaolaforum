@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.squareup.okhttp.Request;
 import com.yuegangshaola.R;
+import com.yuegangshaola.bean.EmailUtils;
 import com.yuegangshaola.common.BaseActivity;
 import com.yuegangshaola.common.IPUtil;
 import com.yuegangshaola.common.LogUtil;
@@ -93,12 +94,12 @@ public class HomeArticleCommentActivity extends BaseActivity {
                 parms.put("city_comment","匿名");
 
                 //发邮件通知我有匿名的新信息
-                /*
-                String MailTitle = "【粤港烧腊论坛手机匿名评论】";
+
+                final String strMailTitle = "【粤港烧腊论坛手机匿名评论】";
                 String strobjniminghuifu = strComment + "<br/><br/>原文链接：<a target=_blank href='http://www.1316818.com/showtopic-" + String.valueOf(intTid) + ".aspx'>showtopic-" + String.valueOf(intTid) + ".aspx</a><br/>";
                 strobjniminghuifu = strobjniminghuifu + "<br/>快速删除：<a target=_blank href=http://www.1316818.com/DeleteNimingPost.aspx?tid=" + String.valueOf(intTid) + "&uniqueCode='" + struniqueCode + "'>点击删除该回复</a>";
                 strobjniminghuifu = strobjniminghuifu + "<br/>更改城市：<a target=_blank href=http://www.1316818.com/DeleteNimingPost.aspx?tid=" + String.valueOf(intTid) + "&uniqueCode='" + struniqueCode + "'&mycode=100>更改成满天红</a>";
-                */
+                final String strContent = strobjniminghuifu;
 
                 OkHttpUtils.postAsync(strUrlPost,parms, new OkHttpUtils.DataCallBack() {
                     @Override
@@ -111,6 +112,13 @@ public class HomeArticleCommentActivity extends BaseActivity {
                         //重新加载详情页面
                         reload(intTid);
                         //HomeArticleCommentActivity.this.finish();
+
+                        //发送邮件
+                        try {
+                            EmailUtils.sendMail(strMailTitle,strContent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                         Toast.makeText(HomeArticleCommentActivity.this,"评论成功发布...",Toast.LENGTH_SHORT).show();
                     }
@@ -162,11 +170,11 @@ public class HomeArticleCommentActivity extends BaseActivity {
 
     private void reload(int intTid){
         //重新加载详情页面:未来考虑是否需要这个代码
-        //Intent intent = new Intent(HomeArticleCommentActivity.this,HomeArticleDetailActivity.class);
-        //Bundle bundle = new Bundle();
-        //bundle.putString("tid",String.valueOf(intTid));
-        //intent.putExtras(bundle);
-        //HomeArticleCommentActivity.this.startActivity(intent);
+        Intent intent = new Intent(HomeArticleCommentActivity.this,HomeArticleDetailActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("tid",String.valueOf(intTid));
+        intent.putExtras(bundle);
+        HomeArticleCommentActivity.this.startActivity(intent);
 
         //当点击到输入框的外边的时候，将输入框隐藏起来
         HomeArticleCommentActivity.this.finish();

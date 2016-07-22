@@ -1,11 +1,16 @@
 package com.yuegangshaola.home.activity;
 
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.tencent.connect.share.QQShare;
 import com.tencent.connect.share.QzoneShare;
 import com.tencent.tauth.IUiListener;
@@ -23,13 +28,13 @@ public class HomeArticleShareActivity extends BaseActivity {
 
     private TextView home_article_share_cancel;
     private TextView home_article_share_restspace;
-    private ImageView home_article_share_weixinpengyouquan;
     private ImageView home_article_share_qqspace;
-    private ImageView home_article_share_weibo;
-    private ImageView home_article_share_weixin;
     private ImageView home_article_share_qq;
     private ImageView home_article_share_lianjie;
 
+    /*
+    QQ,QQ空间
+     */
     private static String APP_ID="1105560564";
     private Tencent mTencent;
     private String strSHARE_TO_QQ_TITLE;
@@ -37,6 +42,7 @@ public class HomeArticleShareActivity extends BaseActivity {
     private String strSHARE_TO_QQ_TARGET_URL;
     private String strSHARE_TO_QQ_IMAGE_URL;
     private ArrayList<String> mImageList;
+
 
     @Override
     protected int getLayout() {
@@ -47,14 +53,13 @@ public class HomeArticleShareActivity extends BaseActivity {
     protected void initView() {
         home_article_share_cancel = (TextView) this.findViewById(R.id.id_home_article_share_cancel);
         home_article_share_restspace = (TextView) this.findViewById(R.id.id_home_article_share_restspace);
-        home_article_share_weixinpengyouquan = (ImageView) this.findViewById(R.id.id_home_article_share_weixinpengyouquan);
         home_article_share_qqspace = (ImageView) this.findViewById(R.id.id_home_article_share_qqspace);
-        home_article_share_weibo = (ImageView) this.findViewById(R.id.id_home_article_share_weibo);
-        home_article_share_weixin = (ImageView) this.findViewById(R.id.id_home_article_share_weixin);
         home_article_share_qq = (ImageView) this.findViewById(R.id.id_home_article_share_qq);
         home_article_share_lianjie = (ImageView) this.findViewById(R.id.id_home_article_share_lianjie);
 
+        //QQ对象
         mTencent = Tencent.createInstance(APP_ID, this.getApplicationContext());
+
     }
 
     @Override
@@ -95,15 +100,6 @@ public class HomeArticleShareActivity extends BaseActivity {
             }
         });
 
-        /*
-        微信朋友圈
-         */
-        home_article_share_weixinpengyouquan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         /*
         QQ空间
@@ -124,25 +120,6 @@ public class HomeArticleShareActivity extends BaseActivity {
             }
         });
 
-        /*
-        微博
-         */
-        home_article_share_weibo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        /*
-        微信
-         */
-        home_article_share_weixin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         /*
         QQ
@@ -168,10 +145,12 @@ public class HomeArticleShareActivity extends BaseActivity {
         home_article_share_lianjie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ClipboardManager clip = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
+                //clip.getText(); // 粘贴
+                clip.setText(strSHARE_TO_QQ_TARGET_URL); // 复制
+                Toast.makeText(HomeArticleShareActivity.this,"分享链接已经复制到剪贴板.",Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 
@@ -181,18 +160,25 @@ public class HomeArticleShareActivity extends BaseActivity {
     }
 
     /*
-QQ回调的需要
- */
+    QQ回调的需要
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mTencent.onActivityResult(requestCode, resultCode, data);
+
+        if(mTencent!=null) {
+            mTencent.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
+
+    /*
+    QQ回调接口
+     */
     class BaseUiListener implements IUiListener {
 
         protected void doComplete(JSONObject values) {
             //这里实现业务逻辑
-
+            Toast.makeText(HomeArticleShareActivity.this,"成功完成分享...",Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -206,4 +192,8 @@ QQ回调的需要
         @Override
         public void onCancel() {}
     }
+
 }
+
+
+

@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
     <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
 
+
     <!--
     <uses-permission android:name="com.eebbk.bfc.ACCESS_BBK_DOWNLOAD_MANAGER" />
     <uses-permission android:name="com.eebbk.bfc.ACCESS_ALL_BBK_DOWNLOADS" />
@@ -48,9 +49,9 @@
             />
 
         <activity android:name=".home.activity.HomeArticleShareActivity"
-            android:theme="@style/myTransparent"
-            />
+            android:theme="@style/myTransparent" />
 
+        <!-- QQ，QQ空间分享 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:noHistory="true"

@@ -291,6 +291,10 @@
             android:textSize="13sp"
             android:layout_gravity="center"
             android:hint="写评论..."
+            android:paddingTop="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="3dp"
             android:layout_weight="5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -301,16 +305,17 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:src="@drawable/topic_tabbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
 
         <ImageView
             android:id="@+id/id_article_detail_share"
             android:layout_weight="1"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center"
             android:src="@drawable/topic_icon_share_normal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
 
     </LinearLayout>
 
