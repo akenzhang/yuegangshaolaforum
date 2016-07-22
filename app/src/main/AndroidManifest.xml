@@ -41,9 +41,14 @@
         </activity>
 
         <activity android:name=".home.activity.HomeArticleDetailActivity" />
+
         <activity android:name=".home.activity.HomeArticleCommentActivity"
             android:theme="@style/myTransparent"
             android:windowSoftInputMode="adjustResize"
+            />
+
+        <activity android:name=".home.activity.HomeArticleShareActivity"
+            android:theme="@style/myTransparent"
             />
 
         <activity

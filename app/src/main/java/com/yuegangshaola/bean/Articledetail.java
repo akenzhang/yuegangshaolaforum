@@ -13,6 +13,16 @@ public class Articledetail {
     private String mFid;
     private String mViews;
 
+    public String getmImageList() {
+        return mImageList;
+    }
+
+    public void setmImageList(String mImageList) {
+        this.mImageList = mImageList;
+    }
+
+    private String mImageList;
+
     public void setMTitle(String mTitle){
         this.mTitle = mTitle;
     }

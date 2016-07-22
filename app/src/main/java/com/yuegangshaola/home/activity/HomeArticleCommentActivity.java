@@ -161,12 +161,12 @@ public class HomeArticleCommentActivity extends BaseActivity {
     protected void bindData() {}
 
     private void reload(int intTid){
-        //重新加载详情页面
-        Intent intent = new Intent(HomeArticleCommentActivity.this,HomeArticleDetailActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("tid",String.valueOf(intTid));
-        intent.putExtras(bundle);
-        HomeArticleCommentActivity.this.startActivity(intent);
+        //重新加载详情页面:未来考虑是否需要这个代码
+        //Intent intent = new Intent(HomeArticleCommentActivity.this,HomeArticleDetailActivity.class);
+        //Bundle bundle = new Bundle();
+        //bundle.putString("tid",String.valueOf(intTid));
+        //intent.putExtras(bundle);
+        //HomeArticleCommentActivity.this.startActivity(intent);
 
         //当点击到输入框的外边的时候，将输入框隐藏起来
         HomeArticleCommentActivity.this.finish();

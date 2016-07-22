@@ -11,15 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.squareup.okhttp.Request;
-import com.tencent.connect.share.QQShare;
-import com.tencent.connect.share.QzoneShare;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
 import com.yuegangshaola.R;
 import com.yuegangshaola.bean.Article;
 import com.yuegangshaola.bean.Articledetail;
@@ -35,11 +28,7 @@ import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.TextUtil;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRelatedArticlesAdapter;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRepliesAdapter;
-
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,10 +55,11 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private ScrollView article_detail_scrollview;
     private LinearLayout article_detail_author;
     private ImageView article_detail_share;
+    private ImageView home_article_detail_share;
+    private TextView home_article_detail_share_text;
 
     private int mTid = 1;
-    private static String APP_ID="1105560564";
-    private Tencent mTencent;
+    private Articledetail mArticleDetail;
 
     @Override
     protected int getLayout() {
@@ -98,17 +88,9 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_scrollview = (ScrollView) this.findViewById(R.id.id_article_detail_scrollview);
         article_detail_author = (LinearLayout) this.findViewById(R.id.id_article_detail_author);
         article_detail_share = (ImageView) this.findViewById(R.id.id_article_detail_share);
+        home_article_detail_share = (ImageView) this.findViewById(R.id.id_home_article_detail_share);
+        home_article_detail_share_text = (TextView) this.findViewById(R.id.id_home_article_detail_share_text);
 
-        mTencent = Tencent.createInstance(APP_ID, this.getApplicationContext());
-
-    }
-
-    /*
-    QQ回调的需要
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        mTencent.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -124,8 +106,35 @@ public class HomeArticleDetailActivity extends BaseActivity {
         });
     }
 
+    private void share(Articledetail articledetail){
+        //启动分享activity，需要传递相关的数据
+        Bundle bundle = new Bundle();
+        bundle.putString("SHARE_TO_QQ_TITLE",articledetail.getMTitle());
+        bundle.putString("SHARE_TO_QQ_SUMMARY","关注:http://1316818.com,更多深入分析...");
+        bundle.putString("SHARE_TO_QQ_TARGET_URL","http://www.1316818.com/showtopic-"+ articledetail.getMTid() +".aspx");
+        bundle.putString("SHARE_TO_QQ_IMAGE_URL",articledetail.getmImageList());
+        Intent intent = new Intent(HomeArticleDetailActivity.this,HomeArticleShareActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
     @Override
     protected void initListener() {
+        /*
+        以下三个注册事件干同样的事情：调用分享功能
+         */
+        home_article_detail_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share(mArticleDetail);
+            }
+        });
+        home_article_detail_share_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share(mArticleDetail);
+            }
+        });
 
         /*
         分享功能
@@ -134,36 +143,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(HomeArticleDetailActivity.this,"分享到QQ好友，QQ空间里去...",Toast.LENGTH_SHORT).show();
-
-                final Bundle params = new Bundle();
-                /*
-                分享给别的QQ
-                 */
-
-                /*
-                params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-                params.putString(QQShare.SHARE_TO_QQ_TITLE, "要分享的标题");
-                params.putString(QQShare.SHARE_TO_QQ_SUMMARY,  "要分享的摘要");
-                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,  "http://www.qq.com/news/1.html");
-                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
-                params.putString(QQShare.SHARE_TO_QQ_APP_NAME,  "测试应用222222");
-                params.putString(QQShare.SHARE_TO_QQ_EXT_INT,  "其他附加功能");
-                mTencent.shareToQQ(HomeArticleDetailActivity.this, params, new BaseUiListener());
-             */
-
-                /*
-                分享给QQ空间
-                 */
-                params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE,QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
-                params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "Test");
-                params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY,  "content infro");
-                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL,  "http://www.hicsg.com");
-                ArrayList imageUrls = new ArrayList();
-                imageUrls.add("http://media-cdn.tripadvisor.com/media/photo-s/01/3e/05/40/the-sandbar-that-links.jpg");
-                params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imageUrls);
-                params.putInt(QzoneShare.SHARE_TO_QQ_EXT_INT,  QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
-                mTencent.shareToQzone(HomeArticleDetailActivity.this, params, new BaseUiListener());
-
+                share(mArticleDetail);
             }
         });
 
@@ -293,14 +273,14 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 ArticledetailRoot root = gson.fromJson(result,ArticledetailRoot.class);
                 List<Articledetail> detaillist = root.getArticledetail();
 
-                Articledetail articleDetail = detaillist.get(0);
-                String strLoadText = TextUtil.parseJason(articleDetail.getMContent());
+                mArticleDetail = detaillist.get(0);
+                String strLoadText = TextUtil.parseJason(mArticleDetail.getMContent());
 
-                article_detail_title.setText(articleDetail.getMTitle());
-                article_detail_category.setText("类别："+articleDetail.getMCategory());
-                article_detail_postdatetime.setText("发布时间："+articleDetail.getMPostDatetime());
-                article_detail_views.setText("浏览："+articleDetail.getMViews());
-                article_detail_poster.setText("作者："+articleDetail.getMPoster());
+                article_detail_title.setText(mArticleDetail.getMTitle());
+                article_detail_category.setText("类别："+mArticleDetail.getMCategory());
+                article_detail_postdatetime.setText("发布时间："+mArticleDetail.getMPostDatetime());
+                article_detail_views.setText("浏览："+mArticleDetail.getMViews());
+                article_detail_poster.setText("作者："+mArticleDetail.getMPoster());
                 article_detail_webview.loadDataWithBaseURL(null,"<style>*{line-height:25px;font-size:1.0em;color:#6c6666;}</style>"+strLoadText,"text/html","utf-8",null); //将字体设置成灰色
 
                 dialog.closeDialog();
@@ -311,7 +291,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
         //////////////////////////////////////////////////////////
         ////////////// 加载相关文章  /////////////////////////////
         //////////////////////////////////////////////////////////
-        //参考showtopic.aspx内的相关SQL,获取某tid的相关新闻，并通过异步获得数据，明天实现   2016.7.16
+        //参考showtopic.aspx内的相关SQL,获取某tid的相关新闻，并通过异步获得数据
         OkHttpUtils.getAsync("http://www.1316818.com/jsonserver.aspx?relatedtid="+String.valueOf(intTid), new OkHttpUtils.DataCallBack() {
             @Override
             public void requestFailure(Request request, IOException e) {}
@@ -355,28 +335,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
         });
 
     }
-
-
-    class BaseUiListener implements IUiListener {
-
-        protected void doComplete(JSONObject values) {
-            //这里实现业务逻辑
-
-        }
-
-        @Override
-        public void onComplete(Object response) {
-            doComplete((JSONObject)response);
-        }
-
-        @Override
-        public void onError(UiError e) {}
-
-        @Override
-        public void onCancel() {}
-    }
-
-
 }
 
 
