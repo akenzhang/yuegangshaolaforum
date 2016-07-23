@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.squareup.okhttp.Request;
 import com.yuegangshaola.R;
 import com.yuegangshaola.common.EmailUtils;
@@ -19,9 +18,7 @@ import com.yuegangshaola.common.BaseActivity;
 import com.yuegangshaola.common.EventBusMessage;
 import com.yuegangshaola.common.IPUtil;
 import com.yuegangshaola.common.OkHttpUtils;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -163,13 +160,6 @@ public class HomeArticleCommentActivity extends BaseActivity {
 
     private void reload(int intTid,int intPid){
         //重新加载详情页面:未来考虑是否需要这个代码
-        /*
-        Intent intent = new Intent(HomeArticleCommentActivity.this,HomeArticleDetailActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("tid",String.valueOf(intTid));
-        intent.putExtras(bundle);
-        HomeArticleCommentActivity.this.startActivity(intent);
-        */
 
         String strComment = home_article_comment_edittext.getText().toString();
 

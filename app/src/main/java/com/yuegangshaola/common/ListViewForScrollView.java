@@ -32,6 +32,7 @@ public class ListViewForScrollView extends ListView {
         int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
                 MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, expandSpec);
+
     }
 
     /**
@@ -66,4 +67,6 @@ public class ListViewForScrollView extends ListView {
                 + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.yuegangshaola.home.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -9,6 +10,7 @@ import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.google.gson.Gson;
@@ -30,10 +32,8 @@ import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.TextUtil;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRelatedArticlesAdapter;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRepliesAdapter;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -48,21 +48,27 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private TextView article_detail_title;
     private TextView article_detail_category;
     private TextView article_detail_postdatetime;
-    private ListViewForScrollView article_detail_relatednews_ListView;
-    private ListViewForScrollView article_detail_replies_ListView;
     private TextView article_detail_views;
     private TextView article_detail_poster;
     private TextView article_detail_category_latest;
     private TextView article_detail_category_share;
     private TextView article_detail_category_diandi;
     private TextView article_detail_category_zhujiao;
-    private EditText article_detail_comment;
+    private TextView article_detail_comment;
     private ImageView article_detail_scrollcomment;
-    private ScrollView article_detail_scrollview;
     private LinearLayout article_detail_author;
     private ImageView article_detail_share;
     private ImageView home_article_detail_share;
     private TextView home_article_detail_share_text;
+    private ScrollView article_detail_scrollview;
+    private ListViewForScrollView article_detail_relatednews_ListView;
+    private ListViewForScrollView article_detail_replies_ListView;
+    private LinearLayout home_article_detail_share_linearlayout;
+    private LinearLayout home_article_detail_linearlayout;
+    private TextView article_detail_share_text02;
+    private LinearLayout article_detail_share_linearlayout;
+    private TextView article_detail_scrollcomment_text;
+    private LinearLayout article_detail_comment_linearlayout;
 
     private int mTid = 1;
     private Articledetail mArticleDetail;
@@ -85,21 +91,27 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_title = (TextView) this.findViewById(R.id.id_article_detail_title);
         article_detail_category = (TextView) this.findViewById(R.id.id_article_detail_category);
         article_detail_postdatetime = (TextView) this.findViewById(R.id.id_article_detail_postdatetime);
-        article_detail_relatednews_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_relatednews_ListView);
-        article_detail_replies_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_replies_ListView);
         article_detail_views = (TextView) this.findViewById(R.id.id_article_detail_views);
         article_detail_poster = (TextView) this.findViewById(R.id.id_article_detail_poster);
         article_detail_category_latest = (TextView) this.findViewById(R.id.id_article_detail_category_latest);
         article_detail_category_share = (TextView) this.findViewById(R.id.id_article_detail_category_share);
         article_detail_category_diandi = (TextView) this.findViewById(R.id.id_article_detail_category_diandi);
         article_detail_category_zhujiao = (TextView) this.findViewById(R.id.id_article_detail_category_zhujiao);
-        article_detail_comment= (EditText) this.findViewById(R.id.id_article_detail_comment);
+        article_detail_comment= (TextView) this.findViewById(R.id.id_article_detail_comment);
         article_detail_scrollcomment = (ImageView) this.findViewById(R.id.id_article_detail_scrollcomment);
-        article_detail_scrollview = (ScrollView) this.findViewById(R.id.id_article_detail_scrollview);
         article_detail_author = (LinearLayout) this.findViewById(R.id.id_article_detail_author);
         article_detail_share = (ImageView) this.findViewById(R.id.id_article_detail_share);
         home_article_detail_share = (ImageView) this.findViewById(R.id.id_home_article_detail_share);
         home_article_detail_share_text = (TextView) this.findViewById(R.id.id_home_article_detail_share_text);
+        article_detail_scrollview = (ScrollView) this.findViewById(R.id.id_article_detail_scrollview);
+        article_detail_relatednews_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_relatednews_ListView);
+        article_detail_replies_ListView = (ListViewForScrollView) this.findViewById(R.id.id_article_detail_replies_ListView);
+        home_article_detail_share_linearlayout = (LinearLayout) this.findViewById(R.id.id_home_article_detail_share_linearlayout);
+        home_article_detail_linearlayout = (LinearLayout) this.findViewById(R.id.id_home_article_detail_linearlayout);
+        article_detail_share_text02 = (TextView) this.findViewById(R.id.id_article_detail_share_text02);
+        article_detail_share_linearlayout = (LinearLayout)this.findViewById(R.id.id_article_detail_share_linearlayout);
+        article_detail_scrollcomment_text = (TextView) this.findViewById(R.id.id_article_detail_scrollcomment_text);
+        article_detail_comment_linearlayout = (LinearLayout)this.findViewById(R.id.id_article_detail_comment_linearlayout);
 
         //注册EventBus
         EventBus.getDefault().register(this);
@@ -141,9 +153,16 @@ public class HomeArticleDetailActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+
         /*
-        以下三个注册事件干同样的事情：调用分享功能
+        以下6个注册事件干同样的事情：调用分享功能
          */
+        home_article_detail_share_linearlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share(mArticleDetail);
+            }
+        });
         home_article_detail_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,10 +175,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 share(mArticleDetail);
             }
         });
-
-        /*
-        分享功能
-         */
         article_detail_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,9 +182,41 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 share(mArticleDetail);
             }
         });
+        article_detail_share_text02.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share(mArticleDetail);
+            }
+        });
+        article_detail_share_linearlayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share(mArticleDetail);
+            }
+        });
 
-        //点击滚动到评论区域
+        //以下3个注册事件点击滚动到评论区域
         article_detail_scrollcomment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                调到评论的位置
+                 */
+                int height = article_detail_author.getHeight()+article_detail_webview.getHeight()+article_detail_relatednews_ListView.getHeight()+article_detail_title.getHeight()+135;
+                article_detail_scrollview.smoothScrollTo(0,height);
+            }
+        });
+        article_detail_scrollcomment_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                调到评论的位置
+                 */
+                int height = article_detail_author.getHeight()+article_detail_webview.getHeight()+article_detail_relatednews_ListView.getHeight()+article_detail_title.getHeight()+135;
+                article_detail_scrollview.smoothScrollTo(0,height);
+            }
+        });
+        article_detail_comment_linearlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*
@@ -181,7 +228,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
         });
 
         /*
-        回到上一界面
+        以下三个界面回到上一界面
          */
         home_article_detail_backward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,11 +236,13 @@ public class HomeArticleDetailActivity extends BaseActivity {
                 HomeArticleDetailActivity.this.finish();
             }
         });
-
-        /*
-        回到上一界面
-         */
         home_article_detail_backward_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HomeArticleDetailActivity.this.finish();
+            }
+        });
+        home_article_detail_linearlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HomeArticleDetailActivity.this.finish();
@@ -250,18 +299,15 @@ public class HomeArticleDetailActivity extends BaseActivity {
         //////////////////////////////////////////////////////////
         ////////////// 触发评论界面弹出  /////////////////////////
         //////////////////////////////////////////////////////////
-        article_detail_comment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        article_detail_comment.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus) {
-                    article_detail_comment.clearFocus();
+            public void onClick(View v) {
 
                     Bundle bundle = new Bundle();
                     bundle.putInt("tid",mTid);
                     Intent intent = new Intent(HomeArticleDetailActivity.this, HomeArticleCommentActivity.class);
                     intent.putExtras(bundle);
                     HomeArticleDetailActivity.this.startActivity(intent);
-                }
             }
         });
 
@@ -356,7 +402,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
         });
 
     }
-
 
     @Subscribe
     public void onEvent(EventBusMessage event) {

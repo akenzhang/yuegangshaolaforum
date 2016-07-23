@@ -11,22 +11,32 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-        <ImageView
-            android:id="@+id/id_home_article_detail_backward"
-            android:layout_weight="0.6"
-            android:layout_marginLeft="8dp"
-            android:layout_gravity="center"
-            android:src="@drawable/left_back_button_normal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/id_home_article_detail_backward_text"
-            android:layout_weight="0.6"
-            android:text="返回"
+        <LinearLayout
+            android:id="@+id/id_home_article_detail_linearlayout"
+            android:orientation="horizontal"
+            android:layout_weight="1.2"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/id_home_article_detail_backward"
+                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center"
+                android:src="@drawable/left_back_button_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/id_home_article_detail_backward_text"
+                android:layout_weight="1"
+                android:text="返回"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
 
         <TextView
             android:layout_weight="15"
@@ -34,26 +44,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/id_home_article_detail_share"
-            android:layout_weight="0.6"
-            android:layout_marginRight="0dp"
+        <LinearLayout
+            android:id="@+id/id_home_article_detail_share_linearlayout"
+            android:layout_weight="1.2"
             android:layout_gravity="center"
-            android:src="@drawable/more_dynamic_normal"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/id_home_article_detail_share_text"
-            android:layout_weight="0.6"
-            android:layout_marginRight="8dp"
-            android:text="分享"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/id_home_article_detail_share"
+                android:layout_weight="1"
+                android:layout_marginRight="0dp"
+                android:layout_gravity="center"
+                android:src="@drawable/more_dynamic_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/id_home_article_detail_share_text"
+                android:layout_weight="1"
+                android:layout_marginRight="8dp"
+                android:text="分享"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <!--页面主体部分：可滚动的文章内容-->
+    <!--页面主体部分：可滚动的文章内容:这里原来是ScrollView -->
     <ScrollView
         android:layout_marginBottom="50dp"
         android:layout_marginTop="50dp"
@@ -173,7 +194,6 @@
                 android:layout_height="1dp" />
 
             <!-- 相关文章 -->
-            <!-- android:divider="@null" -->
             <com.yuegangshaola.common.ListViewForScrollView
                 android:id="@+id/id_article_detail_relatednews_ListView"
                 android:background="@drawable/home_article_relatednews_bg"
@@ -272,18 +292,17 @@
 
         </LinearLayout>
 
-        </ScrollView>
+    </ScrollView>
 
     <!--页面尾部：写评论，分享等-->
     <LinearLayout
-
         android:background="#f3efef"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
-        <EditText
+        <TextView
             android:id="@+id/id_article_detail_comment"
             android:background="@drawable/home_article_bottom_comment"
             android:layout_marginLeft="10dp"
@@ -299,23 +318,57 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/id_article_detail_scrollcomment"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/topic_tabbar"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+        <LinearLayout
+            android:id="@+id/id_article_detail_comment_linearlayout"
+            android:orientation="vertical"
+            android:layout_weight="0.5"
+            android:layout_width="50dp"
+            android:layout_marginLeft="15dp"
+            android:layout_height="50dp">
 
-        <ImageView
-            android:id="@+id/id_article_detail_share"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center"
-            android:src="@drawable/topic_icon_share_normal"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+            <ImageView
+                android:id="@+id/id_article_detail_scrollcomment"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@drawable/topic_tabbar"
+                android:layout_marginTop="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+            <TextView
+                android:id="@+id/id_article_detail_scrollcomment_text"
+                android:text="评论"
+                android:textSize="10sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/id_article_detail_share_linearlayout"
+            android:orientation="vertical"
+            android:layout_width="50dp"
+            android:layout_weight="0.5"
+            android:layout_marginRight="15dp"
+            android:layout_height="50dp">
+            <ImageView
+                android:id="@+id/id_article_detail_share"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@drawable/topic_icon_share_normal"
+                android:layout_marginTop="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp" />
+            <TextView
+                android:id="@+id/id_article_detail_share_text02"
+                android:text="分享"
+                android:textSize="10sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp" />
+        </LinearLayout>
 
     </LinearLayout>
 
