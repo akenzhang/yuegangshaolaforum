@@ -23,11 +23,17 @@ import com.yuegangshaola.bean.Commentset;
 import com.yuegangshaola.bean.Root;
 import com.yuegangshaola.common.BaseActivity;
 import com.yuegangshaola.common.DialogUtil;
+import com.yuegangshaola.common.EventBusMessage;
 import com.yuegangshaola.common.ListViewForScrollView;
+import com.yuegangshaola.common.LogUtil;
 import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.TextUtil;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRelatedArticlesAdapter;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRepliesAdapter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -61,10 +67,14 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private int mTid = 1;
     private Articledetail mArticleDetail;
 
+    private HomeArticleDetailRepliesAdapter repliesAdapter;
+    private List<Commentset> mListComments;
+
     @Override
     protected int getLayout() {
         return R.layout.home_articile_detail_activity;
     }
+
 
     @Override
     protected void initView() {
@@ -91,6 +101,17 @@ public class HomeArticleDetailActivity extends BaseActivity {
         home_article_detail_share = (ImageView) this.findViewById(R.id.id_home_article_detail_share);
         home_article_detail_share_text = (TextView) this.findViewById(R.id.id_home_article_detail_share_text);
 
+        //注册EventBus
+        EventBus.getDefault().register(this);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //注销EventBus
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -323,10 +344,10 @@ public class HomeArticleDetailActivity extends BaseActivity {
             public void requestSuccess(String result) {
                 Gson gson = new Gson();
                 CommentRoot root = gson.fromJson(result,CommentRoot.class);
-                List<Commentset> listComments = root.getCommentset();
+                mListComments = root.getCommentset();
 
-                HomeArticleDetailRepliesAdapter repliesAdapter = new HomeArticleDetailRepliesAdapter(
-                        listComments
+                repliesAdapter = new HomeArticleDetailRepliesAdapter(
+                        mListComments
                         ,R.layout.home_articile_detail_reply
                         ,HomeArticleDetailActivity.this
                 );
@@ -335,6 +356,23 @@ public class HomeArticleDetailActivity extends BaseActivity {
         });
 
     }
-}
+
+
+    @Subscribe
+    public void onEvent(EventBusMessage event) {
+        String strMsg = event.getMsg();
+        if(strMsg.equals("DATA_CHANGED")){
+            Intent intent = new Intent(HomeArticleDetailActivity.this,HomeArticleDetailActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("tid",String.valueOf(event.getmTid()));
+            intent.putExtras(bundle);
+            HomeArticleDetailActivity.this.startActivity(intent);
+
+            this.finish();
+        }
+    };
+
+
+ }
 
 

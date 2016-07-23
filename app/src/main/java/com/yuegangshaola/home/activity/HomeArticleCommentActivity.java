@@ -1,31 +1,28 @@
 package com.yuegangshaola.home.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Request;
 import com.yuegangshaola.R;
-import com.yuegangshaola.bean.EmailUtils;
+import com.yuegangshaola.common.EmailUtils;
 import com.yuegangshaola.common.BaseActivity;
+import com.yuegangshaola.common.EventBusMessage;
 import com.yuegangshaola.common.IPUtil;
-import com.yuegangshaola.common.LogUtil;
 import com.yuegangshaola.common.OkHttpUtils;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,7 +107,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
                     @Override
                     public void requestSuccess(String result) {
                         //重新加载详情页面
-                        reload(intTid);
+                        reload(intTid,intPid);
                         //HomeArticleCommentActivity.this.finish();
 
                         //发送邮件
@@ -130,7 +127,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //重新加载详情页面
-                reload(intTid);
+                reload(intTid,intPid);
 
                 //HomeArticleCommentActivity.this.finish();
             }
@@ -164,13 +161,22 @@ public class HomeArticleCommentActivity extends BaseActivity {
     @Override
     protected void bindData() {}
 
-    private void reload(int intTid){
+    private void reload(int intTid,int intPid){
         //重新加载详情页面:未来考虑是否需要这个代码
+        /*
         Intent intent = new Intent(HomeArticleCommentActivity.this,HomeArticleDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("tid",String.valueOf(intTid));
         intent.putExtras(bundle);
         HomeArticleCommentActivity.this.startActivity(intent);
+        */
+
+        String strComment = home_article_comment_edittext.getText().toString();
+
+        //发一条消息给HomeArticleDetailActivity，通知更新界面
+        if(!TextUtils.isEmpty(strComment)){
+            EventBus.getDefault().post(new EventBusMessage("DATA_CHANGED",intTid));
+        }
 
         //当点击到输入框的外边的时候，将输入框隐藏起来
         HomeArticleCommentActivity.this.finish();

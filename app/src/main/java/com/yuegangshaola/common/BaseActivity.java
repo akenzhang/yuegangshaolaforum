@@ -17,7 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initListener();
         bindData();
     }
-
+    
     /**
      * 获取子类布局文件
      * @return

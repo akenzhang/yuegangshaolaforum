@@ -1,14 +1,11 @@
-package com.yuegangshaola.bean;
+package com.yuegangshaola.common;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
-
 import java.util.Properties;
-
 import javax.activation.DataHandler;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -28,9 +25,9 @@ public class EmailUtils {
     private static String host = "smtp.qq.com";
     private static String to = "372891240@qq.com";
     private static String from = "2217005280@qq.com";
-    private static String password = "zjgerkfyiytudjib";// 密码
+    private static String password = "zjgerkfyiytudjib";//密码
 
-
+    /*
     public boolean isNetworkConnected(Context context) {
         if (context != null) {
             ConnectivityManager mConnectivityManager = (ConnectivityManager) context
@@ -42,6 +39,7 @@ public class EmailUtils {
         }
         return false;
     }
+    */
 
     public static void sendMail(final String strTitle,final String strContent) {
 
@@ -51,7 +49,7 @@ public class EmailUtils {
                 try {
                     //创建HtmlEmail类
                     HtmlEmail email = new HtmlEmail();
-                    //填写邮件的主机明，我这里使用的是163
+                    //填写邮件的主机明，我这里使用的是QQ
                     email.setHostName(host);
                     email.setTLS(true);
                     email.setSSL(true);
