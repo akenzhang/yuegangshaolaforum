@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/id_home_article_comment_layout"
         android:orientation="vertical"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="160dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </LinearLayout>
