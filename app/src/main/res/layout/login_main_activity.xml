@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_weight="15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/id_login_main_close"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/close_review_details_night"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </LinearLayout>
+
+    <!--  登录后保存关注记录轻松查询你的所好  -->
+    <TextView
+        android:id="@+id/id_login_main_desc"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="60dp"
+        android:text="登录后保存关注记录轻松查询你的所好"
+        android:gravity="center"
+        android:textColor="#939596"
+        android:textSize="25sp"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content" />
+
+    <!--  请输入手机号码  -->
+    <LinearLayout
+    android:id="@+id/id_login_main_cellphone"
+    android:layout_below="@+id/id_login_main_desc"
+    android:background="@drawable/login_main_cellphone_bg"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+    <EditText
+        android:background="@null"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:textSize="15sp"
+        android:hint="请输入手机号码"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+    <View
+        android:background="#939596"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="1dp"
+        android:layout_height="20dp"/>
+    <TextView
+        android:id="@+id/id_login_main_sendyanzhengma"
+        android:textColor="#000102"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:text="发送验证码"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!--  请输入验证码  -->
+    <LinearLayout
+        android:id="@+id/id_login_main_yanzhengma"
+        android:layout_below="@+id/id_login_main_cellphone"
+        android:background="@drawable/login_main_cellphone_bg"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <EditText
+            android:background="@null"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:textSize="15sp"
+            android:hint="请输入验证码"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <!--  未注册手机验证后自动注册  -->
+    <TextView
+        android:id="@+id/id_login_main_notregistercellphone"
+        android:layout_below="@+id/id_login_main_yanzhengma"
+        android:layout_centerHorizontal="true"
+        android:text="未注册手机验证后自动注册"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textColor="#939596"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!--  暂不注册，直接进入论坛  -->
+    <TextView
+        android:id="@+id/id_login_main_entrance"
+        android:layout_below="@+id/id_login_main_notregistercellphone"
+        android:text="暂不注册，直接进入论坛"
+        android:background="@drawable/login_main_entrance_bg"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <!--  其它登录方式  -->
+    <LinearLayout
+        android:id="@+id/id_login_main_otherentrance"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_height="120dp"
+        android:layout_width="250dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="#edeaea"
+                android:layout_width="0dp"
+                android:layout_height="1dp"/>
+            <TextView
+                android:text="更多登录方式"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_gravity="center"
+                android:background="#edeaea"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp"/>
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/id_login_main_qqentrance"
+            android:src="@drawable/qq_sdk_login"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="60dp" />
+        <ImageView
+            android:id="@+id/id_login_main_weixinentrance"
+            android:src="@drawable/weixin_sdk_login"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="60dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

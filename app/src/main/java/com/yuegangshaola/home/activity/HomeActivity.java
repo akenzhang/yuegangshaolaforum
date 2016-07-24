@@ -1,7 +1,6 @@
 package com.yuegangshaola.home.activity;
 
 import android.support.v4.app.Fragment;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.yuegangshaola.R;
@@ -27,7 +26,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     @Override
-    protected void initView() {} //采用xUtils来初始化变量
+    protected void initView() {}
 
     @Override
     protected void initVariable() {
@@ -90,4 +89,5 @@ public class HomeActivity extends BaseActivity {
         home_customviewpage.setAdapter(adapter);
 
     }
+
 }
