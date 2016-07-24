@@ -61,8 +61,6 @@ public class LoginMainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginMainActivity.this,"微信登录方式暂不可用,请使用其它方式登录",Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
-                //LoginMainActivity.this.startActivity(intent);
             }
         });
 
@@ -88,7 +86,6 @@ public class LoginMainActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
                 LoginMainActivity.this.startActivity(intent);
-
                 //LoginMainActivity.this.finish();
             }
         });
