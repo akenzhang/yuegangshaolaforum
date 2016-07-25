@@ -95,12 +95,6 @@ public class LoginMainActivity extends BaseActivity {
         login_main_cellphonenum = (EditText) this.findViewById(R.id.id_login_main_cellphonenum);
         login_main_yanzhengma_input = (EditText) this.findViewById(R.id.id_login_main_yanzhengma_input);
 
-//        //实例化QQ对象
-//        if(mTencent==null) {
-//            mTencent = Tencent.createInstance(MyConstants.APP_ID, this.getApplicationContext());
-//        }
-
-
     }
 
     @Override
