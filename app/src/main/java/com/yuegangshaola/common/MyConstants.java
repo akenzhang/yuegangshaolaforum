@@ -8,6 +8,7 @@ public class MyConstants {
     //三种用户名
     public static final String QQ_USER_NAME="qqusername";
     public static final String CELLPHONE_USER_NAME="cellphoneusername";
+    public static final String WEIXIN_USER_NAME="weixinusername";
     public static final String TEMP_USER_NAME="tempusername";
 
     public static final String QQ_USER_IMAGE="qquserimage";

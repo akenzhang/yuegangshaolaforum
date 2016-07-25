@@ -121,6 +121,9 @@ public class LoginMainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LoginMainActivity.this,"微信登录方式暂不可用,请使用其它方式登录",Toast.LENGTH_SHORT).show();
+
+                //将来实现微信登录的时候，需要将微信的用户名存入本地，以便日后获取
+                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.WEIXIN_USER_NAME,"");
             }
         });
 
@@ -134,7 +137,6 @@ public class LoginMainActivity extends BaseActivity {
                     mTencent = Tencent.createInstance(MyConstants.APP_ID, LoginMainActivity.this.getApplicationContext());
                 }
                 mTencent.login(LoginMainActivity.this, "get_user_info", new LoginUiListener());
-
             }
         });
 

@@ -51,7 +51,7 @@ public class HomeActivity extends BaseActivity {
         //home_radiobutton_homepage.setChecked(true);
 
         //打印用户名
-        String strUsername = SharedPreferencesUtils.getData(this, MyConstants.CELLPHONE_USER_NAME)+"   "+SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME) +"   "+SharedPreferencesUtils.getData(this, MyConstants.TEMP_USER_NAME);
+        String strUsername = SharedPreferencesUtils.getData(this,MyConstants.WEIXIN_USER_NAME)+"   "+SharedPreferencesUtils.getData(this,MyConstants.CELLPHONE_USER_NAME)+"   "+SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME) +"   "+SharedPreferencesUtils.getData(this, MyConstants.TEMP_USER_NAME);
         LogUtil.e(strUsername);
     }
 
