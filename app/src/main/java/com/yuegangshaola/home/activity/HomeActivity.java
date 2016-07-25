@@ -5,7 +5,10 @@ import android.widget.RadioGroup;
 
 import com.yuegangshaola.R;
 import com.yuegangshaola.common.BaseActivity;
+import com.yuegangshaola.common.MyConstants;
 import com.yuegangshaola.common.CustomViewPager;
+import com.yuegangshaola.common.LogUtil;
+import com.yuegangshaola.common.SharedPreferencesUtils;
 import com.yuegangshaola.contact.fragment.ContactHomeFragment;
 import com.yuegangshaola.home.adapter.HomeActivityPagerAdapter;
 import com.yuegangshaola.home.fragment.HomeDefaultFragment;
@@ -22,6 +25,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected int getLayout() {
+
         return R.layout.activity_home;
     }
 
@@ -45,6 +49,10 @@ public class HomeActivity extends BaseActivity {
         //代码实现让RadioButton默认选中
         //RadioButton home_radiobutton_homepage = (RadioButton) this.findViewById(R.id.id_home_radiobutton_homepage);
         //home_radiobutton_homepage.setChecked(true);
+
+        //打印用户名
+        String strUsername = SharedPreferencesUtils.getData(this, MyConstants.CELLPHONE_USER_NAME)+"   "+SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME) +"   "+SharedPreferencesUtils.getData(this, MyConstants.TEMP_USER_NAME);
+        LogUtil.e(strUsername);
     }
 
     @Override

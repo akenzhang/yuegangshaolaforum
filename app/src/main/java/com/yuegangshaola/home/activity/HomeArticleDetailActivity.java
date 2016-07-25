@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.google.gson.Gson;
 import com.squareup.okhttp.Request;
 import com.yuegangshaola.R;
@@ -149,7 +150,6 @@ public class HomeArticleDetailActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
-
         /*
         以下6个注册事件干同样的事情：调用分享功能
          */

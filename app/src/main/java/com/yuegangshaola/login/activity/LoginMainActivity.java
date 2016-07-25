@@ -11,17 +11,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.squareup.okhttp.Request;
+import com.tencent.connect.UserInfo;
+import com.tencent.connect.common.Constants;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 import com.yuegangshaola.R;
 import com.yuegangshaola.common.BaseActivity;
-import com.yuegangshaola.common.Constants;
+import com.yuegangshaola.common.MyConstants;
 import com.yuegangshaola.common.LogUtil;
 import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.SharedPreferencesUtils;
 import com.yuegangshaola.home.activity.HomeActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +62,10 @@ public class LoginMainActivity extends BaseActivity {
     //定时器
     private Timer timer = new Timer();
 
+    //QQ互联
+    private Tencent mTencent;
+    private UserInfo mUserInfo;
+
     @Override
     protected int getLayout() {
         //这里判断是否需要用户登录，首先从本地的记录提取用户名
@@ -61,8 +75,8 @@ public class LoginMainActivity extends BaseActivity {
 
     private void doTestLogin(){
         //如果能找到QQ或者cellphone用户名，就默认登录，不再需要提示登录界面
-        String strCellphoneUserName = SharedPreferencesUtils.getData(this, Constants.CELLPHONE_USER_NAME);
-        String strQQUserName = SharedPreferencesUtils.getData(this,Constants.QQ_USER_NAME);
+        String strCellphoneUserName = SharedPreferencesUtils.getData(this, MyConstants.CELLPHONE_USER_NAME);
+        String strQQUserName = SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME);
         if(!TextUtils.isEmpty(strCellphoneUserName) || !TextUtils.isEmpty(strQQUserName)){
             Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
             LoginMainActivity.this.startActivity(intent);
@@ -81,6 +95,12 @@ public class LoginMainActivity extends BaseActivity {
         login_main_close = (ImageView) this.findViewById(R.id.id_login_main_close);
         login_main_cellphonenum = (EditText) this.findViewById(R.id.id_login_main_cellphonenum);
         login_main_yanzhengma_input = (EditText) this.findViewById(R.id.id_login_main_yanzhengma_input);
+
+        //实例化QQ对象
+        if(mTencent==null) {
+            mTencent = Tencent.createInstance(MyConstants.APP_ID, this.getApplicationContext());
+        }
+
 
     }
 
@@ -115,7 +135,9 @@ public class LoginMainActivity extends BaseActivity {
         login_main_qqentrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginMainActivity.this,"正在开发中...",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginMainActivity.this,"正在开发中...",Toast.LENGTH_SHORT).show();
+                mTencent.login(LoginMainActivity.this, "get_user_info", new LoginUiListener());
+
             }
         });
 
@@ -197,7 +219,7 @@ public class LoginMainActivity extends BaseActivity {
                 }
 
                 //将用户信息保存到SharedPreferences中去
-                SharedPreferencesUtils.saveData(LoginMainActivity.this,Constants.CELLPHONE_USER_NAME,strUserCellphone);
+                SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.CELLPHONE_USER_NAME,strUserCellphone);
 
                 //将用户信息保存如数据库中去
                 Map<String,String> paramsAppRegister = new HashMap<String,String>();
@@ -225,6 +247,14 @@ public class LoginMainActivity extends BaseActivity {
         login_main_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //保存临时的用户名
+                String strTempUsername = SharedPreferencesUtils.getData(LoginMainActivity.this, MyConstants.TEMP_USER_NAME);
+                if(TextUtils.isEmpty(strTempUsername)){
+                    String strDate = String.valueOf(Calendar.getInstance().getTimeInMillis());
+                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.TEMP_USER_NAME,"过客("+ strDate+")");
+                }
+
                 Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
                 LoginMainActivity.this.startActivity(intent);
                 //LoginMainActivity.this.finish();
@@ -235,6 +265,15 @@ public class LoginMainActivity extends BaseActivity {
 
     @Override
     protected void bindData() {}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.REQUEST_LOGIN) {
+            mTencent.onActivityResultData(requestCode, resultCode, data, new LoginUiListener());
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     private String generateCode(){
         String[] beforeShuffle = new String[] {"0","1", "2", "3", "4", "5", "6", "7", "8", "9"};
@@ -269,5 +308,66 @@ public class LoginMainActivity extends BaseActivity {
             msg.setData(bundle);
             mHandler.sendMessage(msg);
         }
+    }
+
+    //实现QQ登陆的回调接口
+    class LoginUiListener implements IUiListener {
+        @Override
+        public void onComplete(Object o) {
+            JSONObject jsonObject = (JSONObject)o;
+
+            try {
+                String openid = jsonObject.getString("openid");
+                String expires_in = jsonObject.getString("expires_in");
+                String token = jsonObject.getString("access_token");
+                if (!TextUtils.isEmpty(openid)&&!TextUtils.isEmpty(expires_in)&&!TextUtils.isEmpty(token)){
+                    mTencent.setOpenId(openid);
+                    mTencent.setAccessToken(token,expires_in);
+
+                    //拿到QQ用户的数据
+                    mUserInfo = new UserInfo(LoginMainActivity.this,mTencent.getQQToken());
+                    mUserInfo.getUserInfo(new IUiListener() {
+                        @Override
+                        public void onComplete(Object o) {
+                            JSONObject json = (JSONObject)o;
+
+                            try {
+                                String nickname = json.getString("nickname");
+                                String image = json.getString("figureurl_qq_2");
+                                String gender = json.getString("gender");
+
+                                //将获取到的用户信息保存起来
+                                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_NAME,nickname);
+                                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_IMAGE,image);
+                                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_GENDER,gender);
+
+                                //登录后跳转
+                                Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
+                                startActivity(intent);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(UiError uiError) { }
+
+                        @Override
+                        public void onCancel() {}
+                    });
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onError(UiError e) {
+            Toast.makeText(LoginMainActivity.this,e.errorMessage,Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onCancel() {}
     }
 }

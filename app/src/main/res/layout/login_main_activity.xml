@@ -126,7 +126,7 @@
     <TextView
         android:id="@+id/id_login_main_entrance"
         android:layout_below="@+id/id_login_main_notregistercellphone"
-        android:text="输入验证码,进入论坛"
+        android:text="输入验证码，进入论坛"
         android:enabled="false"
         android:background="@drawable/login_main_entrance_bg"
         android:layout_marginRight="20dp"

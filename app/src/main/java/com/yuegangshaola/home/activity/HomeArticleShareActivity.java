@@ -3,8 +3,6 @@ package com.yuegangshaola.home.activity;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,6 +16,8 @@ import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 import com.yuegangshaola.R;
 import com.yuegangshaola.common.BaseActivity;
+import com.yuegangshaola.common.MyConstants;
+
 import org.json.JSONObject;
 import java.util.ArrayList;
 
@@ -35,7 +35,6 @@ public class HomeArticleShareActivity extends BaseActivity {
     /*
     QQ,QQ空间
      */
-    private static String APP_ID="1105560564";
     private Tencent mTencent;
     private String strSHARE_TO_QQ_TITLE;
     private String strSHARE_TO_QQ_SUMMARY;
@@ -58,7 +57,7 @@ public class HomeArticleShareActivity extends BaseActivity {
         home_article_share_lianjie = (ImageView) this.findViewById(R.id.id_home_article_share_lianjie);
 
         //QQ对象
-        mTencent = Tencent.createInstance(APP_ID, this.getApplicationContext());
+        mTencent = Tencent.createInstance(MyConstants.APP_ID, this.getApplicationContext());
 
     }
 
