@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,10 +24,8 @@ import com.yuegangshaola.common.LogUtil;
 import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.SharedPreferencesUtils;
 import com.yuegangshaola.home.activity.HomeActivity;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -80,7 +79,7 @@ public class LoginMainActivity extends BaseActivity {
         if(!TextUtils.isEmpty(strCellphoneUserName) || !TextUtils.isEmpty(strQQUserName)){
             Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
             LoginMainActivity.this.startActivity(intent);
-            LoginMainActivity.this.finish();
+            //LoginMainActivity.this.finish();
             return;
         }
     }
@@ -96,10 +95,10 @@ public class LoginMainActivity extends BaseActivity {
         login_main_cellphonenum = (EditText) this.findViewById(R.id.id_login_main_cellphonenum);
         login_main_yanzhengma_input = (EditText) this.findViewById(R.id.id_login_main_yanzhengma_input);
 
-        //实例化QQ对象
-        if(mTencent==null) {
-            mTencent = Tencent.createInstance(MyConstants.APP_ID, this.getApplicationContext());
-        }
+//        //实例化QQ对象
+//        if(mTencent==null) {
+//            mTencent = Tencent.createInstance(MyConstants.APP_ID, this.getApplicationContext());
+//        }
 
 
     }
@@ -136,6 +135,10 @@ public class LoginMainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(LoginMainActivity.this,"正在开发中...",Toast.LENGTH_SHORT).show();
+                //实例化QQ对象
+                if(mTencent==null) {
+                    mTencent = Tencent.createInstance(MyConstants.APP_ID, LoginMainActivity.this.getApplicationContext());
+                }
                 mTencent.login(LoginMainActivity.this, "get_user_info", new LoginUiListener());
 
             }
@@ -267,10 +270,19 @@ public class LoginMainActivity extends BaseActivity {
     protected void bindData() {}
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //调用QQ注销接口
+        mTencent.logout(this);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Constants.REQUEST_LOGIN) {
             mTencent.onActivityResultData(requestCode, resultCode, data, new LoginUiListener());
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -309,6 +321,7 @@ public class LoginMainActivity extends BaseActivity {
             mHandler.sendMessage(msg);
         }
     }
+
 
     //实现QQ登陆的回调接口
     class LoginUiListener implements IUiListener {

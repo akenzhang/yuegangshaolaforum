@@ -12,6 +12,7 @@ import com.yuegangshaola.common.SharedPreferencesUtils;
 import com.yuegangshaola.contact.fragment.ContactHomeFragment;
 import com.yuegangshaola.home.adapter.HomeActivityPagerAdapter;
 import com.yuegangshaola.home.fragment.HomeDefaultFragment;
+import com.yuegangshaola.login.activity.LoginMainActivity;
 import com.yuegangshaola.mine.fragment.MineHomeFragment;
 import com.yuegangshaola.video.fragment.VideoHomeFragment;
 
@@ -25,7 +26,6 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected int getLayout() {
-
         return R.layout.activity_home;
     }
 
