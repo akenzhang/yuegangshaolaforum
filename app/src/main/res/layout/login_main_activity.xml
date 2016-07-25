@@ -61,6 +61,7 @@
         android:layout_weight="2"
         android:textSize="15sp"
         android:hint="请输入手机号码"
+        android:text="13510194594"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
     <View
@@ -75,10 +76,11 @@
         android:id="@+id/id_login_main_sendyanzhengma"
         android:textColor="#000102"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:text="发送验证码"
         android:layout_width="0dp"
         android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <!--  请输入验证码  -->

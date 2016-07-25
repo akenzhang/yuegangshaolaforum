@@ -2,15 +2,12 @@ package com.yuegangshaola.home.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import com.google.gson.Gson;
@@ -25,9 +22,8 @@ import com.yuegangshaola.bean.Commentset;
 import com.yuegangshaola.bean.Root;
 import com.yuegangshaola.common.BaseActivity;
 import com.yuegangshaola.common.DialogUtil;
-import com.yuegangshaola.common.EventBusMessage;
+import com.yuegangshaola.bean.EventBusMessage;
 import com.yuegangshaola.common.ListViewForScrollView;
-import com.yuegangshaola.common.LogUtil;
 import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.TextUtil;
 import com.yuegangshaola.home.adapter.HomeArticleDetailRelatedArticlesAdapter;
@@ -415,8 +411,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
 
             this.finish();
         }
-    };
-
+    }
 
  }
 

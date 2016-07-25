@@ -2,29 +2,21 @@ package com.yuegangshaola.home.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yuegangshaola.R;
-import com.yuegangshaola.bean.Article;
 import com.yuegangshaola.bean.Commentset;
 import com.yuegangshaola.bean.Replies;
 import com.yuegangshaola.common.CommonAdapter;
-import com.yuegangshaola.common.EventBusMessage;
 import com.yuegangshaola.common.ListViewForScrollView;
 import com.yuegangshaola.common.ViewHolder;
 import com.yuegangshaola.home.activity.HomeArticleCommentActivity;
-import com.yuegangshaola.home.activity.HomeArticleDetailActivity;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.io.InputStream;
 import java.util.List;

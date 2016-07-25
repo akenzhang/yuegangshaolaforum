@@ -1,4 +1,4 @@
-package com.yuegangshaola.common;
+package com.yuegangshaola.bean;
 
 /**
  * Created by AKENZHANG on 2016/7/23.

@@ -15,7 +15,7 @@ import com.squareup.okhttp.Request;
 import com.yuegangshaola.R;
 import com.yuegangshaola.common.EmailUtils;
 import com.yuegangshaola.common.BaseActivity;
-import com.yuegangshaola.common.EventBusMessage;
+import com.yuegangshaola.bean.EventBusMessage;
 import com.yuegangshaola.common.IPUtil;
 import com.yuegangshaola.common.OkHttpUtils;
 import org.greenrobot.eventbus.EventBus;
