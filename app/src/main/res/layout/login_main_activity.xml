@@ -55,6 +55,7 @@
     android:layout_width="match_parent"
     android:layout_height="50dp">
     <EditText
+        android:id="@+id/id_login_main_cellphonenum"
         android:background="@null"
         android:layout_gravity="center"
         android:layout_weight="2"
@@ -98,6 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <EditText
+            android:id="@+id/id_login_main_yanzhengma_input"
             android:background="@null"
             android:layout_gravity="center"
             android:layout_weight="2"
@@ -120,11 +122,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <!--  暂不注册，直接进入论坛  -->
+    <!--  进入论坛  -->
     <TextView
         android:id="@+id/id_login_main_entrance"
         android:layout_below="@+id/id_login_main_notregistercellphone"
-        android:text="暂不注册，直接进入论坛"
+        android:text="输入验证码,进入论坛"
+        android:enabled="false"
         android:background="@drawable/login_main_entrance_bg"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
