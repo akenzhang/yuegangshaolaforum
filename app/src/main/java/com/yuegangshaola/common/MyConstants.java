@@ -15,8 +15,10 @@ public class MyConstants {
     public static final String QQ_USER_GENDER="qqusergender";
 
     //QQ登录，QQ分享,QQ空间分享
-    public static final String APP_ID="1105434609";
+    public static final String APP_ID="1105434609"; //OK
     //public static final String APP_ID="1105494971";
+    //public static final String APP_ID="1105494971";
+
 
 
 }

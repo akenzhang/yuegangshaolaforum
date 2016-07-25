@@ -232,7 +232,7 @@ public class LoginMainActivity extends BaseActivity {
                     }
                     @Override
                     public void requestSuccess(String result) {
-                        LogUtil.e(result);
+                        //LogUtil.e(result);
                         if(result.contains("注册成功") || result.contains("注册失败，该用户名已经存在")){
                             Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
                             LoginMainActivity.this.startActivity(intent);
