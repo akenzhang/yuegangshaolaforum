@@ -1,7 +1,6 @@
 package com.yuegangshaola.login.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,8 +13,10 @@ import android.widget.Toast;
 import com.squareup.okhttp.Request;
 import com.yuegangshaola.R;
 import com.yuegangshaola.common.BaseActivity;
+import com.yuegangshaola.common.Constants;
 import com.yuegangshaola.common.LogUtil;
 import com.yuegangshaola.common.OkHttpUtils;
+import com.yuegangshaola.common.SharedPreferencesUtils;
 import com.yuegangshaola.home.activity.HomeActivity;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -53,7 +54,21 @@ public class LoginMainActivity extends BaseActivity {
 
     @Override
     protected int getLayout() {
+        //这里判断是否需要用户登录，首先从本地的记录提取用户名
+        doTestLogin();
         return R.layout.login_main_activity;
+    }
+
+    private void doTestLogin(){
+        //如果能找到QQ或者cellphone用户名，就默认登录，不再需要提示登录界面
+        String strCellphoneUserName = SharedPreferencesUtils.getData(this, Constants.CELLPHONE_USER_NAME);
+        String strQQUserName = SharedPreferencesUtils.getData(this,Constants.QQ_USER_NAME);
+        if(!TextUtils.isEmpty(strCellphoneUserName) || !TextUtils.isEmpty(strQQUserName)){
+            Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
+            LoginMainActivity.this.startActivity(intent);
+            LoginMainActivity.this.finish();
+            return;
+        }
     }
 
     @Override
@@ -142,7 +157,7 @@ public class LoginMainActivity extends BaseActivity {
 
                                 SISTY_SECOND=60;
 
-                                //将验证码自动填写到输入框中
+                                //允许用户点击“进入论坛”
                                 login_main_entrance.setEnabled(true);
                                 login_main_entrance.setBackgroundResource(R.drawable.login_main_entrance_bg2);
                                 login_main_entrance.setText("进入论坛");
@@ -174,15 +189,19 @@ public class LoginMainActivity extends BaseActivity {
             public void onClick(View v) {
 
                 //检查输入的验证码是否正确
+                String strUserCellphone = login_main_cellphonenum.getText().toString();
                 String strYanzhengma = login_main_yanzhengma_input.getText().toString();
                 if(!strYanzhengma.equals(YANZHENGMA)){
                     Toast.makeText(LoginMainActivity.this,"请输入正确的验证码...",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                //将用户信息保存到SharedPreferences中去
+                SharedPreferencesUtils.saveData(LoginMainActivity.this,Constants.CELLPHONE_USER_NAME,strUserCellphone);
+
                 //将用户信息保存如数据库中去
                 Map<String,String> paramsAppRegister = new HashMap<String,String>();
-                paramsAppRegister.put("nusername",login_main_cellphonenum.getText().toString());
+                paramsAppRegister.put("nusername",strUserCellphone);
                 paramsAppRegister.put("npassword",strYanzhengma);
                 paramsAppRegister.put("nemail","auto@qq.com");
                 OkHttpUtils.postAsync("http://www.1316818.com/jsonserver.aspx", paramsAppRegister, new OkHttpUtils.DataCallBack() {
