@@ -14,7 +14,7 @@ import com.mantianhong.bean.Root;
 import com.mantianhong.common.BaseFragment;
 import com.mantianhong.common.DialogUtil;
 import com.mantianhong.common.OkHttpUtils;
-import com.mantianhong.home.adapter.HomeDefaultFragmentShaoyaRecyclerViewAdapter;
+import com.mantianhong.home.adapter.HomeDefaultFragmentListArticlesAdapter;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,7 +36,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
 
     private int lastItem;//最后一条数据position
     private boolean hasMore = true;//解决上拉重复加载的bug
-    private HomeDefaultFragmentShaoyaRecyclerViewAdapter adapter=null;
+    private HomeDefaultFragmentListArticlesAdapter adapter=null;
 
     private static int intPageNext=1;
 
@@ -180,7 +180,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
                 mRecyclerview.setLayoutManager(mLayoutManager);
 
                 //将数据绑定给RecyclerView
-                adapter = new HomeDefaultFragmentShaoyaRecyclerViewAdapter(mListArticle,getFragmentContext(),2);
+                adapter = new HomeDefaultFragmentListArticlesAdapter(mListArticle,getFragmentContext(),2);
                 mRecyclerview.setAdapter(adapter);
 
                 hasmore=true;

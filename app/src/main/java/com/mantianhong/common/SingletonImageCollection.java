@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
+import com.mantianhong.R;
 import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
@@ -117,28 +118,18 @@ public class SingletonImageCollection {
         String strFinalImageUrl = mUrl.replace(strWidthHeight,"");
 
         Picasso.with(mContext).setIndicatorsEnabled(true);
-        int resultWidth=80;
-        int resultHeight=60;
-        switch (intImageType){
-            case 1:
-                resultWidth=80;resultHeight=60;
-                break;
-            case 2:
-                resultWidth=320;resultHeight=240;
-                break;
-            case 3:
-                resultWidth=80;resultHeight=60;
-                break;
-            default:
-                break;
+        int resultWidth=106;
+        int resultHeight=80;
+        int intInDownload=R.drawable.indownload;
+        if(intImageType==2){
+            resultWidth=320;resultHeight=240;intInDownload=R.drawable.indownload240;
         }
-
         Picasso.with(mContext)
                 .load(strFinalImageUrl)
+                .placeholder(intInDownload) //设置加载等待图片
                 .resize(resultWidth,resultHeight).centerCrop() //压缩图片
-                .noFade()
-                //.config(Bitmap.Config.RGB_565)
-                .config(Bitmap.Config.ALPHA_8)
+                .noFade() //没有淡入淡出效果
+                .config(Bitmap.Config.ALPHA_8) //显示低像素的照片
                 .into(mImageView);
     }
 

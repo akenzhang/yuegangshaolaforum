@@ -9,7 +9,7 @@ import com.mantianhong.R;
 import com.mantianhong.common.BaseFragment;
 import com.mantianhong.common.CustomViewPager;
 import com.mantianhong.common.LogUtil;
-import com.mantianhong.home.adapter.HomeDefaultFragmentStatePagerAdapter;
+import com.mantianhong.home.adapter.HomeDefaultFragmentCategoriesAdapter;
 
 import java.lang.reflect.Field;
 
@@ -79,7 +79,7 @@ public class HomeDefaultFragment extends BaseFragment {
     @Override
     protected void bindData() {
 
-        HomeDefaultFragmentStatePagerAdapter adapter = new HomeDefaultFragmentStatePagerAdapter(
+        HomeDefaultFragmentCategoriesAdapter adapter = new HomeDefaultFragmentCategoriesAdapter(
                 this.getChildFragmentManager()
                 ,tabTitles
                 ,fragments

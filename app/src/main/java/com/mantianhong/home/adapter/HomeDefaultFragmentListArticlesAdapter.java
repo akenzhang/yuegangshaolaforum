@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by new pc on 2016/7/6.
  */
-public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HomeDefaultFragmentListArticlesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private LayoutInflater mInflater;
     private Context mContext;
@@ -39,7 +39,7 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
     构造函数，可以通过构造函数传递外面的数据进来
     Context 传递环境的目的是方便实例化 private LayoutInflater mInflater;
      */
-    public HomeDefaultFragmentShaoyaRecyclerViewAdapter(List<Article>  mListArticle, Context context, int type){
+    public HomeDefaultFragmentListArticlesAdapter(List<Article>  mListArticle, Context context, int type){
         this.mListArticle = mListArticle;
         this.mContext = context;
         this.mType = type;
@@ -97,9 +97,6 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
             ((ArticleThreeImageViewHolder) holder).mViews.setText("浏览:"+artitle.getMViews());
             ((ArticleThreeImageViewHolder) holder).mReplies.setText("回复:"+artitle.getMReplies());
             ((ArticleThreeImageViewHolder) holder).mPostDatetime.setText("日期:"+artitle.getMPostDatetime());
-            //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[0]).into(((ArticleThreeImageViewHolder) holder).mImageList01);
-            //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[a1]).into(((ArticleThreeImageViewHolder) holder).mImageList02);
-            //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[2]).into(((ArticleThreeImageViewHolder) holder).mImageList03);
             SingletonImageCollection.loadImage(3,mContext,"http://www.1316818.com/upload/" + images[0],((ArticleThreeImageViewHolder) holder).mImageList01);
             SingletonImageCollection.loadImage(3,mContext,"http://www.1316818.com/upload/" + images[1],((ArticleThreeImageViewHolder) holder).mImageList02);
             SingletonImageCollection.loadImage(3,mContext,"http://www.1316818.com/upload/" + images[2],((ArticleThreeImageViewHolder) holder).mImageList03);
@@ -119,7 +116,6 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
             ((ArticleTwoImageViewHolder) holder).mViews.setText("浏览:"+artitle.getMViews());
             ((ArticleTwoImageViewHolder) holder).mReplies.setText("回复:"+artitle.getMReplies());
             ((ArticleTwoImageViewHolder) holder).mPostDatetime.setText("日期:"+artitle.getMPostDatetime());
-            //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[0]).into(((ArticleTwoImageViewHolder) holder).mImageList01);
             SingletonImageCollection.loadImage(2,mContext,"http://www.1316818.com/upload/" + images[0],((ArticleTwoImageViewHolder) holder).mImageList01);
 
             //消除多余的图片缓存
@@ -134,7 +130,6 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
             ((ArticleOneImageViewHolder) holder).mTitle.setText(artitle.getMTitle());
             ((ArticleOneImageViewHolder) holder).mViews.setText("浏览:"+artitle.getMViews());
             ((ArticleOneImageViewHolder) holder).mReplies.setText("回复:"+artitle.getMReplies());
-            //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[0]).into(((ArticleOneImageViewHolder) holder).mImageList01);
             SingletonImageCollection.loadImage(1,mContext,"http://www.1316818.com/upload/" + images[0],((ArticleOneImageViewHolder) holder).mImageList01);
 
             //消除多余的图片缓存
