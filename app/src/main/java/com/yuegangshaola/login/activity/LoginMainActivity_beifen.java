@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.squareup.okhttp.Request;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.common.Constants;
@@ -19,13 +19,15 @@ import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 import com.yuegangshaola.R;
 import com.yuegangshaola.common.BaseActivity;
-import com.yuegangshaola.common.MyConstants;
 import com.yuegangshaola.common.LogUtil;
+import com.yuegangshaola.common.MyConstants;
 import com.yuegangshaola.common.OkHttpUtils;
 import com.yuegangshaola.common.SharedPreferencesUtils;
 import com.yuegangshaola.home.activity.HomeActivity;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -41,7 +43,7 @@ import java.util.TimerTask;
 /**
  * Created by AKENZHANG on 2016/7/24.
  */
-public class LoginMainActivity extends BaseActivity {
+public class LoginMainActivity_beifen extends BaseActivity {
 
     private TextView login_main_entrance;
     private TextView login_main_sendyanzhengma;
@@ -80,8 +82,8 @@ public class LoginMainActivity extends BaseActivity {
         String strCellphoneUserName = SharedPreferencesUtils.getData(this, MyConstants.CELLPHONE_USER_NAME);
         String strQQUserName = SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME);
         if(!TextUtils.isEmpty(strCellphoneUserName) || !TextUtils.isEmpty(strQQUserName)){
-            Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
-            LoginMainActivity.this.startActivity(intent);
+            Intent intent = new Intent(LoginMainActivity_beifen.this, HomeActivity.class);
+            LoginMainActivity_beifen.this.startActivity(intent);
             //LoginMainActivity.this.finish();
             return;
         }
@@ -123,10 +125,10 @@ public class LoginMainActivity extends BaseActivity {
         login_main_weixinentrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginMainActivity.this,"微信登录方式暂不可用,请使用其它方式登录",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginMainActivity_beifen.this,"微信登录方式暂不可用,请使用其它方式登录",Toast.LENGTH_SHORT).show();
 
                 //将来实现微信登录的时候，需要将微信的用户名存入本地，以便日后获取
-                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.WEIXIN_USER_NAME,"");
+                SharedPreferencesUtils.saveData(LoginMainActivity_beifen.this,MyConstants.WEIXIN_USER_NAME,"");
             }
         });
 
@@ -137,9 +139,9 @@ public class LoginMainActivity extends BaseActivity {
                 //Toast.makeText(LoginMainActivity.this,"正在开发中...",Toast.LENGTH_SHORT).show();
                 //实例化QQ对象
                 if(mTencent==null) {
-                    mTencent = Tencent.createInstance(MyConstants.APP_ID, LoginMainActivity.this.getApplicationContext());
+                    mTencent = Tencent.createInstance(MyConstants.APP_ID, LoginMainActivity_beifen.this.getApplicationContext());
                 }
-                mTencent.login(LoginMainActivity.this, "get_user_info", new LoginUiListener());
+                mTencent.login(LoginMainActivity_beifen.this, "get_user_info", new LoginUiListener());
             }
         });
 
@@ -149,7 +151,7 @@ public class LoginMainActivity extends BaseActivity {
             public void onClick(View v) {
 
                 if(login_main_sendyanzhengma.getText().toString().contains("秒后再试")){
-                    Toast.makeText(LoginMainActivity.this,"请稍后再试...",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginMainActivity_beifen.this,"请稍后再试...",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -159,7 +161,7 @@ public class LoginMainActivity extends BaseActivity {
                 //发送的内容需要编码成gb2312
                 String strPhone = login_main_cellphonenum.getText().toString();
                 if(strPhone.equals("") || TextUtils.isEmpty(strPhone)){
-                    Toast.makeText(LoginMainActivity.this,"手机号码不能为空！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginMainActivity_beifen.this,"手机号码不能为空！",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 try {
@@ -196,7 +198,7 @@ public class LoginMainActivity extends BaseActivity {
                                 }
 
                             }else{
-                                Toast.makeText(LoginMainActivity.this,"输入的手机号码不正确，如若其它问题，请联系：13509611303",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginMainActivity_beifen.this,"输入的手机号码不正确，如若其它问题，请联系：13509611303",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -216,12 +218,12 @@ public class LoginMainActivity extends BaseActivity {
                 String strUserCellphone = login_main_cellphonenum.getText().toString();
                 String strYanzhengma = login_main_yanzhengma_input.getText().toString();
                 if(!strYanzhengma.equals(YANZHENGMA)){
-                    Toast.makeText(LoginMainActivity.this,"请输入正确的验证码...",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginMainActivity_beifen.this,"请输入正确的验证码...",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 //将用户信息保存到SharedPreferences中去
-                SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.CELLPHONE_USER_NAME,strUserCellphone);
+                SharedPreferencesUtils.saveData(LoginMainActivity_beifen.this, MyConstants.CELLPHONE_USER_NAME,strUserCellphone);
 
                 //将用户信息保存如数据库中去
                 Map<String,String> paramsAppRegister = new HashMap<String,String>();
@@ -237,8 +239,8 @@ public class LoginMainActivity extends BaseActivity {
                     public void requestSuccess(String result) {
                         //LogUtil.e(result);
                         if(result.contains("注册成功") || result.contains("注册失败，该用户名已经存在")){
-                            Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
-                            LoginMainActivity.this.startActivity(intent);
+                            Intent intent = new Intent(LoginMainActivity_beifen.this, HomeActivity.class);
+                            LoginMainActivity_beifen.this.startActivity(intent);
                         }
                     }
                 });
@@ -251,14 +253,14 @@ public class LoginMainActivity extends BaseActivity {
             public void onClick(View v) {
 
                 //保存临时的用户名
-                String strTempUsername = SharedPreferencesUtils.getData(LoginMainActivity.this, MyConstants.TEMP_USER_NAME);
+                String strTempUsername = SharedPreferencesUtils.getData(LoginMainActivity_beifen.this, MyConstants.TEMP_USER_NAME);
                 if(TextUtils.isEmpty(strTempUsername)){
                     String strDate = String.valueOf(Calendar.getInstance().getTimeInMillis());
-                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.TEMP_USER_NAME,"过客("+ strDate+")");
+                    SharedPreferencesUtils.saveData(LoginMainActivity_beifen.this, MyConstants.TEMP_USER_NAME,"过客("+ strDate+")");
                 }
 
-                Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
-                LoginMainActivity.this.startActivity(intent);
+                Intent intent = new Intent(LoginMainActivity_beifen.this, HomeActivity.class);
+                LoginMainActivity_beifen.this.startActivity(intent);
                 //LoginMainActivity.this.finish();
             }
         });
@@ -337,7 +339,7 @@ public class LoginMainActivity extends BaseActivity {
                     mTencent.setAccessToken(token,expires_in);
 
                     //拿到QQ用户的数据
-                    mUserInfo = new UserInfo(LoginMainActivity.this,mTencent.getQQToken());
+                    mUserInfo = new UserInfo(LoginMainActivity_beifen.this,mTencent.getQQToken());
                     mUserInfo.getUserInfo(new IUiListener() {
                         @Override
                         public void onComplete(Object o) {
@@ -349,12 +351,12 @@ public class LoginMainActivity extends BaseActivity {
                                 String gender = json.getString("gender");
 
                                 //将获取到的用户信息保存起来
-                                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_NAME,nickname);
-                                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_IMAGE,image);
-                                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_GENDER,gender);
+                                SharedPreferencesUtils.saveData(LoginMainActivity_beifen.this,MyConstants.QQ_USER_NAME,nickname);
+                                SharedPreferencesUtils.saveData(LoginMainActivity_beifen.this,MyConstants.QQ_USER_IMAGE,image);
+                                SharedPreferencesUtils.saveData(LoginMainActivity_beifen.this,MyConstants.QQ_USER_GENDER,gender);
 
                                 //登录后跳转
-                                Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
+                                Intent intent = new Intent(LoginMainActivity_beifen.this, HomeActivity.class);
                                 startActivity(intent);
 
                             } catch (JSONException e) {
@@ -376,7 +378,7 @@ public class LoginMainActivity extends BaseActivity {
 
         @Override
         public void onError(UiError e) {
-            Toast.makeText(LoginMainActivity.this,e.errorMessage,Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginMainActivity_beifen.this,e.errorMessage,Toast.LENGTH_SHORT).show();
         }
 
         @Override
