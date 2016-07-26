@@ -125,12 +125,12 @@ public class SingletonImageCollection {
             resultWidth=320;resultHeight=240;intInDownload=R.drawable.indownload240;
         }
         Picasso.with(mContext)
-                .load(strFinalImageUrl)
+                .load(strFinalImageUrl) //设置图片的连接
                 .placeholder(intInDownload) //设置加载等待图片
                 .resize(resultWidth,resultHeight).centerCrop() //压缩图片
                 .noFade() //没有淡入淡出效果
                 .config(Bitmap.Config.ALPHA_8) //显示低像素的照片
-                .into(mImageView);
+                .into(mImageView); //装在图片的控件
     }
 
     public static String parseImageUrl(String url){
