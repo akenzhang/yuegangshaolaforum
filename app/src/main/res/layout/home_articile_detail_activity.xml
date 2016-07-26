@@ -194,7 +194,7 @@
                 android:layout_height="1dp" />
 
             <!-- 相关文章 -->
-            <com.yuegangshaola.common.ListViewForScrollView
+            <com.mantianhong.common.ListViewForScrollView
                 android:id="@+id/id_article_detail_relatednews_ListView"
                 android:background="@drawable/home_article_relatednews_bg"
                 android:divider="@null"
@@ -208,7 +208,7 @@
                 android:layout_height="wrap_content"/>
 
             <!-- 相关评论 -->
-            <com.yuegangshaola.common.ListViewForScrollView
+            <com.mantianhong.common.ListViewForScrollView
                 android:id="@+id/id_article_detail_replies_ListView"
                 android:divider="@null"
                 android:layout_width="match_parent"
