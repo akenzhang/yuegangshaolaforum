@@ -127,7 +127,7 @@ public class SingletonImageCollection {
                 resultWidth=320;resultHeight=240;
                 break;
             case 3:
-                resultWidth=60;resultHeight=45;
+                resultWidth=80;resultHeight=60;
                 break;
             default:
                 break;
