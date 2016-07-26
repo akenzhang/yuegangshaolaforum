@@ -73,8 +73,7 @@ public class LoginMainActivity extends BaseActivity {
 
     private void doTestLogin(){
 
-        SharedPreferencesUtils.saveData(this,MyConstants.QQ_USER_NAME,"");
-
+        //SharedPreferencesUtils.saveData(this,MyConstants.QQ_USER_NAME,"");
         //如果能找到QQ或者cellphone用户名，就默认登录，不再需要提示登录界面
         String strCellphoneUserName = SharedPreferencesUtils.getData(this, MyConstants.CELLPHONE_USER_NAME);
         String strQQUserName = SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME);

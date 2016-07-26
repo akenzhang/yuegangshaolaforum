@@ -100,9 +100,9 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
             //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[0]).into(((ArticleThreeImageViewHolder) holder).mImageList01);
             //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[a1]).into(((ArticleThreeImageViewHolder) holder).mImageList02);
             //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[2]).into(((ArticleThreeImageViewHolder) holder).mImageList03);
-            SingletonImageCollection.loadImage(mContext,"http://www.1316818.com/upload/" + images[0],((ArticleThreeImageViewHolder) holder).mImageList01);
-            SingletonImageCollection.loadImage(mContext,"http://www.1316818.com/upload/" + images[1],((ArticleThreeImageViewHolder) holder).mImageList02);
-            SingletonImageCollection.loadImage(mContext,"http://www.1316818.com/upload/" + images[2],((ArticleThreeImageViewHolder) holder).mImageList03);
+            SingletonImageCollection.loadImage(3,mContext,"http://www.1316818.com/upload/" + images[0],((ArticleThreeImageViewHolder) holder).mImageList01);
+            SingletonImageCollection.loadImage(3,mContext,"http://www.1316818.com/upload/" + images[1],((ArticleThreeImageViewHolder) holder).mImageList02);
+            SingletonImageCollection.loadImage(3,mContext,"http://www.1316818.com/upload/" + images[2],((ArticleThreeImageViewHolder) holder).mImageList03);
 
             //消除多余的图片缓存
             picCollection.recycleCollection(mContext);
@@ -120,7 +120,7 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
             ((ArticleTwoImageViewHolder) holder).mReplies.setText("回复:"+artitle.getMReplies());
             ((ArticleTwoImageViewHolder) holder).mPostDatetime.setText("日期:"+artitle.getMPostDatetime());
             //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[0]).into(((ArticleTwoImageViewHolder) holder).mImageList01);
-            SingletonImageCollection.loadImage(mContext,"http://www.1316818.com/upload/" + images[0],((ArticleTwoImageViewHolder) holder).mImageList01);
+            SingletonImageCollection.loadImage(2,mContext,"http://www.1316818.com/upload/" + images[0],((ArticleTwoImageViewHolder) holder).mImageList01);
 
             //消除多余的图片缓存
             picCollection.recycleCollection(mContext);
@@ -135,7 +135,7 @@ public class HomeDefaultFragmentShaoyaRecyclerViewAdapter extends RecyclerView.A
             ((ArticleOneImageViewHolder) holder).mViews.setText("浏览:"+artitle.getMViews());
             ((ArticleOneImageViewHolder) holder).mReplies.setText("回复:"+artitle.getMReplies());
             //Picasso.with(mContext).load("http://www.1316818.com/upload/" + images[0]).into(((ArticleOneImageViewHolder) holder).mImageList01);
-            SingletonImageCollection.loadImage(mContext,"http://www.1316818.com/upload/" + images[0],((ArticleOneImageViewHolder) holder).mImageList01);
+            SingletonImageCollection.loadImage(1,mContext,"http://www.1316818.com/upload/" + images[0],((ArticleOneImageViewHolder) holder).mImageList01);
 
             //消除多余的图片缓存
             picCollection.recycleCollection(mContext);
