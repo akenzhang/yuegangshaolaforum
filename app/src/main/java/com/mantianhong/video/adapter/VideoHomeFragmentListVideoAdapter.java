@@ -13,6 +13,7 @@ import java.util.List;
 Video等bean的创建
 jsonserver.aspx.cs里Jason生成
 VideoHomeFragment内List<Video> list = null实例化
+
  */
 
 
