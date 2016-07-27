@@ -42,7 +42,7 @@ public class VideoHomeFragment extends BaseFragment {
     protected void bindData() {
 
         List<Video> list = null;
-        VideoHomeFragmentListVideoAdapter adapter = new VideoHomeFragmentListVideoAdapter(list,R.id.id_video_fragment_listview,this.getActivity());
+        VideoHomeFragmentListVideoAdapter adapter = new VideoHomeFragmentListVideoAdapter(list,R.layout.video_fragment_home_listviewdetails,this.getActivity());
         video_fragment_listview.setAdapter(adapter);
 
     }
