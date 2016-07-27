@@ -2,11 +2,17 @@ package com.mantianhong.video.fragment;
 
 import android.support.v4.app.Fragment;
 import android.widget.ListView;
+
+import com.google.gson.Gson;
 import com.mantianhong.R;
 import com.mantianhong.bean.Video;
+import com.mantianhong.bean.VideoRoot;
 import com.mantianhong.common.BaseFragment;
+import com.mantianhong.common.OkHttpUtils;
 import com.mantianhong.video.adapter.VideoHomeFragmentListVideoAdapter;
+import com.squareup.okhttp.Request;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -41,9 +47,22 @@ public class VideoHomeFragment extends BaseFragment {
     @Override
     protected void bindData() {
 
-        List<Video> list = null;
-        VideoHomeFragmentListVideoAdapter adapter = new VideoHomeFragmentListVideoAdapter(list,R.layout.video_fragment_home_listviewdetails,this.getActivity());
-        video_fragment_listview.setAdapter(adapter);
+        //异步获得数据
+        String strUrl = "http://www.1316818.com/jsonserver.aspx?videopageno=1";
+        OkHttpUtils.getAsync(strUrl, new OkHttpUtils.DataCallBack() {
+            @Override
+            public void requestFailure(Request request, IOException e) {}
+
+            @Override
+            public void requestSuccess(String result) {
+                Gson gson = new Gson();
+                VideoRoot root = gson.fromJson(result,VideoRoot.class);
+                List<Video> list = root.getVideo();
+
+                VideoHomeFragmentListVideoAdapter adapter = new VideoHomeFragmentListVideoAdapter(list,R.layout.video_fragment_home_listviewdetails,VideoHomeFragment.this.getActivity());
+                video_fragment_listview.setAdapter(adapter);
+            }
+        });
 
     }
 
