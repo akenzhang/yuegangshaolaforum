@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_video_fragment_listview_linareout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -22,6 +23,7 @@
         <TextView
             android:id="@+id/id_video_fragment_listview_textabbre"
             android:text="简介"
+            android:lineSpacingMultiplier="1.3"
             android:layout_marginTop="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -29,10 +31,11 @@
         <TextView
             android:id="@+id/id_video_fragment_listview_views"
             android:text="浏览次数"
+            android:textColor="#201aa8"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </LinearLayout>
 
 </LinearLayout>

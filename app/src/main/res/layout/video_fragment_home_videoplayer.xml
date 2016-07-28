@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#020000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_weight="15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/id_video_fragment_close"
+            android:textColor="#ffffff"
+            android:text="关闭"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:layout_marginRight="12dp"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/id_video_fragment_videoplayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+
+</LinearLayout>

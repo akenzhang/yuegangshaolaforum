@@ -1,22 +1,26 @@
 package com.mantianhong.video.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.mantianhong.R;
 import com.mantianhong.bean.Video;
 import com.mantianhong.common.CommonAdapter;
+import com.mantianhong.common.LogUtil;
+import com.mantianhong.common.OkHttpUtils;
 import com.mantianhong.common.SingletonImageCollection;
 import com.mantianhong.common.ViewHolder;
+import com.mantianhong.video.activity.VideoHomeFragmentVideoPlayerActivity;
+import com.squareup.okhttp.Request;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-
-
-/*
-VideoHomeFragment内List<Video> list = null实例化
-
- */
 
 
 /**
@@ -28,12 +32,11 @@ public class VideoHomeFragmentListVideoAdapter extends CommonAdapter<Video> {
 
     public VideoHomeFragmentListVideoAdapter(List<Video> list, int resId, Context context) {
         super(list, resId, context);
-
         this.mContext = context;
     }
 
     @Override
-    public void setContent(ViewHolder vh, Video item) {
+    public void setContent(ViewHolder vh, final Video item) {
 
         ImageView iv = ((ImageView)vh.getViews(R.id.id_video_fragment_listview_videoabbre));
         SingletonImageCollection.loadImageNormal(2,mContext,"http://www.1316818.com/upload/video_abbre/"+item.getPic(),iv);
@@ -42,6 +45,39 @@ public class VideoHomeFragmentListVideoAdapter extends CommonAdapter<Video> {
         tvDesc.setText(item.getDesc());
 
         TextView tvViews = ((TextView)vh.getViews(R.id.id_video_fragment_listview_views));
-        tvViews.setText(item.getViews());
+        String strViews = item.getViews();
+        if(TextUtils.isEmpty(strViews)){
+            strViews="0";
+        }
+        tvViews.setText("浏览："+strViews);
+
+        //点击跳转到播放视频界面
+        LinearLayout linearLayout = (LinearLayout)vh.getViews(R.id.id_video_fragment_listview_linareout);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //弹出播放视频的窗体
+                Bundle bundle = new Bundle();
+                bundle.putString("url", item.getLink());
+                Intent intent = new Intent(mContext, VideoHomeFragmentVideoPlayerActivity.class);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+
+                //这里发起保存记录
+                //update dbo.dnt_videolist set views = views +1 where id=1
+                HashMap<String,String> videomap = new HashMap<String, String>();
+                videomap.put("videoid",String.valueOf(item.getId()));
+                OkHttpUtils.postAsync("http://www.1316818.com/jsonserver.aspx", videomap, new OkHttpUtils.DataCallBack() {
+                    @Override
+                    public void requestFailure(Request request, IOException e) {}
+
+                    @Override
+                    public void requestSuccess(String result) {}
+                });
+
+            }
+        });
+
+
     }
 }
