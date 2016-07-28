@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-
 import com.google.gson.Gson;
 import com.squareup.okhttp.Request;
 import com.mantianhong.R;
@@ -15,7 +14,6 @@ import com.mantianhong.common.BaseFragment;
 import com.mantianhong.common.DialogUtil;
 import com.mantianhong.common.OkHttpUtils;
 import com.mantianhong.home.adapter.HomeDefaultFragmentListArticlesAdapter;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -147,6 +145,7 @@ public abstract class YuegangshaolaBaseFragment extends BaseFragment {
 
     @Override
     protected void bindData() {
+
             String strRequestUrl = "http://www.1316818.com/jsonserver.aspx?fid="+ getFids() +"&newspageno="+ intPageNext +"&newspagesize="+NEWS_PAGE_SIZE;  //为了加快速度，第一次加载6条
 
             //弹出提示对话框

@@ -44,7 +44,7 @@ public class ContactHomeFragment extends BaseFragment {
             }
         });
 
-        contact_fragment_webview.loadUrl("http://www.xxsweet.com/pigshow/weixin/MyShop.html");
+        contact_fragment_webview.loadUrl("http://www.xxsweet.com/pigshow/weixin/MyShop2.html");
 
     }
 
