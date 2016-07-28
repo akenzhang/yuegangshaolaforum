@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <WebView
+
         android:layout_marginBottom="55dp"
         android:id="@+id/id_contact_fragment_webview"
         android:layout_width="match_parent"
