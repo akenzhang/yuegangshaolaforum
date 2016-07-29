@@ -8,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.lang.reflect.Field;
-
 /**
  * A simple {@link Fragment} subclass.
  *
  * Fragment的基类
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment_backup extends Fragment {
 
     protected View root;
 
@@ -28,8 +26,6 @@ public abstract class BaseFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        LogUtil.e("BaseFragment==>onCreateView");
         if(root==null) {
             root = inflater.inflate(getLayout(), container, false);
         }
@@ -75,19 +71,5 @@ public abstract class BaseFragment extends Fragment {
      * @return
      */
     protected abstract void bindData();
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }

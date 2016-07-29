@@ -50,8 +50,8 @@ public class HomeActivity extends BaseActivity {
         //home_radiobutton_homepage.setChecked(true);
 
         //打印用户名
-        String strUsername = SharedPreferencesUtils.getData(this,MyConstants.WEIXIN_USER_NAME)+"   "+SharedPreferencesUtils.getData(this,MyConstants.CELLPHONE_USER_NAME)+"   "+SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME) +"   "+SharedPreferencesUtils.getData(this, MyConstants.TEMP_USER_NAME);
-        LogUtil.e(strUsername);
+        //String strUsername = SharedPreferencesUtils.getData(this,MyConstants.WEIXIN_USER_NAME)+"   "+SharedPreferencesUtils.getData(this,MyConstants.CELLPHONE_USER_NAME)+"   "+SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME) +"   "+SharedPreferencesUtils.getData(this, MyConstants.TEMP_USER_NAME);
+        //LogUtil.e(strUsername);
     }
 
     @Override
@@ -88,10 +88,12 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void bindData() {
+        LogUtil.e("HomeActivity==>bindData()==>创建主页、视频、联系和我菜单");
 
         //实例化 HomeActivityPagerAdapter
         HomeActivityPagerAdapter adapter = new HomeActivityPagerAdapter(getSupportFragmentManager(),fragments);
 
+        home_customviewpage.setOffscreenPageLimit(0);
         //将HomeActivityPagerAdapter实力赋值给相应的ViewPager
         home_customviewpage.setAdapter(adapter);
 

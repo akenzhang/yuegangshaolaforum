@@ -1,7 +1,10 @@
 package com.mantianhong.contact.fragment;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -9,13 +12,15 @@ import android.widget.TextView;
 
 import com.mantianhong.R;
 import com.mantianhong.common.BaseFragment;
+import com.mantianhong.common.LazyLoadBaseFragment;
+import com.mantianhong.common.LogUtil;
 
 import java.lang.reflect.Field;
 
 /**
  * Created by new pc on 2016/7/4.
  */
-public class ContactHomeFragment extends BaseFragment {
+public class ContactHomeFragment extends LazyLoadBaseFragment {
 
     private WebView contact_fragment_webview;
 
@@ -26,14 +31,11 @@ public class ContactHomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
-        contact_fragment_webview = (WebView) this.getActivity().findViewById(R.id.id_contact_fragment_webview);
-
+        contact_fragment_webview = (WebView) root.findViewById(R.id.id_contact_fragment_webview);
     }
 
     @Override
     protected void initVariable() {
-
         //初始化Webview
         WebSettings webSettings = contact_fragment_webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -44,29 +46,15 @@ public class ContactHomeFragment extends BaseFragment {
             }
         });
 
-        contact_fragment_webview.loadUrl("http://www.xxsweet.com/pigshow/weixin/MyShop2.html");
-
     }
 
     @Override
     protected void initListener() {}
 
     @Override
-    protected void bindData() {
+    protected void lazyLoad() {
+        LogUtil.e("ContactHomeFragment==>lazyLoad()");
 
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        contact_fragment_webview.loadUrl("http://www.xxsweet.com/pigshow/weixin/MyShop2.html");
     }
 }

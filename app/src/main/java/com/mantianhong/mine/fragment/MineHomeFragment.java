@@ -1,16 +1,23 @@
 package com.mantianhong.mine.fragment;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.mantianhong.R;
 import com.mantianhong.common.BaseFragment;
+import com.mantianhong.common.LazyLoadBaseFragment;
+import com.mantianhong.common.LogUtil;
 
 import java.lang.reflect.Field;
 
 /**
  * Created by new pc on 2016/7/3.
  */
-public class MineHomeFragment extends BaseFragment {
+public class MineHomeFragment extends LazyLoadBaseFragment {
+
     @Override
     protected int getLayout() {
         return R.layout.mine_fragment_home;
@@ -18,7 +25,6 @@ public class MineHomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
     }
 
     @Override
@@ -32,21 +38,9 @@ public class MineHomeFragment extends BaseFragment {
     }
 
     @Override
-    protected void bindData() {
+    protected void lazyLoad() {
+        LogUtil.e("ContactHomeFragment==>lazyLoad()");
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        try {
-            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-            childFragmentManager.setAccessible(true);
-            childFragmentManager.set(this, null);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

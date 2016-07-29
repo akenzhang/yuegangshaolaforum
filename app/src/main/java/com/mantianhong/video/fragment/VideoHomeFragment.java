@@ -3,8 +3,11 @@ package com.mantianhong.video.fragment;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
@@ -14,6 +17,7 @@ import com.mantianhong.bean.Video;
 import com.mantianhong.bean.VideoRoot;
 import com.mantianhong.common.BaseFragment;
 import com.mantianhong.common.DialogUtil;
+import com.mantianhong.common.LazyLoadBaseFragment;
 import com.mantianhong.common.LogUtil;
 import com.mantianhong.common.OkHttpUtils;
 import com.mantianhong.video.activity.VideoHomeFragmentVideoPlayerActivity;
@@ -28,12 +32,13 @@ import java.util.List;
 /**
  * Created by new pc on 2016/7/3.
  */
-public class VideoHomeFragment extends BaseFragment {
+public class VideoHomeFragment extends LazyLoadBaseFragment {
 
     private ListView video_fragment_listview;
     private List<Video> mList = new ArrayList<>();
     private VideoHomeFragmentListVideoAdapter mAdapter;
     private Boolean isEnd= false;
+
 
     @Override
     protected int getLayout() {
@@ -42,7 +47,7 @@ public class VideoHomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        video_fragment_listview = (ListView) this.getActivity().findViewById(R.id.id_video_fragment_listview);
+        video_fragment_listview = (ListView) root.findViewById(R.id.id_video_fragment_listview);
     }
 
     @Override
@@ -50,7 +55,6 @@ public class VideoHomeFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
-
         video_fragment_listview.setOnScrollListener(new AbsListView.OnScrollListener() {
 
             int mListViewFirstItem = 0;
@@ -131,29 +135,33 @@ public class VideoHomeFragment extends BaseFragment {
                 }
             }
         });
-
     }
 
     @Override
-    protected void bindData() {
+    protected void lazyLoad() {
+        LogUtil.e("VideoHomeFragment==>lazyLoad()");
 
-        //异步获得数据
-        String strUrl = "http://www.1316818.com/jsonserver.aspx?videopageno=1";
-        OkHttpUtils.getAsync(strUrl, new OkHttpUtils.DataCallBack() {
-            @Override
-            public void requestFailure(Request request, IOException e) {}
+        try {
+            //异步获得数据
+            String strUrl = "http://www.1316818.com/jsonserver.aspx?videopageno=1";
+            OkHttpUtils.getAsync(strUrl, new OkHttpUtils.DataCallBack() {
+                @Override
+                public void requestFailure(Request request, IOException e) {
+                }
 
-            @Override
-            public void requestSuccess(String result) {
-                Gson gson = new Gson();
-                VideoRoot root = gson.fromJson(result,VideoRoot.class);
-                mList = root.getVideo();
+                @Override
+                public void requestSuccess(String result) {
+                    Gson gson = new Gson();
+                    VideoRoot root = gson.fromJson(result, VideoRoot.class);
+                    mList = root.getVideo();
 
-                mAdapter = new VideoHomeFragmentListVideoAdapter(mList,R.layout.video_fragment_home_listviewdetails,VideoHomeFragment.this.getActivity());
-                video_fragment_listview.setAdapter(mAdapter);
-            }
-        });
-
+                    mAdapter = new VideoHomeFragmentListVideoAdapter(mList, R.layout.video_fragment_home_listviewdetails, VideoHomeFragment.this.getActivity());
+                    video_fragment_listview.setAdapter(mAdapter);
+                }
+            });
+        }catch (Exception ex){
+            LogUtil.e(ex.getMessage());
+        }
     }
 
     @Override

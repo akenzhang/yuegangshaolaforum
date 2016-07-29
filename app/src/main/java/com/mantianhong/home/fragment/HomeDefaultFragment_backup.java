@@ -1,18 +1,13 @@
 package com.mantianhong.home.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.mantianhong.R;
 import com.mantianhong.common.BaseFragment;
 import com.mantianhong.common.CustomViewPager;
-import com.mantianhong.common.LazyLoadBaseFragment;
 import com.mantianhong.common.LogUtil;
 import com.mantianhong.home.adapter.HomeDefaultFragmentCategoriesAdapter;
 
@@ -21,7 +16,7 @@ import java.lang.reflect.Field;
 /**
  * Created by new pc on 2016/7/3.
  */
-public class HomeDefaultFragment extends LazyLoadBaseFragment {
+public class HomeDefaultFragment_backup extends BaseFragment {
 
     private CustomViewPager mHome_fragment_toptab_viewpager;
     private TabLayout mTabLayout;
@@ -41,8 +36,8 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
     @Override
     protected void initVariable() {
 
-        mHome_fragment_toptab_viewpager = (CustomViewPager) root.findViewById(R.id.id_home_fragment_top_tab);
-        mTabLayout = (TabLayout) root.findViewById(R.id.id_home_fragment_tablayout);
+        mHome_fragment_toptab_viewpager = (CustomViewPager) this.getActivity().findViewById(R.id.id_home_fragment_top_tab);
+        mTabLayout = (TabLayout) this.getActivity().findViewById(R.id.id_home_fragment_tablayout);
 
         tabTitles = new String[]{
                 "最新资讯" //HomeDefaultFragmentRedian
@@ -66,8 +61,10 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
         mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //LogUtil.e(String.valueOf(tabTitles[tab.getPosition()]));
+                LogUtil.e(String.valueOf(tabTitles[tab.getPosition()]));
+
                 mHome_fragment_toptab_viewpager.setCurrentItem(tab.getPosition());
+
             }
 
             @Override
@@ -80,17 +77,14 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
     }
 
     @Override
-    protected void lazyLoad() {
-        LogUtil.e("HomeDefaultFragment==>lazyLoad()==>创建最新资讯、烧腊技术分享、培训现场点滴、隆江猪脚顶部菜单");
-
+    protected void bindData() {
         try {
             HomeDefaultFragmentCategoriesAdapter adapter = new HomeDefaultFragmentCategoriesAdapter(
                     this.getChildFragmentManager()
                     , tabTitles
                     , fragments
             );
-
-            mHome_fragment_toptab_viewpager.setOffscreenPageLimit(0);
+            //mHome_fragment_toptab_viewpager.setOffscreenPageLimit(1);
             mHome_fragment_toptab_viewpager.setAdapter(adapter);
             mTabLayout.setupWithViewPager(mHome_fragment_toptab_viewpager);
             mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
@@ -107,4 +101,18 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
         }
     }
 
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        try {
+            Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+            childFragmentManager.setAccessible(true);
+            childFragmentManager.set(this, null);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
