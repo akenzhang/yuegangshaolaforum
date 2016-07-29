@@ -66,23 +66,7 @@ public class LoginMainActivity extends BaseActivity {
 
     @Override
     protected int getLayout() {
-        //这里判断是否需要用户登录，首先从本地的记录提取用户名
-        doTestLogin();
         return R.layout.login_main_activity;
-    }
-
-    private void doTestLogin(){
-
-        //SharedPreferencesUtils.saveData(this,MyConstants.QQ_USER_NAME,"");
-        //如果能找到QQ或者cellphone用户名，就默认登录，不再需要提示登录界面
-        String strCellphoneUserName = SharedPreferencesUtils.getData(this, MyConstants.CELLPHONE_USER_NAME);
-        String strQQUserName = SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME);
-        if(!TextUtils.isEmpty(strCellphoneUserName) || !TextUtils.isEmpty(strQQUserName)){
-            Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
-            LoginMainActivity.this.startActivity(intent);
-            //LoginMainActivity.this.finish();
-            return;
-        }
     }
 
     @Override
@@ -283,7 +267,6 @@ public class LoginMainActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
     private String generateCode(){
         String[] beforeShuffle = new String[] {"0","1", "2", "3", "4", "5", "6", "7", "8", "9"};
         List list = Arrays.asList(beforeShuffle);
@@ -296,7 +279,6 @@ public class LoginMainActivity extends BaseActivity {
         String result = afterShuffle.substring(5, 9);
         return result;
     }
-
 
     class UpdateYanzhengmaStateTask extends TimerTask
     {
@@ -318,7 +300,6 @@ public class LoginMainActivity extends BaseActivity {
             mHandler.sendMessage(msg);
         }
     }
-
 
     //实现QQ登陆的回调接口
     class LoginUiListener implements IUiListener {

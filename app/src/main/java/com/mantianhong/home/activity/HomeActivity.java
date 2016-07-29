@@ -1,6 +1,9 @@
 package com.mantianhong.home.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.widget.RadioGroup;
 
 import com.mantianhong.R;
@@ -12,27 +15,33 @@ import com.mantianhong.common.SharedPreferencesUtils;
 import com.mantianhong.contact.fragment.ContactHomeFragment;
 import com.mantianhong.home.adapter.HomeActivityPagerAdapter;
 import com.mantianhong.home.fragment.HomeDefaultFragment;
+import com.mantianhong.login.activity.LoginMainActivity;
 import com.mantianhong.mine.fragment.MineHomeFragment;
 import com.mantianhong.video.fragment.VideoHomeFragment;
-
 
 public class HomeActivity extends BaseActivity {
 
     private RadioGroup home_tab;
     private CustomViewPager home_customviewpage;
-
     private Fragment fragments[];
+    private Boolean isLogin=false;
 
     @Override
     protected int getLayout() {
+        //这里判断是否需要用户登录，首先从本地的记录提取用户名
+        doTestLogin();
+
         return R.layout.activity_home;
     }
 
     @Override
-    protected void initView() {}
+    protected void initView() {
+        if(isLogin) return;
+    }
 
     @Override
     protected void initVariable() {
+        if(isLogin) return;
 
         home_tab = (RadioGroup) this.findViewById(R.id.id_home_tab);
         home_customviewpage = (CustomViewPager) this.findViewById(R.id.id_home_customviewpage);
@@ -56,6 +65,7 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+        if(isLogin) return;
 
         //注册主页低下按钮的点击事件
         home_tab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -88,6 +98,8 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     protected void bindData() {
+        if(isLogin) return;
+
         LogUtil.e("HomeActivity==>bindData()==>创建主页、视频、联系和我菜单");
 
         //实例化 HomeActivityPagerAdapter
@@ -97,6 +109,24 @@ public class HomeActivity extends BaseActivity {
         //将HomeActivityPagerAdapter实力赋值给相应的ViewPager
         home_customviewpage.setAdapter(adapter);
 
+    }
+
+    private Boolean doTestLogin(){
+        LogUtil.e("LoginMainActivity==>doTestLogin()");
+        //SharedPreferencesUtils.saveData(this,MyConstants.QQ_USER_NAME,"");
+        //如果能找到QQ或者cellphone用户名，就默认登录，不再需要提示登录界面
+        String strCellphoneUserName = SharedPreferencesUtils.getData(this, MyConstants.CELLPHONE_USER_NAME);
+        String strQQUserName = SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME);
+        String strWeixinUserName = SharedPreferencesUtils.getData(this, MyConstants.WEIXIN_USER_NAME);
+        String strTempUserName = SharedPreferencesUtils.getData(this, MyConstants.TEMP_USER_NAME);
+        if(TextUtils.isEmpty(strCellphoneUserName) && TextUtils.isEmpty(strQQUserName) && TextUtils.isEmpty(strWeixinUserName) && TextUtils.isEmpty(strTempUserName)){
+            isLogin=true;
+            Intent intent = new Intent(HomeActivity.this,LoginMainActivity.class);
+            this.startActivity(intent);
+            return false;
+        }
+
+        return true;
     }
 
 }
