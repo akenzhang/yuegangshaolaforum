@@ -31,9 +31,6 @@ public class VideoHomeFragmentVideoMoreActivity extends BaseActivity {
         video_fragment_more_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                暂时没找到好的办法关闭，并且停掉内存中播放的视频
-                 */
                 VideoHomeFragmentVideoMoreActivity.this.finish();
             }
         });
