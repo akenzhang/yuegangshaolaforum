@@ -1,25 +1,20 @@
 package com.mantianhong.home.fragment;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.mantianhong.common.LazyLoadBaseFragment;
-import com.mantianhong.common.LogUtil;
+import com.mantianhong.utiltools.LazyLoadBaseFragment;
+import com.mantianhong.utiltools.LogUtil;
 import com.squareup.okhttp.Request;
 import com.mantianhong.R;
 import com.mantianhong.bean.Article;
 import com.mantianhong.bean.Articleset;
 import com.mantianhong.bean.Root;
-import com.mantianhong.common.BaseFragment;
-import com.mantianhong.common.DialogUtil;
-import com.mantianhong.common.OkHttpUtils;
+import com.mantianhong.utiltools.DialogUtil;
+import com.mantianhong.utiltools.OkHttpUtils;
 import com.mantianhong.home.adapter.HomeDefaultFragmentListArticlesAdapter;
 import java.io.IOException;
 import java.util.List;

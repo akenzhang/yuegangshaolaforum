@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.mantianhong.R;
 import com.mantianhong.bean.Article;
-import com.mantianhong.common.CommonAdapter;
-import com.mantianhong.common.ViewHolder;
+import com.mantianhong.utiltools.CommonAdapter;
+import com.mantianhong.utiltools.ViewHolder;
 import com.mantianhong.home.activity.HomeArticleDetailActivity;
 
 import java.util.List;

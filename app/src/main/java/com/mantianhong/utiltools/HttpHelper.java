@@ -1,4 +1,4 @@
-package com.mantianhong.common;
+package com.mantianhong.utiltools;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

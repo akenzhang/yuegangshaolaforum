@@ -1,22 +1,15 @@
 package com.mantianhong.home.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.mantianhong.R;
-import com.mantianhong.common.BaseFragment;
-import com.mantianhong.common.CustomViewPager;
-import com.mantianhong.common.LazyLoadBaseFragment;
-import com.mantianhong.common.LogUtil;
+import com.mantianhong.utiltools.CustomViewPager;
+import com.mantianhong.utiltools.LazyLoadBaseFragment;
+import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.home.adapter.HomeDefaultFragmentCategoriesAdapter;
-
-import java.lang.reflect.Field;
 
 /**
  * Created by new pc on 2016/7/3.

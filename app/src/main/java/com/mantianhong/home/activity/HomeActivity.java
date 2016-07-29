@@ -1,17 +1,16 @@
 package com.mantianhong.home.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.widget.RadioGroup;
 
 import com.mantianhong.R;
-import com.mantianhong.common.BaseActivity;
-import com.mantianhong.common.MyConstants;
-import com.mantianhong.common.CustomViewPager;
-import com.mantianhong.common.LogUtil;
-import com.mantianhong.common.SharedPreferencesUtils;
+import com.mantianhong.utiltools.BaseActivity;
+import com.mantianhong.utiltools.MyConstants;
+import com.mantianhong.utiltools.CustomViewPager;
+import com.mantianhong.utiltools.LogUtil;
+import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.mantianhong.contact.fragment.ContactHomeFragment;
 import com.mantianhong.home.adapter.HomeActivityPagerAdapter;
 import com.mantianhong.home.fragment.HomeDefaultFragment;

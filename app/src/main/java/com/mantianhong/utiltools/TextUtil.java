@@ -1,4 +1,4 @@
-package com.mantianhong.common;
+package com.mantianhong.utiltools;
 
 /**
  * Created by new pc on 2016/7/14.
