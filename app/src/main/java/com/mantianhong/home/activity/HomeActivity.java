@@ -114,7 +114,7 @@ public class HomeActivity extends BaseActivity {
     private Boolean doTestLogin(){
         LogUtil.e("LoginMainActivity==>doTestLogin()");
         //SharedPreferencesUtils.saveData(this,MyConstants.QQ_USER_NAME,"");
-        //如果能找到QQ或者cellphone用户名，就默认登录，不再需要提示登录界面
+        //如果能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
         String strCellphoneUserName = SharedPreferencesUtils.getData(this, MyConstants.CELLPHONE_USER_NAME);
         String strQQUserName = SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME);
         String strWeixinUserName = SharedPreferencesUtils.getData(this, MyConstants.WEIXIN_USER_NAME);
