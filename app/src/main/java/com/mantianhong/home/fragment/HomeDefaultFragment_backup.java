@@ -6,9 +6,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 
 import com.mantianhong.R;
-import com.mantianhong.common.BaseFragment;
-import com.mantianhong.common.CustomViewPager;
-import com.mantianhong.common.LogUtil;
+import com.mantianhong.utiltools.BaseFragment;
+import com.mantianhong.utiltools.CustomViewPager;
+import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.home.adapter.HomeDefaultFragmentCategoriesAdapter;
 
 import java.lang.reflect.Field;

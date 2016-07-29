@@ -1,17 +1,8 @@
 package com.mantianhong.mine.fragment;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.mantianhong.R;
-import com.mantianhong.common.BaseFragment;
-import com.mantianhong.common.LazyLoadBaseFragment;
-import com.mantianhong.common.LogUtil;
-
-import java.lang.reflect.Field;
+import com.mantianhong.utiltools.LazyLoadBaseFragment;
+import com.mantianhong.utiltools.LogUtil;
 
 /**
  * Created by new pc on 2016/7/3.

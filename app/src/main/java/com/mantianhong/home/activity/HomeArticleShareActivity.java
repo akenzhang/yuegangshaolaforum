@@ -15,8 +15,8 @@ import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 import com.mantianhong.R;
-import com.mantianhong.common.BaseActivity;
-import com.mantianhong.common.MyConstants;
+import com.mantianhong.utiltools.BaseActivity;
+import com.mantianhong.utiltools.MyConstants;
 
 import org.json.JSONObject;
 import java.util.ArrayList;

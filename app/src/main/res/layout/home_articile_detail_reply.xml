@@ -73,13 +73,13 @@
                 android:layout_height="wrap_content" />
 
                 <!--  填充 home_article_detail_replyinner.xml  -->
-                <com.mantianhong.common.ListViewForScrollView
+                <com.mantianhong.utiltools.ListViewForScrollView
                     android:id="@+id/id_home_article_detail_reply_replies"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                </com.mantianhong.common.ListViewForScrollView>
+                </com.mantianhong.utiltools.ListViewForScrollView>
 
             <TextView
                 android:id="@+id/id_home_article_detail_replythis"

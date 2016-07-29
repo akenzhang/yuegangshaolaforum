@@ -10,11 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.mantianhong.R;
 import com.mantianhong.bean.Video;
-import com.mantianhong.common.CommonAdapter;
-import com.mantianhong.common.LogUtil;
-import com.mantianhong.common.OkHttpUtils;
-import com.mantianhong.common.SingletonImageCollection;
-import com.mantianhong.common.ViewHolder;
+import com.mantianhong.utiltools.CommonAdapter;
+import com.mantianhong.utiltools.OkHttpUtils;
+import com.mantianhong.utiltools.SingletonImageCollection;
+import com.mantianhong.utiltools.ViewHolder;
 import com.mantianhong.video.activity.VideoHomeFragmentVideoPlayerActivity;
 import com.squareup.okhttp.Request;
 

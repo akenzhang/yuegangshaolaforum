@@ -1,13 +1,6 @@
 package com.mantianhong.video.fragment;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
@@ -15,12 +8,10 @@ import com.google.gson.Gson;
 import com.mantianhong.R;
 import com.mantianhong.bean.Video;
 import com.mantianhong.bean.VideoRoot;
-import com.mantianhong.common.BaseFragment;
-import com.mantianhong.common.DialogUtil;
-import com.mantianhong.common.LazyLoadBaseFragment;
-import com.mantianhong.common.LogUtil;
-import com.mantianhong.common.OkHttpUtils;
-import com.mantianhong.video.activity.VideoHomeFragmentVideoPlayerActivity;
+import com.mantianhong.utiltools.DialogUtil;
+import com.mantianhong.utiltools.LazyLoadBaseFragment;
+import com.mantianhong.utiltools.LogUtil;
+import com.mantianhong.utiltools.OkHttpUtils;
 import com.mantianhong.video.adapter.VideoHomeFragmentListVideoAdapter;
 import com.squareup.okhttp.Request;
 

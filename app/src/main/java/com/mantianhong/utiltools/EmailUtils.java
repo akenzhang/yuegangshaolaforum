@@ -1,4 +1,4 @@
-package com.mantianhong.common;
+package com.mantianhong.utiltools;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
