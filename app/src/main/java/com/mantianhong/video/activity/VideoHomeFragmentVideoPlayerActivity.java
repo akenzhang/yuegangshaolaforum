@@ -58,6 +58,8 @@ public class VideoHomeFragmentVideoPlayerActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+
+        //更多微视：  http://www.weishi.com/u/25690423
     }
 
     @Override
