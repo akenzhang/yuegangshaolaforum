@@ -1,6 +1,7 @@
 package com.mantianhong.video.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.mantianhong.R;
@@ -20,6 +22,7 @@ import com.mantianhong.common.DialogUtil;
 import com.mantianhong.common.LazyLoadBaseFragment;
 import com.mantianhong.common.LogUtil;
 import com.mantianhong.common.OkHttpUtils;
+import com.mantianhong.video.activity.VideoHomeFragmentVideoMoreActivity;
 import com.mantianhong.video.activity.VideoHomeFragmentVideoPlayerActivity;
 import com.mantianhong.video.adapter.VideoHomeFragmentListVideoAdapter;
 import com.squareup.okhttp.Request;
@@ -38,7 +41,7 @@ public class VideoHomeFragment extends LazyLoadBaseFragment {
     private List<Video> mList = new ArrayList<>();
     private VideoHomeFragmentListVideoAdapter mAdapter;
     private Boolean isEnd= false;
-
+    private TextView video_fragment_more;
 
     @Override
     protected int getLayout() {
@@ -48,6 +51,7 @@ public class VideoHomeFragment extends LazyLoadBaseFragment {
     @Override
     protected void initView() {
         video_fragment_listview = (ListView) root.findViewById(R.id.id_video_fragment_listview);
+        video_fragment_more = (TextView) root.findViewById(R.id.id_video_fragment_more);
     }
 
     @Override
@@ -133,6 +137,15 @@ public class VideoHomeFragment extends LazyLoadBaseFragment {
                         mScreenY = location[1];
                     }
                 }
+            }
+        });
+
+        video_fragment_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //更多微视 http://www.weishi.com/u/25690423
+                Intent intent  = new Intent(root.getContext(), VideoHomeFragmentVideoMoreActivity.class);
+                root.getContext().startActivity(intent);
             }
         });
     }

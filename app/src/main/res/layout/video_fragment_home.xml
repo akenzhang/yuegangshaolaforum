@@ -6,9 +6,16 @@
 
     <TextView
         android:id="@+id/id_video_fragment_more"
-        android:text="更多视频，点击进入"
+        android:background="#d33d3f"
+        android:textColor="#fbfafa"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="18sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="50dp"
+        android:text="更多视频，点击进入"
+        android:lineSpacingMultiplier="1.5">
+        </TextView>
 
     <ListView
         android:id="@+id/id_video_fragment_listview"

@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/id_video_fragment_close"
+            android:id="@+id/id_video_fragment_more_close"
             android:textColor="#ffffff"
             android:text="关闭"
             android:gravity="center"
@@ -29,7 +29,7 @@
     </LinearLayout>
 
     <WebView
-        android:id="@+id/id_video_fragment_videoplayer"
+        android:id="@+id/id_video_fragment_videomore"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></WebView>
 

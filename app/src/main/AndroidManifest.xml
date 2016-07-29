@@ -54,6 +54,7 @@
             android:theme="@style/myTransparent" />
 
         <activity android:name=".video.activity.VideoHomeFragmentVideoPlayerActivity" />
+        <activity android:name=".video.activity.VideoHomeFragmentVideoMoreActivity" />
 
         <!-- QQ，QQ空间分享 -->
         <activity
