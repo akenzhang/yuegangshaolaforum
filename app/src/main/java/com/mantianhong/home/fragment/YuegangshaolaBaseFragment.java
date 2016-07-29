@@ -38,7 +38,6 @@ public abstract class YuegangshaolaBaseFragment extends LazyLoadBaseFragment {
     private int mydy=0;
 
     private int lastItem;//最后一条数据position
-    private boolean hasMore = true;//解决上拉重复加载的bug
     private HomeDefaultFragmentListArticlesAdapter adapter=null;
 
     private static int intPageNext=1;
