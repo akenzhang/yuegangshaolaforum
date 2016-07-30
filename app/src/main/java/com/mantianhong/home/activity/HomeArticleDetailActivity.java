@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.squareup.okhttp.Request;
 import com.mantianhong.R;
 import com.mantianhong.bean.Article;
@@ -299,11 +300,14 @@ public class HomeArticleDetailActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("tid",mTid);
-                    Intent intent = new Intent(HomeArticleDetailActivity.this, HomeArticleCommentActivity.class);
-                    intent.putExtras(bundle);
-                    HomeArticleDetailActivity.this.startActivity(intent);
+                //这个时候判断是否用户为登录状态，否则弹出登录界面
+                if(!SharedPreferencesUtils.isLogin(HomeArticleDetailActivity.this)) return;
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("tid",mTid);
+                Intent intent = new Intent(HomeArticleDetailActivity.this, HomeArticleCommentActivity.class);
+                intent.putExtras(bundle);
+                HomeArticleDetailActivity.this.startActivity(intent);
             }
         });
 

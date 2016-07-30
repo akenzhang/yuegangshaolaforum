@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mantianhong.utiltools.SharedPreferencesUtils;
+import com.mantianhong.utiltools.TextUtil;
 import com.squareup.okhttp.Request;
 import com.mantianhong.R;
 import com.mantianhong.utiltools.EmailUtils;
@@ -85,7 +88,8 @@ public class HomeArticleCommentActivity extends BaseActivity {
                 parms.put("message_comment",strComment);
                 parms.put("uniqueCode_comment",struniqueCode);
                 parms.put("ip_comment", IPUtil.getIP(HomeArticleCommentActivity.this));
-                parms.put("city_comment","匿名");
+                //parms.put("city_comment","匿名");
+                parms.put("city_comment", TextUtil.getString(SharedPreferencesUtils.getUserName(HomeArticleCommentActivity.this),"(",")")); //取得用户名字
 
                 //发邮件通知我有匿名的新信息
 

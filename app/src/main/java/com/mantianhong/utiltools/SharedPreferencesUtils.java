@@ -2,9 +2,12 @@ package com.mantianhong.utiltools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.text.TextUtils;
+
+import com.mantianhong.login.activity.LoginMainActivity;
 
 /**
  * Created by AKENZHANG on 2016/7/25.
@@ -39,21 +42,36 @@ public class SharedPreferencesUtils {
         }
 
         strValue = getData(mContext,MyConstants.QQ_USER_NAME);
-        if(!TextUtils.isEmpty(strValue) && strValue.length()==11 && strValue.startsWith("1",0)){
+        if(!TextUtils.isEmpty(strValue)){
             return strValue;
         }
 
         strValue = getData(mContext,MyConstants.WEIXIN_USER_NAME);
-        if(!TextUtils.isEmpty(strValue) && strValue.length()==11 && strValue.startsWith("1",0)){
+        if(!TextUtils.isEmpty(strValue)){
             return strValue;
         }
 
         strValue = getData(mContext,MyConstants.TEMP_USER_NAME);
-        if(!TextUtils.isEmpty(strValue) && strValue.length()==11 && strValue.startsWith("1",0)){
+        if(!TextUtils.isEmpty(strValue)){
             return strValue;
         }
 
-        return "未知访客";
+        return "";
     }
+
+    public static Boolean isLogin(Context mContext){
+        boolean isThisLogin=true;
+        //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
+        String strUserName = SharedPreferencesUtils.getUserName(mContext);
+        if(TextUtils.isEmpty(strUserName)){
+            isThisLogin=false;
+            Intent intent = new Intent(mContext,LoginMainActivity.class);
+            mContext.startActivity(intent);
+            return isThisLogin;
+        }
+
+        return isThisLogin;
+    }
+
 
 }

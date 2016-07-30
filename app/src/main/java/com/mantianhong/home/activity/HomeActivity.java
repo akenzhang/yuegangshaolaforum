@@ -1,5 +1,6 @@
 package com.mantianhong.home.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -28,7 +29,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected int getLayout() {
         //这里判断是否需要用户登录，首先从本地的记录提取用户名
-        doTestLogin();
+        isLogin();
 
         return R.layout.activity_home;
     }
@@ -110,16 +111,12 @@ public class HomeActivity extends BaseActivity {
 
     }
 
-    private Boolean doTestLogin(){
-        LogUtil.e("LoginMainActivity==>doTestLogin()");
-        //SharedPreferencesUtils.saveData(this,MyConstants.QQ_USER_NAME,"");
+    private Boolean isLogin(){
+        isLogin=false;
         //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
-        String strCellphoneUserName = SharedPreferencesUtils.getData(this, MyConstants.CELLPHONE_USER_NAME);
-        String strQQUserName = SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME);
-        String strWeixinUserName = SharedPreferencesUtils.getData(this, MyConstants.WEIXIN_USER_NAME);
-        String strTempUserName = SharedPreferencesUtils.getData(this, MyConstants.TEMP_USER_NAME);
-        if(TextUtils.isEmpty(strCellphoneUserName) && TextUtils.isEmpty(strQQUserName) && TextUtils.isEmpty(strWeixinUserName) && TextUtils.isEmpty(strTempUserName)){
-            isLogin=true;
+        String strUserName = SharedPreferencesUtils.getUserName(this);
+        if(TextUtils.isEmpty(strUserName)){
+            isLogin=false;
             Intent intent = new Intent(HomeActivity.this,LoginMainActivity.class);
             this.startActivity(intent);
             return false;
