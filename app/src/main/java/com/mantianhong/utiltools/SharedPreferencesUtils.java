@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.provider.SyncStateContract;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.mantianhong.login.activity.LoginMainActivity;
@@ -35,7 +35,7 @@ public class SharedPreferencesUtils {
         return strValue;
     }
 
-    public static String getUserName(Context mContext){
+    public static String getUserNameConsiderlessVisitor(Context mContext){
 
         String strValue = getData(mContext,MyConstants.CELLPHONE_USER_NAME);
         if(!TextUtils.isEmpty(strValue) && strValue.length()==11 && strValue.startsWith("1",0)){
@@ -52,7 +52,32 @@ public class SharedPreferencesUtils {
             return strValue;
         }
 
-        strValue = getData(mContext,MyConstants.TEMP_USER_NAME);
+        //strValue = getData(mContext,MyConstants.VISITOR_USER_NAME);
+        //if(!TextUtils.isEmpty(strValue)){
+        //    return strValue;
+        //}
+
+        return "";
+    }
+
+    public static String getUserNameIncludingVisitor(Context mContext){
+
+        String strValue = getData(mContext,MyConstants.CELLPHONE_USER_NAME);
+        if(!TextUtils.isEmpty(strValue) && strValue.length()==11 && strValue.startsWith("1",0)){
+            return strValue;
+        }
+
+        strValue = getData(mContext,MyConstants.QQ_USER_NAME);
+        if(!TextUtils.isEmpty(strValue)){
+            return strValue;
+        }
+
+        strValue = getData(mContext,MyConstants.WEIXIN_USER_NAME);
+        if(!TextUtils.isEmpty(strValue)){
+            return strValue;
+        }
+
+        strValue = getData(mContext,MyConstants.VISITOR_USER_NAME);
         if(!TextUtils.isEmpty(strValue)){
             return strValue;
         }
@@ -60,10 +85,10 @@ public class SharedPreferencesUtils {
         return "";
     }
 
-    public static Boolean isLogin(Context mContext){
+    public static Boolean isLoginIncludingVisitor(Context mContext){
         boolean isThisLogin=true;
         //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
-        String strUserName = SharedPreferencesUtils.getUserName(mContext);
+        String strUserName = SharedPreferencesUtils.getUserNameIncludingVisitor(mContext);
         if(TextUtils.isEmpty(strUserName)){
             isThisLogin=false;
             Intent intent = new Intent(mContext,LoginMainActivity.class);
@@ -74,9 +99,43 @@ public class SharedPreferencesUtils {
         return isThisLogin;
     }
 
-    public static Boolean getLoginState(Context mContext){
+    public static Boolean isLoginConsiderlessVisitor(Context mContext){
         boolean isThisLogin=true;
-        String strUserName = SharedPreferencesUtils.getUserName(mContext);
+        //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
+        String strUserName = SharedPreferencesUtils.getUserNameIncludingVisitor(mContext);
+        if(strUserName.contains("过客") || strUserName.contains("游客") ) strUserName="";
+        if(TextUtils.isEmpty(strUserName)){
+            isThisLogin=false;
+            Intent intent = new Intent(mContext,LoginMainActivity.class);
+            mContext.startActivity(intent);
+            return isThisLogin;
+        }
+
+        return isThisLogin;
+    }
+
+    public static Boolean isLoginConsiderlessVisitor(Context mContext,String mFlag){
+        boolean isThisLogin=true;
+        //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
+        String strUserName = SharedPreferencesUtils.getUserNameIncludingVisitor(mContext);
+        if(strUserName.contains("过客") || strUserName.contains("游客") ) strUserName="";
+        if(TextUtils.isEmpty(strUserName)){
+            isThisLogin=false;
+            Bundle bundle = new Bundle();
+            bundle.putString("flag",mFlag);
+            Intent intent = new Intent(mContext,LoginMainActivity.class);
+            intent.putExtras(bundle);
+            mContext.startActivity(intent);
+            return isThisLogin;
+        }
+
+        return isThisLogin;
+    }
+
+    public static Boolean getLoginStateConsiderlessVisitor(Context mContext){
+        boolean isThisLogin=true;
+        String strUserName = SharedPreferencesUtils.getUserNameIncludingVisitor(mContext);
+        if(strUserName.contains("过客") || strUserName.contains("游客") ) strUserName="";
         if(TextUtils.isEmpty(strUserName)){
             isThisLogin=false;
             return isThisLogin;
@@ -85,7 +144,7 @@ public class SharedPreferencesUtils {
         return isThisLogin;
     }
 
-    public static String getLoginMode(Context mContext){
+    public static String getLoginModeIncludingVisitor(Context mContext){
 
         String strValue = getData(mContext,MyConstants.CELLPHONE_USER_NAME);
         if(!TextUtils.isEmpty(strValue) && strValue.length()==11 && strValue.startsWith("1",0)){
@@ -102,15 +161,15 @@ public class SharedPreferencesUtils {
             return "WEIXIN";
         }
 
-        strValue = getData(mContext,MyConstants.TEMP_USER_NAME);
+        strValue = getData(mContext,MyConstants.VISITOR_USER_NAME);
         if(!TextUtils.isEmpty(strValue)){
-            return "TEMP";
+            return "VISITOR";
         }
 
         return "";
     }
 
-    public static void logout(Context mContext){
+    public static void logoutConsiderlessVisitor(Context mContext){
         saveData(mContext, MyConstants.CELLPHONE_USER_NAME,"");
         saveData(mContext, MyConstants.QQ_USER_NAME,"");
         saveData(mContext, MyConstants.WEIXIN_USER_NAME,"");

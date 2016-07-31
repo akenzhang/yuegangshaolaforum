@@ -189,7 +189,7 @@ public class LoginMainActivity extends BaseActivity {
             }
         });
 
-        //进入论坛
+        //短信进入论坛
         login_main_entrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,8 +219,18 @@ public class LoginMainActivity extends BaseActivity {
                     public void requestSuccess(String result) {
                         //LogUtil.e(result);
                         if(result.contains("注册成功") || result.contains("注册失败，该用户名已经存在")){
-                            Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
-                            LoginMainActivity.this.startActivity(intent);
+
+                            //登录后跳转
+                            Bundle bundle = LoginMainActivity.this.getIntent().getExtras();
+                            String strFlag = bundle.getString("flag"); //CANNOTCOMMENT
+                            if(strFlag!=null){
+                                if(!TextUtils.isEmpty(strFlag) && strFlag.equals("CANNOTCOMMENT")){
+                                    LoginMainActivity.this.finish();
+                                }
+                            }else{
+                                Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
+                                LoginMainActivity.this.startActivity(intent);
+                            }
                         }
                     }
                 });
@@ -233,15 +243,24 @@ public class LoginMainActivity extends BaseActivity {
             public void onClick(View v) {
 
                 //保存临时的用户名
-                String strTempUsername = SharedPreferencesUtils.getData(LoginMainActivity.this, MyConstants.TEMP_USER_NAME);
+                String strTempUsername = SharedPreferencesUtils.getData(LoginMainActivity.this, MyConstants.VISITOR_USER_NAME);
                 if(TextUtils.isEmpty(strTempUsername)){
                     String strDate = String.valueOf(Calendar.getInstance().getTimeInMillis());
-                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.TEMP_USER_NAME,"过客("+ strDate+")");
+                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.VISITOR_USER_NAME,"游客("+ strDate+")");
                 }
 
-                Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
-                LoginMainActivity.this.startActivity(intent);
-                //LoginMainActivity.this.finish();
+                //登录后跳转
+                Bundle bundle = LoginMainActivity.this.getIntent().getExtras();
+                String strFlag = bundle.getString("flag"); //CANNOTCOMMENT
+                if(strFlag!=null){
+                    if(!TextUtils.isEmpty(strFlag) && strFlag.equals("CANNOTCOMMENT")){
+                        LoginMainActivity.this.finish();
+                    }
+                }else{
+                    Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
+                    LoginMainActivity.this.startActivity(intent);
+                    //LoginMainActivity.this.finish();
+                }
             }
         });
 
@@ -255,7 +274,9 @@ public class LoginMainActivity extends BaseActivity {
         super.onDestroy();
 
         //调用QQ注销接口
-        mTencent.logout(this);
+        if(mTencent!=null) {
+            mTencent.logout(this);
+        }
     }
 
     @Override
@@ -333,8 +354,16 @@ public class LoginMainActivity extends BaseActivity {
                                 SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_GENDER,gender);
 
                                 //登录后跳转
-                                Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
-                                startActivity(intent);
+                                Bundle bundle = LoginMainActivity.this.getIntent().getExtras();
+                                String strFlag = bundle.getString("flag"); //CANNOTCOMMENT
+                                if(strFlag!=null){
+                                    if(!TextUtils.isEmpty(strFlag) && strFlag.equals("CANNOTCOMMENT")){
+                                        LoginMainActivity.this.finish();
+                                    }
+                                }else{
+                                    Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
+                                    LoginMainActivity.this.startActivity(intent);
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

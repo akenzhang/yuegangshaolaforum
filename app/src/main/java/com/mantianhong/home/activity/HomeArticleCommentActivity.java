@@ -89,7 +89,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
                 parms.put("uniqueCode_comment",struniqueCode);
                 parms.put("ip_comment", IPUtil.getIP(HomeArticleCommentActivity.this));
                 //parms.put("city_comment","匿名");
-                parms.put("city_comment", TextUtil.getString(SharedPreferencesUtils.getUserName(HomeArticleCommentActivity.this),"(",")")); // 取得用户名字
+                parms.put("city_comment", TextUtil.getString(SharedPreferencesUtils.getUserNameIncludingVisitor(HomeArticleCommentActivity.this),"(",")")); // 取得用户名字
 
                 //发邮件通知我有匿名的新信息
 

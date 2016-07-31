@@ -301,7 +301,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
             public void onClick(View v) {
 
                 //这个时候判断是否用户为登录状态，否则弹出登录界面
-                if(!SharedPreferencesUtils.isLogin(HomeArticleDetailActivity.this)) return;
+                if(!SharedPreferencesUtils.isLoginConsiderlessVisitor(HomeArticleDetailActivity.this,"CANNOTCOMMENT")) return;
 
                 Bundle bundle = new Bundle();
                 bundle.putInt("tid",mTid);

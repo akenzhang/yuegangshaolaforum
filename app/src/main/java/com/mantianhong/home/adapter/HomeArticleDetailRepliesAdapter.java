@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.mantianhong.R;
 import com.mantianhong.bean.Commentset;
 import com.mantianhong.bean.Replies;
-import com.mantianhong.home.activity.HomeArticleDetailActivity;
 import com.mantianhong.utiltools.CommonAdapter;
 import com.mantianhong.utiltools.ListViewForScrollView;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
@@ -78,7 +77,7 @@ public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Commentset> {
             public void onClick(View v) {
 
                 //这个时候判断是否用户为登录状态，否则弹出登录界面
-                if(!SharedPreferencesUtils.isLogin(mContext)) return;
+                if(!SharedPreferencesUtils.isLoginConsiderlessVisitor(mContext,"CANNOTCOMMENT")) return;
 
                 int intPid = Integer.valueOf(item.getPid());
                 int intTid = Integer.valueOf(item.getTid());

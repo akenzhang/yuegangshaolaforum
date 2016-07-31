@@ -1,6 +1,5 @@
 package com.mantianhong.home.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -8,7 +7,6 @@ import android.widget.RadioGroup;
 
 import com.mantianhong.R;
 import com.mantianhong.utiltools.BaseActivity;
-import com.mantianhong.utiltools.MyConstants;
 import com.mantianhong.utiltools.CustomViewPager;
 import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
@@ -59,7 +57,7 @@ public class HomeActivity extends BaseActivity {
         //home_radiobutton_homepage.setChecked(true);
 
         //打印用户名
-        //String strUsername = SharedPreferencesUtils.getData(this,MyConstants.WEIXIN_USER_NAME)+"   "+SharedPreferencesUtils.getData(this,MyConstants.CELLPHONE_USER_NAME)+"   "+SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME) +"   "+SharedPreferencesUtils.getData(this, MyConstants.TEMP_USER_NAME);
+        //String strUsername = SharedPreferencesUtils.getData(this,MyConstants.WEIXIN_USER_NAME)+"   "+SharedPreferencesUtils.getData(this,MyConstants.CELLPHONE_USER_NAME)+"   "+SharedPreferencesUtils.getData(this, MyConstants.QQ_USER_NAME) +"   "+SharedPreferencesUtils.getData(this, MyConstants.VISITOR_USER_NAME);
         //LogUtil.e(strUsername);
     }
 
@@ -114,7 +112,7 @@ public class HomeActivity extends BaseActivity {
     private Boolean isLogin(){
         isLogin=false;
         //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
-        String strUserName = SharedPreferencesUtils.getUserName(this);
+        String strUserName = SharedPreferencesUtils.getUserNameIncludingVisitor(this);
         if(TextUtils.isEmpty(strUserName)){
             isLogin=false;
             Intent intent = new Intent(HomeActivity.this,LoginMainActivity.class);
