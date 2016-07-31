@@ -35,14 +35,17 @@ public class MineDataAdapter extends CommonAdapter<String> {
                 String text = (String) v.getTag();
                 switch (text){
                     case "我的关注":
+
                         LogUtil.e("我的关注");
                         break;
 
                     case "我的文章":
+
                         LogUtil.e("我的文章");
                         break;
 
                     case "我的评论":
+
                         LogUtil.e("我的评论");
                         break;
                 };
