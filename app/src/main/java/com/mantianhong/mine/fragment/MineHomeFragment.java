@@ -9,9 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.mantianhong.R;
-import com.mantianhong.home.activity.HomeActivity;
 import com.mantianhong.mine.adapter.MineDataAdapter;
 import com.mantianhong.utiltools.LazyLoadBaseFragment;
 import com.mantianhong.utiltools.LogUtil;
@@ -22,11 +20,8 @@ import com.tencent.connect.common.Constants;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
