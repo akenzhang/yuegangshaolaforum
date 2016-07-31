@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
@@ -67,6 +68,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
     private LinearLayout article_detail_share_linearlayout;
     private TextView article_detail_scrollcomment_text;
     private LinearLayout article_detail_comment_linearlayout;
+    private ImageView article_detail_takenote;
 
     private int mTid = 1;
     private Articledetail mArticleDetail;
@@ -110,6 +112,7 @@ public class HomeArticleDetailActivity extends BaseActivity {
         article_detail_share_linearlayout = (LinearLayout)this.findViewById(R.id.id_article_detail_share_linearlayout);
         article_detail_scrollcomment_text = (TextView) this.findViewById(R.id.id_article_detail_scrollcomment_text);
         article_detail_comment_linearlayout = (LinearLayout)this.findViewById(R.id.id_article_detail_comment_linearlayout);
+        article_detail_takenote = (ImageView) this.findViewById(R.id.id_article_detail_takenote);
 
         //注册EventBus
         EventBus.getDefault().register(this);
@@ -151,6 +154,17 @@ public class HomeArticleDetailActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+
+        /*
+        关注
+         */
+        article_detail_takenote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomeArticleDetailActivity.this,"此功能有待实现...",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         /*
         以下6个注册事件干同样的事情：调用分享功能
          */

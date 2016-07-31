@@ -133,6 +133,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/id_article_detail_takenote"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
                     android:layout_gravity="center"
