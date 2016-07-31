@@ -4,9 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Mine"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+    <LinearLayout
+        android:background="@drawable/profile_bg"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+            <LinearLayout
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:src="@drawable/qqicon_login_profile"
+                        android:layout_gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="60dp" />
+                    <ImageView
+                        android:src="@drawable/weixinicon_login_profile"
+                        android:layout_gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="60dp" />
+                    <ImageView
+                        android:src="@drawable/cellphoneicon_login_profile"
+                        android:layout_gravity="center"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="60dp" />
+                    <TextView
+                        android:layout_weight="0.5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:background="@drawable/mine_fragment_loginmodetext_bg"
+                android:textColor="#fefdfd"
+                android:layout_gravity="center"
+                android:text="请选择登陆方式"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingRight="12dp"
+                android:paddingLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/id_mine_fragment_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
 
 </LinearLayout>
