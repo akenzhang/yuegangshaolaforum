@@ -93,26 +93,26 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
     @Override
     protected void initListener() {
 
-        if(blLoginState==false){
-            qqicon_login_profile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(MineHomeFragment.this.getContext(),"正在开发...",Toast.LENGTH_SHORT).show();
-                }
-            });
-            weixinicon_login_profile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(MineHomeFragment.this.getContext(),"正在开发...",Toast.LENGTH_SHORT).show();
-                }
-            });
-            cellphoneicon_login_profile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(MineHomeFragment.this.getContext(),"正在开发...",Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+        qqicon_login_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MineHomeFragment.this.getContext(),"正在开发...",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        weixinicon_login_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MineHomeFragment.this.getContext(),"正在开发...",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        cellphoneicon_login_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MineHomeFragment.this.getContext(),"正在开发...",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mine_fragment_logout.setOnClickListener(new View.OnClickListener() {
             @Override
