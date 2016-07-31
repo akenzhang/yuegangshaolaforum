@@ -173,6 +173,11 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MineHomeFragment.this.getContext(),"正在开发...",Toast.LENGTH_SHORT).show();
+
+                //Intent intent = new Intent(MineHomeFragment.this.getContext(),LoginCellphoneActivity.class);
+                //startActivity(intent);
+                if(!SharedPreferencesUtils.isLoginConsiderlessVisitor(MineHomeFragment.this.getContext(),"CANNOTCOMMENT")) return;
+
             }
         });
 

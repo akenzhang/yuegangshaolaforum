@@ -13,21 +13,6 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
 
 
-    <!--
-    <uses-permission android:name="com.eebbk.bfc.ACCESS_BBK_DOWNLOAD_MANAGER" />
-    <uses-permission android:name="com.eebbk.bfc.ACCESS_ALL_BBK_DOWNLOADS" />
-    <uses-permission android:name="com.eebbk.bfc.SEND_BBK_DOWNLOAD_COMPLETED_INTENTS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.SET_WALLPAPER" />
-    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
-    -->
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -42,9 +27,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login.activity.LoginMainActivity" />
+        <activity android:name=".login.activity.LoginMainActivity" android:theme="@style/commonStyle" />
 
-        <activity android:name="com.mantianhong.home.activity.HomeArticleDetailActivity" />
+        <activity android:name="com.mantianhong.home.activity.HomeArticleDetailActivity"/>
 
         <activity android:name="com.mantianhong.home.activity.HomeArticleCommentActivity"
             android:theme="@style/myTransparent"

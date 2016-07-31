@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mantianhong.utiltools.TextUtil;
 import com.squareup.okhttp.Request;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.common.Constants;
@@ -101,7 +103,7 @@ public class LoginMainActivity extends BaseActivity {
     @Override
     protected void initListener() {
 
-        //会用微信登录
+        //用微信登录
         login_main_weixinentrance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +137,7 @@ public class LoginMainActivity extends BaseActivity {
                     return;
                 }
 
-                final String strCode = generateCode();
+                final String strCode = TextUtil.generateCode();
                 YANZHENGMA = strCode;
 
                 //发送的内容需要编码成gb2312
@@ -242,13 +244,6 @@ public class LoginMainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                //保存临时的用户名
-                String strTempUsername = SharedPreferencesUtils.getData(LoginMainActivity.this, MyConstants.VISITOR_USER_NAME);
-                if(TextUtils.isEmpty(strTempUsername)){
-                    String strDate = String.valueOf(Calendar.getInstance().getTimeInMillis());
-                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.VISITOR_USER_NAME,"游客("+ strDate+")");
-                }
-
                 //登录后跳转
                 Bundle bundle = LoginMainActivity.this.getIntent().getExtras();
                 String strFlag = bundle.getString("flag"); //CANNOTCOMMENT
@@ -257,9 +252,15 @@ public class LoginMainActivity extends BaseActivity {
                         LoginMainActivity.this.finish();
                     }
                 }else{
+                    //保存临时的用户名
+                    String strTempUsername = SharedPreferencesUtils.getData(LoginMainActivity.this, MyConstants.VISITOR_USER_NAME);
+                    if(TextUtils.isEmpty(strTempUsername)){
+                        String strDate = String.valueOf(Calendar.getInstance().getTimeInMillis());
+                        SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.VISITOR_USER_NAME,"游客("+ strDate+")");
+                    }
+
                     Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
                     LoginMainActivity.this.startActivity(intent);
-                    //LoginMainActivity.this.finish();
                 }
             }
         });
@@ -288,18 +289,6 @@ public class LoginMainActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private String generateCode(){
-        String[] beforeShuffle = new String[] {"0","1", "2", "3", "4", "5", "6", "7", "8", "9"};
-        List list = Arrays.asList(beforeShuffle);
-        Collections.shuffle(list); //洗牌，混乱
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            sb.append(list.get(i));
-        }
-        String afterShuffle = sb.toString();
-        String result = afterShuffle.substring(5, 9);
-        return result;
-    }
 
     class UpdateYanzhengmaStateTask extends TimerTask
     {
