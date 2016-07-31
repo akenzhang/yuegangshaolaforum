@@ -26,6 +26,7 @@
             android:layout_height="wrap_content" />
 
         <ImageView
+            android:id="@+id/id_mine_fragment_detail_image"
             android:src="@drawable/like_arrow_textpage"
             android:layout_weight="2"
             android:layout_width="0dp"

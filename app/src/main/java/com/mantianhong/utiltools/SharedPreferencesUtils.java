@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.provider.SyncStateContract;
 import android.text.TextUtils;
 
 import com.mantianhong.login.activity.LoginMainActivity;
@@ -73,5 +74,46 @@ public class SharedPreferencesUtils {
         return isThisLogin;
     }
 
+    public static Boolean getLoginState(Context mContext){
+        boolean isThisLogin=true;
+        String strUserName = SharedPreferencesUtils.getUserName(mContext);
+        if(TextUtils.isEmpty(strUserName)){
+            isThisLogin=false;
+            return isThisLogin;
+        }
+
+        return isThisLogin;
+    }
+
+    public static String getLoginMode(Context mContext){
+
+        String strValue = getData(mContext,MyConstants.CELLPHONE_USER_NAME);
+        if(!TextUtils.isEmpty(strValue) && strValue.length()==11 && strValue.startsWith("1",0)){
+            return "CELLPHONE";
+        }
+
+        strValue = getData(mContext,MyConstants.QQ_USER_NAME);
+        if(!TextUtils.isEmpty(strValue)){
+            return "QQ";
+        }
+
+        strValue = getData(mContext,MyConstants.WEIXIN_USER_NAME);
+        if(!TextUtils.isEmpty(strValue)){
+            return "WEIXIN";
+        }
+
+        strValue = getData(mContext,MyConstants.TEMP_USER_NAME);
+        if(!TextUtils.isEmpty(strValue)){
+            return "TEMP";
+        }
+
+        return "";
+    }
+
+    public static void logout(Context mContext){
+        saveData(mContext, MyConstants.CELLPHONE_USER_NAME,"");
+        saveData(mContext, MyConstants.QQ_USER_NAME,"");
+        saveData(mContext, MyConstants.WEIXIN_USER_NAME,"");
+    }
 
 }

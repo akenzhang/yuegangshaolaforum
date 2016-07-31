@@ -5,6 +5,48 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/id_mine_fragment_loginstate"
+        android:background="@drawable/profile_bg"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/id_mine_fragment_logout"
+                android:text="注 销"
+                android:layout_marginTop="10dp"
+                android:textColor="#ffffff"
+                android:layout_gravity="right"
+                android:gravity="right"
+                android:layout_marginRight="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/id_mine_fragment_loginmypic"
+                android:src="@drawable/qqicon_login_profile"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp" />
+            <TextView
+                android:id="@+id/id_mine_fragment_username"
+                android:text="我是某某"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_mine_fragment_loginpic"
         android:background="@drawable/profile_bg"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -19,18 +61,21 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content" />
                     <ImageView
+                        android:id="@+id/id_qqicon_login_profile"
                         android:src="@drawable/qqicon_login_profile"
                         android:layout_gravity="center"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="60dp" />
                     <ImageView
+                        android:id="@+id/id_weixinicon_login_profile"
                         android:src="@drawable/weixinicon_login_profile"
                         android:layout_gravity="center"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="60dp" />
                     <ImageView
+                        android:id="@+id/id_cellphoneicon_login_profile"
                         android:src="@drawable/cellphoneicon_login_profile"
                         android:layout_gravity="center"
                         android:layout_width="0dp"
