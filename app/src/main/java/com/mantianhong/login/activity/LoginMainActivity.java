@@ -125,7 +125,8 @@ public class LoginMainActivity extends BaseActivity {
                 if(mTencent==null) {
                     mTencent = Tencent.createInstance(MyConstants.APP_ID, LoginMainActivity.this.getApplicationContext());
                 }
-                mTencent.login(LoginMainActivity.this, "get_user_info", new LoginUiListener());
+                //mTencent.login(LoginMainActivity.this, "get_user_info|all", new LoginUiListener());
+                mTencent.login(LoginMainActivity.this, "all", new LoginUiListener());
             }
         });
 
@@ -380,7 +381,8 @@ public class LoginMainActivity extends BaseActivity {
                                 }
 
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                                //e.printStackTrace();
+                                LogUtil.e(json+"; "+e.getMessage());
                             }
                         }
 
