@@ -67,7 +67,6 @@ public class HomeArticleDetailRepliesAdapter extends CommonAdapter<Commentset> {
         //取出该comment的相关回复
         repliesInnerAdapter = new HomeArticleDetailRepliesInnerAdapter(listinnerReplies,R.layout.home_articile_detail_replyinner,mContext);
         listReplies.setAdapter(repliesInnerAdapter);
-        //listReplies.deferNotifyDataSetChanged();
 
         /*
         为“回复本评论”注册事件

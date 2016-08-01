@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.squareup.okhttp.Request;
 import com.mantianhong.R;
@@ -398,20 +399,27 @@ public class HomeArticleDetailActivity extends BaseActivity {
         //////////////////////////////////////////////////////////
         OkHttpUtils.getAsync("http://www.1316818.com/jsonserver.aspx?commenttid="+ String.valueOf(intTid) +"", new OkHttpUtils.DataCallBack() {
             @Override
-            public void requestFailure(Request request, IOException e) {}
+            public void requestFailure(Request request, IOException e) {
+                LogUtil.e(e.getMessage());
+            }
 
             @Override
             public void requestSuccess(String result) {
-                Gson gson = new Gson();
-                CommentRoot root = gson.fromJson(result,CommentRoot.class);
-                mListComments = root.getCommentset();
+                try {
+                    Gson gson = new Gson();
+                    String strResult = TextUtil.RevoveGreaterLessTag(TextUtil.parseJason(result));
+                    CommentRoot root = gson.fromJson(strResult, CommentRoot.class);
+                    mListComments = root.getCommentset();
 
-                repliesAdapter = new HomeArticleDetailRepliesAdapter(
-                        mListComments
-                        ,R.layout.home_articile_detail_reply
-                        ,HomeArticleDetailActivity.this
-                );
-                article_detail_replies_ListView.setAdapter(repliesAdapter);
+                    repliesAdapter = new HomeArticleDetailRepliesAdapter(
+                            mListComments
+                            , R.layout.home_articile_detail_reply
+                            , HomeArticleDetailActivity.this
+                    );
+                    article_detail_replies_ListView.setAdapter(repliesAdapter);
+                }catch (Exception ex){
+                    LogUtil.e(ex.getMessage());
+                }
             }
         });
 

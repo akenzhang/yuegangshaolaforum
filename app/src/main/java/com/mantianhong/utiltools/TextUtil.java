@@ -10,7 +10,7 @@ import java.util.List;
 public class TextUtil {
 
     public static String parseJason(String strResult){
-        return strResult.replace("111111","<").replace("222222","/>").replace("333333",">").replace("444444","\"").replace("555555","\''");
+        return strResult.replace("$@111111@$","<").replace("$@222222@$","/>").replace("$@333333@$",">").replace("$@444444@$","\"").replace("$@555555@$","\''");
     }
 
     public static String getString(String strOrigin,String strStart,String strEnd){
@@ -35,4 +35,37 @@ public class TextUtil {
         String result = afterShuffle.substring(5, 9);
         return result;
     }
+
+    /*
+    去掉"<"和">"内的内容
+    并将图片的连接保存到ArrayList内
+     */
+    public static String RevoveGreaterLessTag(String strOrigin){
+
+        String strResult = strOrigin;
+        String strStart = "<";
+        String strEnd = ">";
+        String strRemove="";
+        int intStart=-1;
+        int intEnd=-1;
+
+        if(!strResult.contains(strStart)){
+            return strResult;
+        }
+
+        do {
+            if(strResult.contains(strStart) && strResult.contains(strEnd)) {
+                intStart= strResult.indexOf(strStart);
+                intEnd= strResult.indexOf(strEnd);
+                strRemove = strResult.substring(intStart,intEnd+1);
+                strResult = strResult.replace(strRemove,"");
+            }else{
+                break;
+            }
+        }while(strResult.contains(strStart) && strResult.contains(strEnd));
+
+        return strResult;
+    }
+
+
 }
