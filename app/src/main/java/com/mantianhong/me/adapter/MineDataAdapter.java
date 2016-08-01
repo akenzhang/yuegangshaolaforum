@@ -1,4 +1,4 @@
-package com.mantianhong.mine.adapter;
+package com.mantianhong.me.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.mantianhong.R;
 import com.mantianhong.utiltools.CommonAdapter;
-import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.ViewHolder;
 
 import java.util.List;

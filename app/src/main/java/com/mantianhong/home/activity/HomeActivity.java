@@ -14,7 +14,7 @@ import com.mantianhong.contact.fragment.ContactHomeFragment;
 import com.mantianhong.home.adapter.HomeActivityPagerAdapter;
 import com.mantianhong.home.fragment.HomeDefaultFragment;
 import com.mantianhong.login.activity.LoginMainActivity;
-import com.mantianhong.mine.fragment.MineHomeFragment;
+import com.mantianhong.me.fragment.MineHomeFragment;
 import com.mantianhong.video.fragment.VideoHomeFragment;
 
 public class HomeActivity extends BaseActivity {

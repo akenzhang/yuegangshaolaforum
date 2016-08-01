@@ -1,8 +1,6 @@
-package com.mantianhong.mine.fragment;
+package com.mantianhong.me.fragment;
 
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.mantianhong.R;
 import com.mantianhong.bean.UpdateMineMessage;
-import com.mantianhong.mine.adapter.MineDataAdapter;
+import com.mantianhong.me.adapter.MineDataAdapter;
 import com.mantianhong.utiltools.LazyLoadBaseFragment;
 import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.MyConstants;
