@@ -2,6 +2,7 @@ package com.mantianhong.mine.fragment;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.mantianhong.R;
+import com.mantianhong.bean.UpdateMineMessage;
 import com.mantianhong.mine.adapter.MineDataAdapter;
 import com.mantianhong.utiltools.LazyLoadBaseFragment;
 import com.mantianhong.utiltools.LogUtil;
@@ -20,6 +22,9 @@ import com.tencent.connect.common.Constants;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
@@ -79,6 +84,9 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
             initForNotLogined();
         }
 
+        //在要接收消息的页面注册EventBus
+        EventBus.getDefault().register(this);
+
     }
 
     private void initForLogined(){
@@ -131,6 +139,7 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
         mine_fragment_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 SharedPreferencesUtils.logoutConsiderlessVisitor(MineHomeFragment.this.getContext());
 
                 mine_fragment_loginpic.setVisibility(View.VISIBLE);
@@ -167,12 +176,7 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
         cellphoneicon_login_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MineHomeFragment.this.getContext(),"正在开发...",Toast.LENGTH_SHORT).show();
-
-                //Intent intent = new Intent(MineHomeFragment.this.getContext(),LoginCellphoneActivity.class);
-                //startActivity(intent);
-                if(!SharedPreferencesUtils.isLoginConsiderlessVisitor(MineHomeFragment.this.getContext(),"CANNOTCOMMENT")) return;
-
+                if(!SharedPreferencesUtils.isLoginConsiderlessVisitor(MineHomeFragment.this.getContext(),"CANNOTCOMMENT","NEEDCALLBACK")) return;
             }
         });
 
@@ -190,8 +194,23 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
             mTencent.logout(MineHomeFragment.this.getContext());
         }
 
+        //在要接收消息的页面解除注册
+        try {
+            EventBus.getDefault().unregister(this);
+        }catch (Exception ex){
+            LogUtil.e("MineHomeFragment->onDestroy():"+ex.getMessage());
+        }
     }
 
+    //在要接收消息的页面声明你的订阅方法(也就是声明方法处理消息)
+    @Subscribe
+    public void onEvent(UpdateMineMessage event) {
+        /* Do something */
+        String strMsg = event.getMsg();
+        if(strMsg.equals("UPDATE_USER_STATE")){
+            initForLogined();
+        }
+    };
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mantianhong.bean.UpdateMineMessage;
 import com.mantianhong.utiltools.TextUtil;
 import com.squareup.okhttp.Request;
 import com.tencent.connect.UserInfo;
@@ -25,6 +26,8 @@ import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.OkHttpUtils;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.mantianhong.home.activity.HomeActivity;
+
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -97,7 +100,6 @@ public class LoginMainActivity extends BaseActivity {
                 }
             }
         };
-
     }
 
     @Override
@@ -224,14 +226,31 @@ public class LoginMainActivity extends BaseActivity {
 
                             //登录后跳转
                             Bundle bundle = LoginMainActivity.this.getIntent().getExtras();
+                            if(bundle==null){
+                                Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
+                                LoginMainActivity.this.startActivity(intent);
+
+                                //关闭登录界面
+                                LoginMainActivity.this.finish();
+                            }
+
                             String strFlag = bundle.getString("flag"); //CANNOTCOMMENT
                             if(strFlag!=null){
                                 if(!TextUtils.isEmpty(strFlag) && strFlag.equals("CANNOTCOMMENT")){
-                                    LoginMainActivity.this.finish();
+                                    String strHandlerFlag = bundle.getString("handlerflag"); //CANNOTCOMMENT
+                                    if(strHandlerFlag!=null){
+                                        if(!TextUtils.isEmpty(strHandlerFlag) && strHandlerFlag.equals("NEEDCALLBACK")){
+                                            //除了要更新了本地的用户数据，还要发一个消息，让界面更新
+                                            //在发送消息的页面调用post发送消息
+                                            EventBus.getDefault().post(new UpdateMineMessage("UPDATE_USER_STATE"));
+                                            //关闭登录界面
+                                            LoginMainActivity.this.finish();
+                                        }
+                                    }else {
+                                        //这种情况仅仅关闭登录界面即可，因为已经更新了本地的用户数据
+                                        LoginMainActivity.this.finish();
+                                    }
                                 }
-                            }else{
-                                Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
-                                LoginMainActivity.this.startActivity(intent);
                             }
                         }
                     }
@@ -246,13 +265,10 @@ public class LoginMainActivity extends BaseActivity {
 
                 //登录后跳转
                 Bundle bundle = LoginMainActivity.this.getIntent().getExtras();
-                String strFlag = bundle.getString("flag"); //CANNOTCOMMENT
-                if(strFlag!=null){
-                    if(!TextUtils.isEmpty(strFlag) && strFlag.equals("CANNOTCOMMENT")){
-                        LoginMainActivity.this.finish();
-                    }
-                }else{
-                    //保存临时的用户名
+
+                //判断是否从其它页面跳转过来，如果是即会传递一定的参数进来
+                if(bundle==null){
+                    //如果bundle为null,说明是直接从登录后过来的，这个时候没有从其它页面传过来的bundle参数
                     String strTempUsername = SharedPreferencesUtils.getData(LoginMainActivity.this, MyConstants.VISITOR_USER_NAME);
                     if(TextUtils.isEmpty(strTempUsername)){
                         String strDate = String.valueOf(Calendar.getInstance().getTimeInMillis());
@@ -261,7 +277,16 @@ public class LoginMainActivity extends BaseActivity {
 
                     Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
                     LoginMainActivity.this.startActivity(intent);
+                    LoginMainActivity.this.finish();
                 }
+
+                String strFlag = bundle.getString("flag"); //CANNOTCOMMENT
+                if(strFlag!=null){
+                    if(!TextUtils.isEmpty(strFlag) && strFlag.equals("CANNOTCOMMENT")){
+                        LoginMainActivity.this.finish();
+                    }
+                }
+
             }
         });
 
@@ -289,7 +314,7 @@ public class LoginMainActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-
+    //重发短信
     class UpdateYanzhengmaStateTask extends TimerTask
     {
         @Override

@@ -132,6 +132,25 @@ public class SharedPreferencesUtils {
         return isThisLogin;
     }
 
+    public static Boolean isLoginConsiderlessVisitor(Context mContext,String mFlag,String mHandlerFlag){
+        boolean isThisLogin=true;
+        //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
+        String strUserName = SharedPreferencesUtils.getUserNameIncludingVisitor(mContext);
+        if(strUserName.contains("过客") || strUserName.contains("游客") ) strUserName="";
+        if(TextUtils.isEmpty(strUserName)){
+            isThisLogin=false;
+            Bundle bundle = new Bundle();
+            bundle.putString("flag",mFlag);
+            bundle.putString("handlerflag",mHandlerFlag);
+            Intent intent = new Intent(mContext,LoginMainActivity.class);
+            intent.putExtras(bundle);
+            mContext.startActivity(intent);
+            return isThisLogin;
+        }
+
+        return isThisLogin;
+    }
+
     public static Boolean getLoginStateConsiderlessVisitor(Context mContext){
         boolean isThisLogin=true;
         String strUserName = SharedPreferencesUtils.getUserNameIncludingVisitor(mContext);
