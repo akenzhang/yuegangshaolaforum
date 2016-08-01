@@ -158,7 +158,8 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
                 if(mTencent==null) {
                     mTencent = Tencent.createInstance(MyConstants.APP_ID, MineHomeFragment.this.getContext());
                 }
-                mTencent.login(MineHomeFragment.this, "get_user_info", new LoginUiListener());
+                //mTencent.login(MineHomeFragment.this, "get_user_info", new LoginUiListener());
+                mTencent.login(MineHomeFragment.this, "all", new LoginUiListener());
             }
         });
 
