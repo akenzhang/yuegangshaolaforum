@@ -125,7 +125,7 @@ public class LoginMainActivity extends BaseActivity {
                 if(mTencent==null) {
                     mTencent = Tencent.createInstance(MyConstants.APP_ID, LoginMainActivity.this.getApplicationContext());
                 }
-                //mTencent.login(LoginMainActivity.this, "get_user_info|all", new LoginUiListener());
+
                 mTencent.login(LoginMainActivity.this, "all", new LoginUiListener());
             }
         });
@@ -210,11 +210,14 @@ public class LoginMainActivity extends BaseActivity {
                 //将用户信息保存到SharedPreferences中去
                 SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.CELLPHONE_USER_NAME,strUserCellphone);
 
-                //将用户信息保存如数据库中去
+                //将用户信息保存如数据库中去 username,password,nickname,type,imgid
+                // android_username,android_password,android_nickname,android_type,android_imgid
                 Map<String,String> paramsAppRegister = new HashMap<String,String>();
-                paramsAppRegister.put("nusername",strUserCellphone);
-                paramsAppRegister.put("npassword",strYanzhengma);
-                paramsAppRegister.put("nemail","auto@qq.com");
+                paramsAppRegister.put("android_username",strUserCellphone);
+                paramsAppRegister.put("android_password",strUserCellphone);
+                paramsAppRegister.put("android_nickname",strUserCellphone);
+                paramsAppRegister.put("android_type","phone");
+                paramsAppRegister.put("android_img","1");
                 OkHttpUtils.postAsync("http://www.1316818.com/jsonserver.aspx", paramsAppRegister, new OkHttpUtils.DataCallBack() {
                     @Override
                     public void requestFailure(Request request, IOException e) {
@@ -287,7 +290,6 @@ public class LoginMainActivity extends BaseActivity {
                         LoginMainActivity.this.finish();
                     }
                 }
-
             }
         });
 
@@ -344,7 +346,7 @@ public class LoginMainActivity extends BaseActivity {
             JSONObject jsonObject = (JSONObject)o;
 
             try {
-                String openid = jsonObject.getString("openid");
+                final String openid = jsonObject.getString("openid");
                 String expires_in = jsonObject.getString("expires_in");
                 String token = jsonObject.getString("access_token");
                 if (!TextUtils.isEmpty(openid)&&!TextUtils.isEmpty(expires_in)&&!TextUtils.isEmpty(token)){
@@ -363,10 +365,33 @@ public class LoginMainActivity extends BaseActivity {
                                 String image = json.getString("figureurl_qq_2");
                                 String gender = json.getString("gender");
 
+                                //将用户的信息保存到数据库中去
+                                //openid (32)  nickname  image
+                                try {
+                                    Map<String, String> paramsAppRegister = new HashMap<String, String>();
+                                    paramsAppRegister.put("android_username", nickname);
+                                    paramsAppRegister.put("android_password", openid);
+                                    paramsAppRegister.put("android_nickname", nickname);
+                                    paramsAppRegister.put("android_type", "qq");
+                                    paramsAppRegister.put("android_img", image);
+                                    OkHttpUtils.postAsync("http://www.1316818.com/jsonserver.aspx", paramsAppRegister, new OkHttpUtils.DataCallBack() {
+                                        @Override
+                                        public void requestFailure(Request request, IOException e) {LogUtil.e(e.getMessage());}
+                                        @Override
+                                        public void requestSuccess(String result) {LogUtil.e(result);}
+                                    });
+                                }catch (Exception exsave){
+                                    LogUtil.e(exsave.getMessage());
+                                }
+
                                 //将获取到的用户信息保存起来
-                                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_NAME,nickname);
-                                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_IMAGE,image);
-                                SharedPreferencesUtils.saveData(LoginMainActivity.this,MyConstants.QQ_USER_GENDER,gender);
+                                try {
+                                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_NAME, nickname);
+                                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_IMAGE, image);
+                                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_GENDER, gender);
+                                }catch (Exception exsharedpreference){
+                                    LogUtil.e(exsharedpreference.getMessage());
+                                }
 
                                 //登录后跳转
                                 Bundle bundle = LoginMainActivity.this.getIntent().getExtras();

@@ -14,7 +14,9 @@ import com.mantianhong.me.adapter.MineDataAdapter;
 import com.mantianhong.utiltools.LazyLoadBaseFragment;
 import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.MyConstants;
+import com.mantianhong.utiltools.OkHttpUtils;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
+import com.squareup.okhttp.Request;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.common.Constants;
 import com.tencent.tauth.IUiListener;
@@ -25,7 +27,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by new pc on 2016/7/3.
@@ -227,7 +233,7 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
             JSONObject jsonObject = (JSONObject)o;
 
             try {
-                String openid = jsonObject.getString("openid");
+                final String openid = jsonObject.getString("openid");
                 String expires_in = jsonObject.getString("expires_in");
                 String token = jsonObject.getString("access_token");
                 if (!TextUtils.isEmpty(openid)&&!TextUtils.isEmpty(expires_in)&&!TextUtils.isEmpty(token)){
@@ -255,6 +261,25 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
                                 //Intent intent = new Intent(MineHomeFragment.this.getContext(), MineHomeFragment.class);
                                 //startActivity(intent);
                                 initForLogined();
+
+                                //将用户的信息保存到数据库中去
+                                //openid (32)  nickname  image
+                                try {
+                                    Map<String, String> paramsAppRegister = new HashMap<String, String>();
+                                    paramsAppRegister.put("android_username", nickname);
+                                    paramsAppRegister.put("android_password", openid);
+                                    paramsAppRegister.put("android_nickname", nickname);
+                                    paramsAppRegister.put("android_type", "qq");
+                                    paramsAppRegister.put("android_img", image);
+                                    OkHttpUtils.postAsync("http://www.1316818.com/jsonserver.aspx", paramsAppRegister, new OkHttpUtils.DataCallBack() {
+                                        @Override
+                                        public void requestFailure(Request request, IOException e) {LogUtil.e(e.getMessage());}
+                                        @Override
+                                        public void requestSuccess(String result) {LogUtil.e(result);}
+                                    });
+                                }catch (Exception exsave){
+                                    LogUtil.e(exsave.getMessage());
+                                }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
