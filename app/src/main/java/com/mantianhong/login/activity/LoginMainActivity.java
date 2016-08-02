@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mantianhong.bean.UpdateMineMessage;
+import com.mantianhong.utiltools.DBUtils;
 import com.mantianhong.utiltools.TextUtil;
 import com.squareup.okhttp.Request;
 import com.tencent.connect.UserInfo;
@@ -373,24 +374,33 @@ public class LoginMainActivity extends BaseActivity {
 
                                 //将用户的信息保存到数据库中去
                                 //openid (32)  nickname  image
-                                try {
-                                    Map<String, String> paramsAppRegister = new HashMap<String, String>();
-                                    paramsAppRegister.put("android_username", nickname);
-                                    paramsAppRegister.put("android_password", openid);
-                                    paramsAppRegister.put("android_nickname", nickname);
-                                    paramsAppRegister.put("android_type", "qq");
-                                    paramsAppRegister.put("android_img", image);
-                                    OkHttpUtils.postAsync("http://www.1316818.com/jsonserver.aspx", paramsAppRegister, new OkHttpUtils.DataCallBack() {
-                                        @Override
-                                        public void requestFailure(Request request, IOException e) {LogUtil.e(e.getMessage());}
-                                        @Override
-                                        public void requestSuccess(String result) {LogUtil.e(result);}
-                                    });
-                                }catch (Exception exsave){
-                                    LogUtil.e(exsave.getMessage());
-                                }
+//                                try {
+//                                    Map<String, String> paramsAppRegister = new HashMap<String, String>();
+//                                    paramsAppRegister.put("android_username", nickname);
+//                                    paramsAppRegister.put("android_password", openid);
+//                                    paramsAppRegister.put("android_nickname", nickname);
+//                                    paramsAppRegister.put("android_type", "qq");
+//                                    paramsAppRegister.put("android_img", image);
+//                                    OkHttpUtils.postAsync("http://www.1316818.com/jsonserver.aspx", paramsAppRegister, new OkHttpUtils.DataCallBack() {
+//                                        @Override
+//                                        public void requestFailure(Request request, IOException e) {LogUtil.e(e.getMessage());}
+//                                        @Override
+//                                        public void requestSuccess(String result) {LogUtil.e(result);}
+//                                    });
+//                                }catch (Exception exsave){
+//                                    LogUtil.e(exsave.getMessage());
+//                                }
+
+                                Map<String, String> paramsAppRegister = new HashMap<String, String>();
+                                paramsAppRegister.put("android_username", nickname);
+                                paramsAppRegister.put("android_password", openid);
+                                paramsAppRegister.put("android_nickname", nickname);
+                                paramsAppRegister.put("android_type", "qq");
+                                paramsAppRegister.put("android_img", image);
+                                DBUtils.SaveToDB(paramsAppRegister);
 
                                 //登录后跳转
+                                //合理不用更新用户的转态，因为在“me”模块与相同的QQ登录代码
                                 Bundle bundle = LoginMainActivity.this.getIntent().getExtras();
                                 if(bundle==null){
                                     Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);

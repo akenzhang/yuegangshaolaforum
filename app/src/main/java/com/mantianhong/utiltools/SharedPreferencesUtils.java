@@ -60,6 +60,31 @@ public class SharedPreferencesUtils {
         return "";
     }
 
+    public static String getUserIdConsiderlessVisitor(Context mContext){
+
+        String strValue = getData(mContext,MyConstants.CELLPHONE_USER_ID);
+        if(!TextUtils.isEmpty(strValue) && strValue.length()==11 && strValue.startsWith("1",0)){
+            return strValue;
+        }
+
+        strValue = getData(mContext,MyConstants.QQ_USER_ID);
+        if(!TextUtils.isEmpty(strValue)){
+            return strValue;
+        }
+
+        strValue = getData(mContext,MyConstants.WEIXIN_USER_ID);
+        if(!TextUtils.isEmpty(strValue)){
+            return strValue;
+        }
+
+        //strValue = getData(mContext,MyConstants.VISITOR_USER_NAME);
+        //if(!TextUtils.isEmpty(strValue)){
+        //    return strValue;
+        //}
+
+        return "";
+    }
+
     public static String getUserNameIncludingVisitor(Context mContext){
 
         String strValue = getData(mContext,MyConstants.CELLPHONE_USER_NAME);
@@ -99,6 +124,9 @@ public class SharedPreferencesUtils {
         return isThisLogin;
     }
 
+    /*
+    表示登录完成后跳转到主页面，关闭掉登录页面
+     */
     public static Boolean isLoginConsiderlessVisitor(Context mContext){
         boolean isThisLogin=true;
         //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
@@ -114,6 +142,9 @@ public class SharedPreferencesUtils {
         return isThisLogin;
     }
 
+    /*
+    不用跳转到主页面，也不用更新当前用户的登录状态
+     */
     public static Boolean isLoginConsiderlessVisitor(Context mContext,String mFlag){
         boolean isThisLogin=true;
         //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
@@ -132,6 +163,10 @@ public class SharedPreferencesUtils {
         return isThisLogin;
     }
 
+    /*
+    mHandlerFlag -- 表示是否需要发送消息通知更新页面
+    不用跳转到主页面，但需要更新当前用户的登录状态
+     */
     public static Boolean isLoginConsiderlessVisitor(Context mContext,String mFlag,String mHandlerFlag){
         boolean isThisLogin=true;
         //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面

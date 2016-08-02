@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.mantianhong.utiltools.DBUtils;
 import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.squareup.okhttp.Request;
@@ -35,7 +36,9 @@ import com.mantianhong.home.adapter.HomeArticleDetailRepliesAdapter;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by AKENZHANG on 2016/7/13.
@@ -160,9 +163,21 @@ public class HomeArticleDetailActivity extends BaseActivity {
         关注
          */
         article_detail_takenote.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeArticleDetailActivity.this,"此功能有待实现...",Toast.LENGTH_SHORT).show();
+                //如果用户尚未登录，即提示用户登录
+                if(!SharedPreferencesUtils.isLoginConsiderlessVisitor(HomeArticleDetailActivity.this,"CANNOTCOMMENT")) return;
+
+                String strUsername =  SharedPreferencesUtils.getUserNameConsiderlessVisitor(HomeArticleDetailActivity.this);
+                String strPassword = SharedPreferencesUtils.getUserIdConsiderlessVisitor(HomeArticleDetailActivity.this);
+                Map<String,String> hasMapParams = new HashMap<String,String>();
+                hasMapParams.put("takenote_username",strUsername);
+                hasMapParams.put("takenote_password",strPassword);
+                hasMapParams.put("takenote_tid",String.valueOf(mTid));
+                DBUtils.SaveToDB(hasMapParams);
+
+                Toast.makeText(HomeArticleDetailActivity.this,"已经成功关注该文章",Toast.LENGTH_SHORT).show();
             }
         });
 
