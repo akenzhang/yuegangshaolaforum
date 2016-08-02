@@ -212,7 +212,6 @@ public class LoginMainActivity extends BaseActivity {
                 SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.CELLPHONE_USER_ID,strUserCellphone);
 
                 //将用户信息保存如数据库中去 username,password,nickname,type,imgid
-                // android_username,android_password,android_nickname,android_type,android_imgid
                 Map<String,String> paramsAppRegister = new HashMap<String,String>();
                 paramsAppRegister.put("android_username",strUserCellphone);
                 paramsAppRegister.put("android_password",strUserCellphone);
