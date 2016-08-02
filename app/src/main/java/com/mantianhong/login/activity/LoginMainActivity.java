@@ -209,6 +209,7 @@ public class LoginMainActivity extends BaseActivity {
 
                 //将用户信息保存到SharedPreferences中去
                 SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.CELLPHONE_USER_NAME,strUserCellphone);
+                SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.CELLPHONE_USER_ID,strUserCellphone);
 
                 //将用户信息保存如数据库中去 username,password,nickname,type,imgid
                 // android_username,android_password,android_nickname,android_type,android_imgid
@@ -365,6 +366,12 @@ public class LoginMainActivity extends BaseActivity {
                                 String image = json.getString("figureurl_qq_2");
                                 String gender = json.getString("gender");
 
+                                //将获取到的用户信息保存起来
+                                SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_NAME, nickname);
+                                SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_ID, openid);
+                                SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_IMAGE, image);
+                                SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_GENDER, gender);
+
                                 //将用户的信息保存到数据库中去
                                 //openid (32)  nickname  image
                                 try {
@@ -384,48 +391,38 @@ public class LoginMainActivity extends BaseActivity {
                                     LogUtil.e(exsave.getMessage());
                                 }
 
-                                //将获取到的用户信息保存起来
-                                try {
-                                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_NAME, nickname);
-                                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_IMAGE, image);
-                                    SharedPreferencesUtils.saveData(LoginMainActivity.this, MyConstants.QQ_USER_GENDER, gender);
-                                }catch (Exception exsharedpreference){
-                                    LogUtil.e(exsharedpreference.getMessage());
-                                }
-
                                 //登录后跳转
                                 Bundle bundle = LoginMainActivity.this.getIntent().getExtras();
-                                String strFlag = bundle.getString("flag"); //CANNOTCOMMENT
-                                if(strFlag!=null){
-                                    if(!TextUtils.isEmpty(strFlag) && strFlag.equals("CANNOTCOMMENT")){
-                                        LoginMainActivity.this.finish();
-                                    }
-                                }else{
+                                if(bundle==null){
                                     Intent intent = new Intent(LoginMainActivity.this, HomeActivity.class);
                                     LoginMainActivity.this.startActivity(intent);
+                                }else{
+                                    String strFlag = bundle.getString("flag"); //CANNOTCOMMENT
+                                    if(strFlag!=null){
+                                        if(!TextUtils.isEmpty(strFlag) && strFlag.equals("CANNOTCOMMENT")){
+                                            LoginMainActivity.this.finish();
+                                        }
+                                    }
                                 }
-
-                            } catch (JSONException e) {
-                                //e.printStackTrace();
+                            } catch (Exception e) {
                                 LogUtil.e(json+"; "+e.getMessage());
                             }
                         }
 
                         @Override
                         public void onError(UiError uiError) { }
-
                         @Override
                         public void onCancel() {}
                     });
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                LogUtil.e(e.getMessage());
             }
         }
 
         @Override
         public void onError(UiError e) {
-            Toast.makeText(LoginMainActivity.this,e.errorMessage,Toast.LENGTH_SHORT).show();
+            LogUtil.e(e.errorMessage);
         }
 
         @Override

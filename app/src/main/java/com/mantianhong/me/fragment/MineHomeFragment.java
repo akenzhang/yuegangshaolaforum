@@ -118,7 +118,6 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
         blLoginState = SharedPreferencesUtils.getLoginStateConsiderlessVisitor(MineHomeFragment.this.getContext());
         adapter = new MineDataAdapter(blLoginState,datalist,R.layout.mine_fragment_home_listviewdetail,root.getContext());
         mine_fragment_listview.setAdapter(adapter);
-
     }
 
     private void initForNotLogined(){
@@ -254,12 +253,11 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
 
                                 //将获取到的用户信息保存起来
                                 SharedPreferencesUtils.saveData(MineHomeFragment.this.getContext(), MyConstants.QQ_USER_NAME,nickname);
+                                SharedPreferencesUtils.saveData(MineHomeFragment.this.getContext(), MyConstants.QQ_USER_ID, openid);
                                 SharedPreferencesUtils.saveData(MineHomeFragment.this.getContext(),MyConstants.QQ_USER_IMAGE,image);
                                 SharedPreferencesUtils.saveData(MineHomeFragment.this.getContext(),MyConstants.QQ_USER_GENDER,gender);
 
                                 //登录后跳转
-                                //Intent intent = new Intent(MineHomeFragment.this.getContext(), MineHomeFragment.class);
-                                //startActivity(intent);
                                 initForLogined();
 
                                 //将用户的信息保存到数据库中去
@@ -281,7 +279,7 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
                                     LogUtil.e(exsave.getMessage());
                                 }
 
-                            } catch (JSONException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -293,14 +291,14 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
                         public void onCancel() {}
                     });
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                LogUtil.e(e.getMessage());
             }
         }
 
         @Override
         public void onError(UiError e) {
-            Toast.makeText(MineHomeFragment.this.getContext(),e.errorMessage,Toast.LENGTH_SHORT).show();
+            LogUtil.e(e.errorMessage);
         }
 
         @Override

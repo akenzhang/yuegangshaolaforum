@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.mantianhong.utiltools.TextUtil;
 import com.squareup.okhttp.Request;
@@ -56,8 +57,18 @@ public class HomeArticleCommentActivity extends BaseActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        final int intTid = bundle.getInt("tid",1);
-        final int intPid = bundle.getInt("pid",-1);
+        int intTempTid=1;
+        int intTempPid=-1;
+        if(bundle==null){
+            intTempTid=1;
+            intTempPid=-1;
+        }else {
+            intTempTid = bundle.getInt("tid",1);
+            intTempPid = bundle.getInt("pid",-1);
+        }
+
+        final int intTid = intTempTid;
+        final int intPid = intTempPid;
 
         /*
         看看评论来自哪里，如果是新的评论，即不用传送pid,如果是“回复本评论”，那么需要传动pid,同时更改一下相关的文本
@@ -102,7 +113,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
                 OkHttpUtils.postAsync(strUrlPost,parms, new OkHttpUtils.DataCallBack() {
                     @Override
                     public void requestFailure(Request request, IOException e) {
-                        Toast.makeText(HomeArticleCommentActivity.this,"发生异常，请重新发送...",Toast.LENGTH_SHORT).show();
+                        LogUtil.e(e.getMessage());
                     }
 
                     @Override
@@ -129,8 +140,6 @@ public class HomeArticleCommentActivity extends BaseActivity {
             public void onClick(View v) {
                 //重新加载详情页面
                 reload(intTid,intPid);
-
-                //HomeArticleCommentActivity.this.finish();
             }
         });
 

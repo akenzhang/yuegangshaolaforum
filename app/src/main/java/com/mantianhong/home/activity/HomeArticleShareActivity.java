@@ -36,11 +36,11 @@ public class HomeArticleShareActivity extends BaseActivity {
     QQ,QQ空间
      */
     private Tencent mTencent;
-    private String strSHARE_TO_QQ_TITLE;
-    private String strSHARE_TO_QQ_SUMMARY;
-    private String strSHARE_TO_QQ_TARGET_URL;
-    private String strSHARE_TO_QQ_IMAGE_URL;
-    private ArrayList<String> mImageList;
+    private String strSHARE_TO_QQ_TITLE = "";
+    private String strSHARE_TO_QQ_SUMMARY = "";
+    private String strSHARE_TO_QQ_TARGET_URL = "";
+    private String strSHARE_TO_QQ_IMAGE_URL = "";
+    private ArrayList<String> mImageList = new ArrayList<>();
 
 
     @Override
@@ -66,18 +66,21 @@ public class HomeArticleShareActivity extends BaseActivity {
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
-        strSHARE_TO_QQ_TITLE = bundle.getString("SHARE_TO_QQ_TITLE");
-        strSHARE_TO_QQ_SUMMARY =bundle.getString("SHARE_TO_QQ_SUMMARY");
-        strSHARE_TO_QQ_TARGET_URL =bundle.getString("SHARE_TO_QQ_TARGET_URL");
-        strSHARE_TO_QQ_IMAGE_URL = bundle.getString("SHARE_TO_QQ_IMAGE_URL");
-        mImageList = new ArrayList<>();
+        if(bundle!=null){
+            strSHARE_TO_QQ_TITLE = bundle.getString("SHARE_TO_QQ_TITLE");
+            strSHARE_TO_QQ_SUMMARY =bundle.getString("SHARE_TO_QQ_SUMMARY");
+            strSHARE_TO_QQ_TARGET_URL =bundle.getString("SHARE_TO_QQ_TARGET_URL");
+            strSHARE_TO_QQ_IMAGE_URL = bundle.getString("SHARE_TO_QQ_IMAGE_URL");
 
-        String[] images = strSHARE_TO_QQ_IMAGE_URL.split("\\|");
-        for(String url:images){
-            if(!TextUtils.isEmpty(url)) {
-                mImageList.add("http://www.1316818.com/upload/"+url);
+            String[] images = strSHARE_TO_QQ_IMAGE_URL.split("\\|");
+            for(String url:images){
+                if(!TextUtils.isEmpty(url)) {
+                    mImageList.add("http://www.1316818.com/upload/"+url);
+                }
             }
         }
+
+
     }
 
     @Override
@@ -107,14 +110,14 @@ public class HomeArticleShareActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Bundle params = new Bundle();
-                params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE,QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
-                params.putString(QzoneShare.SHARE_TO_QQ_TITLE,strSHARE_TO_QQ_TITLE);
+                params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
+                params.putString(QzoneShare.SHARE_TO_QQ_TITLE, strSHARE_TO_QQ_TITLE);
                 //params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY,strSHARE_TO_QQ_SUMMARY);
-                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL,strSHARE_TO_QQ_TARGET_URL);
+                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, strSHARE_TO_QQ_TARGET_URL);
                 //ArrayList imageUrls = new ArrayList();
                 //imageUrls.add("http://media-cdn.tripadvisor.com/media/photo-s/01/3e/05/40/the-sandbar-that-links.jpg");
                 params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, mImageList);
-                params.putInt(QzoneShare.SHARE_TO_QQ_EXT_INT,  QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
+                params.putInt(QzoneShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
                 mTencent.shareToQzone(HomeArticleShareActivity.this, params, new BaseUiListener());
             }
         });
@@ -128,10 +131,10 @@ public class HomeArticleShareActivity extends BaseActivity {
             public void onClick(View v) {
                 Bundle params = new Bundle();
                 params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-                params.putString(QQShare.SHARE_TO_QQ_TITLE,strSHARE_TO_QQ_TITLE);
-                params.putString(QQShare.SHARE_TO_QQ_SUMMARY,strSHARE_TO_QQ_SUMMARY);
-                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,strSHARE_TO_QQ_TARGET_URL);
-                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,mImageList.get(0));
+                params.putString(QQShare.SHARE_TO_QQ_TITLE, strSHARE_TO_QQ_TITLE);
+                params.putString(QQShare.SHARE_TO_QQ_SUMMARY, strSHARE_TO_QQ_SUMMARY);
+                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, strSHARE_TO_QQ_TARGET_URL);
+                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, mImageList.get(0));
                 //params.putString(QQShare.SHARE_TO_QQ_APP_NAME,  "测试应用222222");
                 //params.putString(QQShare.SHARE_TO_QQ_EXT_INT,  "其他附加功能");
                 mTencent.shareToQQ(HomeArticleShareActivity.this, params, new BaseUiListener());
@@ -154,9 +157,7 @@ public class HomeArticleShareActivity extends BaseActivity {
     }
 
     @Override
-    protected void bindData() {
-
-    }
+    protected void bindData() {}
 
     /*
     QQ回调的需要
