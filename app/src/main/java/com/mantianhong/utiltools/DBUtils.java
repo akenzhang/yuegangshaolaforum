@@ -1,16 +1,13 @@
 package com.mantianhong.utiltools;
 
 import com.squareup.okhttp.Request;
-
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by AKENZHANG on 2016/8/2.
  */
-public class DBUtils {
+public abstract class DBUtils {
 
     /*
     这个方法简单的调用OkHttpUtils.postAsync(),没有任何返回值，也不做任何处理
@@ -42,8 +39,8 @@ public class DBUtils {
     }
 
     /*
-这个方法简单的调用OkHttpUtils.postAsync(),没有任何返回值，也不做任何处理
- */
+    这个方法简单的调用OkHttpUtils.postAsync(),没有任何返回值，也不做任何处理
+    */
     public static void SaveToDB(String url,Map<String, String> hasMapParams){
 
         try {
@@ -68,4 +65,22 @@ public class DBUtils {
             LogUtil.e(exsave.getMessage());
         }
     }
+
+    //需要重写实现requestSuccess方法
+    public void getAsync(Map<String, String> hasMapParams){
+        OkHttpUtils.postAsync("http://www.1316818.com/jsonserver.aspx", hasMapParams, new OkHttpUtils.DataCallBack() {
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                //Do nothing
+                LogUtil.e(e.getMessage());
+            }
+
+            @Override
+            public void requestSuccess(String result){
+                successRequest(result);
+            }
+        });
+    }
+
+    protected abstract void successRequest(String result);
 }

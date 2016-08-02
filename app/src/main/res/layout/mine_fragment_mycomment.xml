@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/id_mine_fragment_mycomment_back"
+        android:text="返回"
+        android:paddingLeft="12dp"
+        android:textSize="18sp"
+        android:gravity="center_vertical|left"
+        android:textColor="#ffffff"
+        android:background="#ff0202"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <ListView
+        android:id="@+id/id_mine_fragment_mycomment"
+        android:layout_margin="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+</LinearLayout>

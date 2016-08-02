@@ -227,6 +227,10 @@ public class SharedPreferencesUtils {
         saveData(mContext, MyConstants.CELLPHONE_USER_NAME,"");
         saveData(mContext, MyConstants.QQ_USER_NAME,"");
         saveData(mContext, MyConstants.WEIXIN_USER_NAME,"");
+
+        saveData(mContext, MyConstants.CELLPHONE_USER_ID,"");
+        saveData(mContext, MyConstants.QQ_USER_ID,"");
+        saveData(mContext, MyConstants.WEIXIN_USER_ID,"");
     }
 
 }

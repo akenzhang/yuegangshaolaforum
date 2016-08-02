@@ -38,6 +38,8 @@
         <activity android:name=".video.activity.VideoHomeFragmentVideoPlayerActivity" />
         <activity android:name=".video.activity.VideoHomeFragmentVideoMoreActivity" />
 
+        <activity android:name=".me.activity.MineHomeTakenoteActivity" />
+
         <!-- QQ，QQ空间分享 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
