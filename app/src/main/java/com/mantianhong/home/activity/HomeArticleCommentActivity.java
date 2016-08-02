@@ -83,7 +83,6 @@ public class HomeArticleCommentActivity extends BaseActivity {
             public void onClick(View v) {
 
                 String strComment = home_article_comment_edittext.getText().toString();
-                //Toast.makeText(HomeArticleCommentActivity.this,strComment,Toast.LENGTH_SHORT).show();
 
                 //获得用书的输入回复，也获得tid,接下来是将该回复保存到数据库内
                 String strUrlPost = "http://www.1316818.com/jsonserver.aspx";
@@ -99,11 +98,10 @@ public class HomeArticleCommentActivity extends BaseActivity {
                 parms.put("message_comment",strComment);
                 parms.put("uniqueCode_comment",struniqueCode);
                 parms.put("ip_comment", IPUtil.getIP(HomeArticleCommentActivity.this));
-                //parms.put("city_comment","匿名");
-                parms.put("city_comment", TextUtil.getString(SharedPreferencesUtils.getUserNameIncludingVisitor(HomeArticleCommentActivity.this),"(",")")); // 取得用户名字
+                parms.put("city_comment", SharedPreferencesUtils.getUserNameIncludingVisitor(HomeArticleCommentActivity.this)); // 取得用户名字
+                parms.put("android_userpwd_comment",SharedPreferencesUtils.getUserIdConsiderlessVisitor(HomeArticleCommentActivity.this)); //取得密码
 
                 //发邮件通知我有匿名的新信息
-
                 final String strMailTitle = "【粤港烧腊论坛手机匿名评论】";
                 String strobjniminghuifu = strComment + "<br/><br/>原文链接：<a target=_blank href='http://www.1316818.com/showtopic-" + String.valueOf(intTid) + ".aspx'>showtopic-" + String.valueOf(intTid) + ".aspx</a><br/>";
                 strobjniminghuifu = strobjniminghuifu + "<br/>快速删除：<a target=_blank href=http://www.1316818.com/DeleteNimingPost.aspx?tid=" + String.valueOf(intTid) + "&uniqueCode='" + struniqueCode + "'>点击删除该回复</a>";
@@ -122,10 +120,15 @@ public class HomeArticleCommentActivity extends BaseActivity {
                         reload(intTid,intPid);
                         //HomeArticleCommentActivity.this.finish();
 
-                        //发送邮件
-                        EmailUtils.sendMail(strMailTitle,strContent);
+                        if(result.contains("添加成功") && result.contains("1")){
 
-                        Toast.makeText(HomeArticleCommentActivity.this,"评论成功发布...",Toast.LENGTH_SHORT).show();
+                            //发送邮件
+                            EmailUtils.sendMail(strMailTitle,strContent);
+
+                            Toast.makeText(HomeArticleCommentActivity.this,"评论成功发布...",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(HomeArticleCommentActivity.this,"评论发生异常...",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
