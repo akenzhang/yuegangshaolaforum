@@ -1,11 +1,9 @@
 package com.mantianhong.me.activity;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.mantianhong.R;
 import com.mantianhong.bean.Takenote;
@@ -15,14 +13,7 @@ import com.mantianhong.utiltools.BaseActivity;
 import com.mantianhong.utiltools.DBUtils;
 import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 
 /**
  * Created by AKENZHANG on 2016/8/2.
@@ -31,11 +22,12 @@ public class MineHomeTakenoteActivity extends BaseActivity {
 
     private TextView mine_fragment_takenote_back;
     private ListView mine_fragment_takenote;
-    private List<Takenote> mList =  new ArrayList<>();
+    private List<Takenote> mList;
     private static int mPageNo = 1;
     private int mLastItem = 1;
     private MineTakenoteAdapter mAdapter;
     private String mUserID;
+    private int mPagesize=15;
 
     @Override
     protected int getLayout() {
@@ -72,16 +64,17 @@ public class MineHomeTakenoteActivity extends BaseActivity {
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE && mLastItem == mAdapter.getCount() ){
                     try {
-                        mPageNo=1;
-                        String url = "http://www.1316818.com/jsonserver.aspx?takenote_userid="+ mUserID +"&takenote_pageno="+ mPageNo +"&takenote_pagesize=15";
+                        mPageNo=mAdapter.getCount()/mPagesize+1;
+
+                        final String url = "http://www.1316818.com/jsonserver.aspx?takenote_userid="+ mUserID +"&takenote_pageno="+ mPageNo +"&takenote_pagesize="+String.valueOf(mPagesize);
                         new DBUtils() {
                             @Override
                             protected void successRequest(String result) {
                                 if(!result.contains("找不到记录")) {
                                     Gson gson = new Gson();
                                     TakenoteRoot root = gson.fromJson(result, TakenoteRoot.class);
-                                    mList = root.getTakenote();
-
+                                    List<Takenote> mListNew = root.getTakenote();
+                                    mList.addAll(mListNew);
                                     mAdapter.notifyDataSetChanged();
                                 }
                             }
@@ -95,8 +88,7 @@ public class MineHomeTakenoteActivity extends BaseActivity {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                LogUtil.e(firstVisibleItem+"  "+visibleItemCount+"  "+totalItemCount);
-                mLastItem = firstVisibleItem + visibleItemCount-1;
+                mLastItem = firstVisibleItem + visibleItemCount;
             }
         });
     }
@@ -107,7 +99,7 @@ public class MineHomeTakenoteActivity extends BaseActivity {
         //获得数据
         try {
             mPageNo=1;
-            String url = "http://www.1316818.com/jsonserver.aspx?takenote_userid="+ mUserID +"&takenote_pageno="+ mPageNo +"&takenote_pagesize=15";
+            String url = "http://www.1316818.com/jsonserver.aspx?takenote_userid="+ mUserID +"&takenote_pageno="+ mPageNo +"&takenote_pagesize="+String.valueOf(mPagesize);;
             new DBUtils() {
                 @Override
                 protected void successRequest(String result) {
