@@ -66,7 +66,7 @@ public abstract class DBUtils {
         }
     }
 
-    //需要重写实现requestSuccess方法
+    //需要重写实现requestSuccess方法，一个参数：Map<String, String> hasMapParams
     public void getAsync(Map<String, String> hasMapParams){
         OkHttpUtils.postAsync("http://www.1316818.com/jsonserver.aspx", hasMapParams, new OkHttpUtils.DataCallBack() {
             @Override
@@ -77,6 +77,22 @@ public abstract class DBUtils {
 
             @Override
             public void requestSuccess(String result){
+                successRequest(result);
+            }
+        });
+    }
+
+    //需要重写实现requestSuccess方法，一个参数：可以灵活的构建url
+    public void getAsync(String url){
+        OkHttpUtils.getAsync(url, new OkHttpUtils.DataCallBack() {
+            @Override
+            public void requestFailure(Request request, IOException e) {
+                //Do nothing
+                LogUtil.e(e.getMessage());
+            }
+
+            @Override
+            public void requestSuccess(String result) {
                 successRequest(result);
             }
         });
