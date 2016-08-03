@@ -39,6 +39,7 @@
         <activity android:name=".video.activity.VideoHomeFragmentVideoMoreActivity" />
 
         <activity android:name=".me.activity.MineHomeTakenoteActivity" />
+        <activity android:name=".me.activity.MineHomeMycommentActivity" />
 
         <!-- QQ，QQ空间分享 -->
         <activity

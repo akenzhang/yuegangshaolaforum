@@ -131,6 +131,7 @@ public class SingletonImageCollection {
                 .noFade() //没有淡入淡出效果
                 .config(Bitmap.Config.ALPHA_8) //显示低像素的照片
                 .into(mImageView); //装在图片的控件
+
     }
 
     public static void loadImageNormal(int intImageType,Context mContext, String mUrl,ImageView mImageView){
@@ -149,6 +150,7 @@ public class SingletonImageCollection {
                 .noFade() //没有淡入淡出效果
                 .config(Bitmap.Config.ALPHA_8) //显示低像素的照片
                 .into(mImageView); //装在图片的控件
+
     }
 
     public static String parseImageUrl(String url){

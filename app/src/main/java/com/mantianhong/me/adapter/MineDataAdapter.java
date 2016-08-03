@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mantianhong.R;
+import com.mantianhong.me.activity.MineHomeMycommentActivity;
 import com.mantianhong.me.activity.MineHomeTakenoteActivity;
 import com.mantianhong.utiltools.CommonAdapter;
 import com.mantianhong.utiltools.ViewHolder;
@@ -55,10 +56,8 @@ public class MineDataAdapter extends CommonAdapter<String> {
 
                 switch (text){
                     case "我的关注":
-                        //Toast.makeText(mContext,"我的关注",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(mContext, MineHomeTakenoteActivity.class);
-                        mContext.startActivity(intent);
-
+                        Intent intent1 = new Intent(mContext, MineHomeTakenoteActivity.class);
+                        mContext.startActivity(intent1);
                         break;
 
                     case "我的文章":
@@ -66,7 +65,8 @@ public class MineDataAdapter extends CommonAdapter<String> {
                         break;
 
                     case "我的评论":
-                        Toast.makeText(mContext,"我的评论",Toast.LENGTH_SHORT).show();
+                        Intent intent2 = new Intent(mContext, MineHomeMycommentActivity.class);
+                        mContext.startActivity(intent2);
                         break;
                 };
             }
