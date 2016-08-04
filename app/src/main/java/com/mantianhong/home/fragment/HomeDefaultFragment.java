@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.mantianhong.R;
 import com.mantianhong.utiltools.CustomViewPager;
@@ -18,6 +21,8 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
 
     private CustomViewPager mHome_fragment_toptab_viewpager;
     private TabLayout mTabLayout;
+    private ImageButton home_fragment_newtopic;
+    private ImageButton home_fragment_search;
 
     //初始化数据
     private String tabTitles[];
@@ -29,13 +34,16 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
     }
 
     @Override
-    protected void initView() {}
+    protected void initView() {
+        mHome_fragment_toptab_viewpager = (CustomViewPager) root.findViewById(R.id.id_home_fragment_top_tab);
+        mTabLayout = (TabLayout) root.findViewById(R.id.id_home_fragment_tablayout);
+        home_fragment_newtopic = (ImageButton) root.findViewById(R.id.id_home_fragment_newtopic);
+        home_fragment_search = (ImageButton) root.findViewById(R.id.id_home_fragment_search);
+
+    }
 
     @Override
     protected void initVariable() {
-
-        mHome_fragment_toptab_viewpager = (CustomViewPager) root.findViewById(R.id.id_home_fragment_top_tab);
-        mTabLayout = (TabLayout) root.findViewById(R.id.id_home_fragment_tablayout);
 
         tabTitles = new String[]{
                 "最新资讯" //HomeDefaultFragmentRedian
@@ -70,6 +78,21 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
 
+        //增加新帖子
+        home_fragment_newtopic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"正在开发中，增加新帖子.....",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //搜索功能
+        home_fragment_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(),"正在开发中，搜索功能.....",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
