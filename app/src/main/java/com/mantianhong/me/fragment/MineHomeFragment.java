@@ -84,7 +84,9 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
         }
 
         //在要接收消息的页面注册EventBus
-        EventBus.getDefault().register(this);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
 
     }
 
