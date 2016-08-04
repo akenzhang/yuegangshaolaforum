@@ -12,6 +12,7 @@ import com.mantianhong.bean.MycommentRoot;
 import com.mantianhong.me.adapter.MineMycommentAdapter;
 import com.mantianhong.utiltools.BaseActivity;
 import com.mantianhong.utiltools.DBUtils;
+import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class MineHomeMycommentActivity extends BaseActivity {
     private static int mPagesize = 15;
     private MineMycommentAdapter mAdapter;
     private String mUserID = "";
+    private boolean hasmore=false;
 
     @Override
     protected int getLayout() {
@@ -65,10 +67,10 @@ public class MineHomeMycommentActivity extends BaseActivity {
         mine_fragment_mycomment.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE && mLastItem == mAdapter.getCount() ){
+                if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE && mLastItem == mAdapter.getCount() && hasmore ){
                     mPageNo=mAdapter.getCount()/mPagesize+1; //当前页码
 
-                    String url = "http://www.1316818.com/jsonserver.aspx?mycomment_userid="+ mUserID +"&mycomment_pageno="+ String.valueOf(mPageNo) +"&mycomment_pagesize="+String.valueOf(mPagesize);
+                    String url = "http://www.1316818.com/jsonserver.aspx?mycomment_userid="+ mUserID +"&mycomment_pageno="+ mPageNo +"&mycomment_pagesize="+String.valueOf(mPagesize);
                     new DBUtils() {
                         @Override
                         protected void successRequest(String result) {
@@ -77,7 +79,17 @@ public class MineHomeMycommentActivity extends BaseActivity {
                                 MycommentRoot root = gson.fromJson(result,MycommentRoot.class);
 
                                 List<Mycomment> mListNew = root.getMycomment(); //将新的数据存入mListNew内
+                                if(mListNew.size()<mPagesize){
+                                    hasmore=false;
+                                }else{
+                                    hasmore=true;
+                                }
                                 mList.addAll(mListNew); //将新的数据mListNew加入到mList内
+
+                                for(Mycomment ite:mList){
+                                    LogUtil.e(ite.getTitle());
+                                }
+
                                 mAdapter.notifyDataSetChanged(); //通知adapter更新数据
                             }
                         }
@@ -105,6 +117,11 @@ public class MineHomeMycommentActivity extends BaseActivity {
                     Gson gson = new Gson();
                     MycommentRoot root = gson.fromJson(result, MycommentRoot.class);
                     mList = root.getMycomment();
+                    if(mList.size()<mPagesize){
+                        hasmore=false;
+                    }else{
+                        hasmore=true;
+                    }
 
                     //将数据绑定到mine_fragment_mycomment
                     mAdapter = new MineMycommentAdapter(mList,R.layout.mine_fragment_mycommentdetails,MineHomeMycommentActivity.this);

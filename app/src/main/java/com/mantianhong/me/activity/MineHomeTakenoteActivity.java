@@ -24,10 +24,12 @@ public class MineHomeTakenoteActivity extends BaseActivity {
     private ListView mine_fragment_takenote;
     private List<Takenote> mList;
     private static int mPageNo = 1;
+    private static int mPrePageNo = 1;
     private int mLastItem = 1;
     private MineTakenoteAdapter mAdapter;
     private String mUserID;
     private int mPagesize=15;
+    private boolean hasmore=false;
 
     @Override
     protected int getLayout() {
@@ -62,11 +64,13 @@ public class MineHomeTakenoteActivity extends BaseActivity {
         mine_fragment_takenote.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-                if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE && mLastItem == mAdapter.getCount() ){
+                if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE && mLastItem == mAdapter.getCount() && hasmore){
                     try {
                         mPageNo=mAdapter.getCount()/mPagesize+1;
-
-                        final String url = "http://www.1316818.com/jsonserver.aspx?takenote_userid="+ mUserID +"&takenote_pageno="+ mPageNo +"&takenote_pagesize="+String.valueOf(mPagesize);
+                        if(mPageNo==mPrePageNo){
+                            hasmore=false;
+                        }
+                        String url = "http://www.1316818.com/jsonserver.aspx?takenote_userid="+ mUserID +"&takenote_pageno="+ mPageNo +"&takenote_pagesize="+String.valueOf(mPagesize);
                         new DBUtils() {
                             @Override
                             protected void successRequest(String result) {
@@ -74,6 +78,12 @@ public class MineHomeTakenoteActivity extends BaseActivity {
                                     Gson gson = new Gson();
                                     TakenoteRoot root = gson.fromJson(result, TakenoteRoot.class);
                                     List<Takenote> mListNew = root.getTakenote();
+                                    if(mListNew.size()<mPagesize){
+                                        hasmore=false;
+                                    }else{
+                                        hasmore=true;
+                                    }
+                                    mPrePageNo = mPageNo;
                                     mList.addAll(mListNew);
                                     mAdapter.notifyDataSetChanged();
                                 }
@@ -107,6 +117,12 @@ public class MineHomeTakenoteActivity extends BaseActivity {
                         Gson gson = new Gson();
                         TakenoteRoot root = gson.fromJson(result, TakenoteRoot.class);
                         mList = root.getTakenote();
+                        if(mList.size()<mPagesize){
+                            hasmore=false;
+                        }else{
+                            hasmore=true;
+                        }
+                        mPrePageNo = mPageNo;
 
                         //绑定数据
                         mAdapter = new MineTakenoteAdapter(mList, R.layout.mine_fragment_takenotedetails, MineHomeTakenoteActivity.this);

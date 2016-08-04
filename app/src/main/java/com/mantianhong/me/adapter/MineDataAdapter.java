@@ -61,7 +61,7 @@ public class MineDataAdapter extends CommonAdapter<String> {
                         break;
 
                     case "我的文章":
-                        Toast.makeText(mContext,"我的文章",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext,"此功能正在开发中......",Toast.LENGTH_SHORT).show();
                         break;
 
                     case "我的评论":
