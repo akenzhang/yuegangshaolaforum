@@ -13,6 +13,7 @@ import com.mantianhong.bean.Mycomment;
 import com.mantianhong.bean.Takenote;
 import com.mantianhong.home.activity.HomeArticleDetailActivity;
 import com.mantianhong.utiltools.CommonAdapter;
+import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.mantianhong.utiltools.ViewHolder;
 
 import java.util.List;
@@ -35,12 +36,14 @@ public class MineMycommentAdapter extends CommonAdapter<Mycomment> {
         TextView message = (TextView) vh.getViews(R.id.id_mine_fragment_mycomment_message);
         TextView title = (TextView) vh.getViews(R.id.id_mine_fragment_mycomment_title);
         TextView postdatetime = (TextView) vh.getViews(R.id.id_mine_fragment_mycomment_postdatetime);
+        TextView commentposter = (TextView) vh.getViews(R.id.id_mine_fragment_mycomment_commentposter);
         ImageView img = (ImageView) vh.getViews(R.id.id_mine_fragment_mycomment_img);
         LinearLayout linearLayout = (LinearLayout) vh.getViews(R.id.id_mine_fragment_mycomment_linearlayout);
 
-        title.setText("主题："+item.getTitle());
+        title.setText("原文："+item.getTitle());
         message.setText(item.getMessage());
         postdatetime.setText("评论日期:"+item.getPostdatetime());
+        commentposter.setText("评论人:"+ SharedPreferencesUtils.getUserNameConsiderlessVisitor(mContext));
 
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

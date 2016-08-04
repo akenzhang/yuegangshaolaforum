@@ -21,6 +21,8 @@
         <TextView
             android:id="@+id/id_mine_fragment_mycomment_message"
             android:text="评论内容"
+            android:textSize="16sp"
+            android:textColor="#660404"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
             android:lineSpacingMultiplier="1.3"
@@ -31,19 +33,37 @@
             android:id="@+id/id_mine_fragment_mycomment_title"
             android:text="标题"
             android:textColor="#040000"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:layout_marginBottom="10dp"
             android:lineSpacingMultiplier="1.3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/id_mine_fragment_mycomment_postdatetime"
-            android:text="发表时间"
-            android:textSize="10sp"
-            android:layout_marginBottom="5dp"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/id_mine_fragment_mycomment_postdatetime"
+                android:text="发表时间"
+                android:textSize="10sp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/id_mine_fragment_mycomment_commentposter"
+                android:text="发表"
+                android:textSize="10sp"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
