@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.mantianhong.R;
 import com.mantianhong.utiltools.BaseActivity;
@@ -85,6 +86,10 @@ public class HomeActivity extends BaseActivity {
 
                     case R.id.id_home_radiobutton_me:
                         home_customviewpage.setCurrentItem(3);
+                        break;
+
+                    case R.id.id_home_radiobutton_newpost:
+                        Toast.makeText(HomeActivity.this,"新添加帖子......",Toast.LENGTH_SHORT).show();
                         break;
 
                     default:

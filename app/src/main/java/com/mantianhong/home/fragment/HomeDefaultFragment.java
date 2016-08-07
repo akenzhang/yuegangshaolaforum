@@ -21,7 +21,6 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
 
     private CustomViewPager mHome_fragment_toptab_viewpager;
     private TabLayout mTabLayout;
-    private ImageButton home_fragment_newtopic;
     private ImageButton home_fragment_search;
 
     //初始化数据
@@ -37,7 +36,6 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
     protected void initView() {
         mHome_fragment_toptab_viewpager = (CustomViewPager) root.findViewById(R.id.id_home_fragment_top_tab);
         mTabLayout = (TabLayout) root.findViewById(R.id.id_home_fragment_tablayout);
-        home_fragment_newtopic = (ImageButton) root.findViewById(R.id.id_home_fragment_newtopic);
         home_fragment_search = (ImageButton) root.findViewById(R.id.id_home_fragment_search);
 
     }
@@ -76,14 +74,6 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
-        });
-
-        //增加新帖子
-        home_fragment_newtopic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(),"正在开发中，增加新帖子.....",Toast.LENGTH_SHORT).show();
-            }
         });
 
         //搜索功能

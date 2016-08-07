@@ -63,7 +63,7 @@ public class MineHomeMycommentActivity extends BaseActivity {
             }
         });
 
-        //为mine_fragment_mycomment注册滚动时间
+        //为mine_fragment_mycomment注册滚动事件
         mine_fragment_mycomment.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {

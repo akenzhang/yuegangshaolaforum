@@ -34,20 +34,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="160dp"
-        android:elevation="1dp"
-        />
-
-    <!--  浮动按钮  -->
-    <ImageButton
-        android:id="@+id/id_home_fragment_newtopic"
-        android:background="@android:color/transparent"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:src="@drawable/newtopic"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
         android:layout_marginBottom="106dp"
         android:elevation="1dp"
         />
