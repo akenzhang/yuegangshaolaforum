@@ -46,7 +46,7 @@ public class HomeActivity extends BaseActivity {
 
         //初始化Fragment
         fragments = new Fragment[]{
-                new HomeDefaultFragment()
+                 new HomeDefaultFragment()
                 ,new VideoHomeFragment()
                 ,new ContactHomeFragment()
                 ,new MineHomeFragment()
