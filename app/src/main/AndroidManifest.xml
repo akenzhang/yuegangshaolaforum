@@ -32,6 +32,10 @@
             android:theme="@style/myTransparent"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity android:name=".post.activity.PostNewArticleActivity"
+            android:theme="@style/myTransparent"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity android:name="com.mantianhong.home.activity.HomeArticleShareActivity"
             android:theme="@style/myTransparent" />
 

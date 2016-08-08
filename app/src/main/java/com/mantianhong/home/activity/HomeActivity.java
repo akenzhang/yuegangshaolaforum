@@ -3,10 +3,13 @@ package com.mantianhong.home.activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.mantianhong.R;
+import com.mantianhong.post.activity.PostNewArticleActivity;
 import com.mantianhong.utiltools.BaseActivity;
 import com.mantianhong.utiltools.CustomViewPager;
 import com.mantianhong.utiltools.LogUtil;
@@ -25,6 +28,8 @@ public class HomeActivity extends BaseActivity {
     private Fragment fragments[];
     private Boolean isLogin=false;
 
+    private RadioButton home_radiobutton_newpost;
+
     @Override
     protected int getLayout() {
         //这里判断是否需要用户登录，首先从本地的记录提取用户名
@@ -36,6 +41,8 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void initView() {
         if(isLogin) return;
+
+        home_radiobutton_newpost = (RadioButton) this.findViewById(R.id.id_home_radiobutton_newpost);
     }
 
     @Override
@@ -66,6 +73,14 @@ public class HomeActivity extends BaseActivity {
     protected void initListener() {
         if(isLogin) return;
 
+        home_radiobutton_newpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, PostNewArticleActivity.class);
+                startActivity(intent);
+            }
+        });
+
         //注册主页低下按钮的点击事件
         home_tab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -89,7 +104,6 @@ public class HomeActivity extends BaseActivity {
                         break;
 
                     case R.id.id_home_radiobutton_newpost:
-                        Toast.makeText(HomeActivity.this,"新添加帖子......",Toast.LENGTH_SHORT).show();
                         break;
 
                     default:

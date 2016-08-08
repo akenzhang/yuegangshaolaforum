@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/id_post_newarticle_layout"
+        android:orientation="vertical"
+        android:layout_marginBottom="220dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_post_newarticle_innerlayout"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:background="#ecedf0"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+        <EditText
+            android:id="@+id/id_post_newarticle_content_edittext"
+            android:background="@drawable/home_article_comment_bg"
+            android:gravity="top"
+            android:textSize="12sp"
+            android:hint="请输入帖子内容"
+            android:paddingTop="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="0dp"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <EditText
+            android:id="@+id/id_post_newarticle_title_edittext"
+            android:background="@drawable/home_article_comment_bg"
+            android:gravity="top"
+            android:textSize="12sp"
+            android:hint="请输入标题"
+            android:paddingTop="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="3dp"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="44dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/id_post_newarticle_addpic_imageview"
+                android:src="@drawable/tabbar_icon_picture_normal"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/id_post_newarticle_release_textview"
+                android:enabled="false"
+                android:layout_gravity="right"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:background="#d1d1d5"
+                android:text="发  表"
+                android:textColor="#fdfdfe"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="25dp"
+                android:layout_width="55dp"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
