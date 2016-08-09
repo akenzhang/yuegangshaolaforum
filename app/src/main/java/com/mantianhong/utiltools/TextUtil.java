@@ -1,5 +1,8 @@
 package com.mantianhong.utiltools;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -65,6 +68,10 @@ public class TextUtil {
         }while(strResult.contains(strStart) && strResult.contains(strEnd));
 
         return strResult;
+    }
+
+    public static void ShowToast(Context mContext, String str){
+        Toast.makeText(mContext,str,Toast.LENGTH_SHORT).show();
     }
 
 

@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/id_post_newarticle_layout"
         android:orientation="vertical"
-        android:layout_marginBottom="330dp"
+        android:layout_marginBottom="290dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </LinearLayout>
@@ -15,9 +15,9 @@
         android:id="@+id/id_post_newarticle_innerlayout"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:background="#ecedf0"
+        android:background="#dadad9"
         android:layout_width="match_parent"
-        android:layout_height="330dp">
+        android:layout_height="290dp">
 
         <EditText
             android:id="@+id/id_post_newarticle_content_edittext"
@@ -29,7 +29,7 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingBottom="0dp"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="100dp" />
 
@@ -43,18 +43,17 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingBottom="3dp"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="44dp" />
 
         <LinearLayout
+            android:layout_margin="5dp"
             android:orientation="horizontal"
-            android:background="#e2ee8e"
+            android:background="#d0d0ca"
             android:layout_width="match_parent"
             android:paddingBottom="5dp"
-            android:layout_marginBottom="10dp"
-            android:layout_height="85dp">
-
+            android:layout_height="80dp">
 
             <ImageView
                 android:layout_weight="1"
@@ -92,13 +91,12 @@
                 android:layout_marginTop="5dp"
                 android:layout_height="80dp" />
 
-
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="30dp">
 
             <TextView
                 android:layout_weight="10"
@@ -120,13 +118,12 @@
                 android:text="发  表"
                 android:textColor="#fdfdfe"
                 android:layout_marginTop="0dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="0dp"
                 android:layout_marginRight="25dp"
-                android:layout_width="55dp"
+                android:layout_width="75dp"
                 android:layout_height="30dp" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 
