@@ -271,7 +271,8 @@ public class PostNewArticleActivity extends BaseActivity {
         if (resultCode != RESULT_OK)
             return;
         switch (requestCode) {
-            case PHOTO_PICKED_WITH_DATA: {// 调用Gallery返回的
+            case PHOTO_PICKED_WITH_DATA: {
+                // 调用Gallery返回的
                 final Bitmap photo = data.getParcelableExtra("data");
                 // 下面就是显示照片了
                 System.out.println(photo);
