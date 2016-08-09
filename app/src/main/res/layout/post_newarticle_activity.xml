@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/id_post_newarticle_layout"
         android:orientation="vertical"
-        android:layout_marginBottom="290dp"
+        android:layout_marginBottom="390dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </LinearLayout>
@@ -17,7 +17,7 @@
         android:layout_alignParentBottom="true"
         android:background="#dadad9"
         android:layout_width="match_parent"
-        android:layout_height="290dp">
+        android:layout_height="390dp">
 
         <EditText
             android:id="@+id/id_post_newarticle_content_edittext"
@@ -31,7 +31,7 @@
             android:paddingBottom="0dp"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="100dp" />
+            android:layout_height="200dp" />
 
         <EditText
             android:id="@+id/id_post_newarticle_title_edittext"
@@ -50,7 +50,7 @@
         <LinearLayout
             android:layout_margin="5dp"
             android:orientation="horizontal"
-            android:background="#d0d0ca"
+            android:background="#6c0e24"
             android:layout_width="match_parent"
             android:paddingBottom="5dp"
             android:layout_height="80dp">
