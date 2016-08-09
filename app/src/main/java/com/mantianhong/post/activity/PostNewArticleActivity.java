@@ -39,10 +39,16 @@ public class PostNewArticleActivity extends BaseActivity {
     private EditText post_newarticle_title_edittext;
     private TextView post_newarticle_release_textview;
     private LinearLayout post_newarticle_layout;
-    private ImageView post_newarticle_addpic_imageview;
+
+    private ImageView post_newarticle_pic01_imageview;
+    private ImageView post_newarticle_pic02_imageview;
+    private ImageView post_newarticle_pic03_imageview;
+    private ImageView post_newarticle_pic04_imageview;
 
     private int intTitleFlag = -1;
     private int intContentFlag = -1;
+
+    private static int mFlag = -1;
 
     @Override
     protected int getLayout() {
@@ -56,7 +62,11 @@ public class PostNewArticleActivity extends BaseActivity {
         post_newarticle_title_edittext = (EditText) this.findViewById(R.id.id_post_newarticle_title_edittext);
         post_newarticle_release_textview = (TextView) this.findViewById(R.id.id_post_newarticle_release_textview);
         post_newarticle_layout = (LinearLayout) this.findViewById(R.id.id_post_newarticle_layout);
-        post_newarticle_addpic_imageview = (ImageView) this.findViewById(R.id.id_post_newarticle_addpic_imageview);
+
+        post_newarticle_pic01_imageview = (ImageView) this.findViewById(R.id.id_post_newarticle_pic01_imageview);
+        post_newarticle_pic02_imageview = (ImageView) this.findViewById(R.id.id_post_newarticle_pic02_imageview);
+        post_newarticle_pic03_imageview = (ImageView) this.findViewById(R.id.id_post_newarticle_pic03_imageview);
+        post_newarticle_pic04_imageview = (ImageView) this.findViewById(R.id.id_post_newarticle_pic04_imageview);
 
     }
 
@@ -121,11 +131,32 @@ public class PostNewArticleActivity extends BaseActivity {
             }
         });
 
-        post_newarticle_addpic_imageview.setOnClickListener(new View.OnClickListener() {
+
+        post_newarticle_pic01_imageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PostNewArticleActivity.this,"添加图片功能正在开发中...",Toast.LENGTH_SHORT).show();
-                doPickPhotoAction();
+                doPickPhotoAction(1);
+            }
+        });
+
+        post_newarticle_pic02_imageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doPickPhotoAction(2);
+            }
+        });
+
+        post_newarticle_pic03_imageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doPickPhotoAction(3);
+            }
+        });
+
+        post_newarticle_pic04_imageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doPickPhotoAction(4);
             }
         });
 
@@ -151,60 +182,10 @@ public class PostNewArticleActivity extends BaseActivity {
 
     private File mCurrentPhotoFile;//照相机拍照得到的图片
 
-    private void doPickPhotoAction() {
+    private void doPickPhotoAction(int intFlag) {
         Context context = PostNewArticleActivity.this;
-
-        // Wrap our context to inflate list items using correct theme
-        final Context dialogContext = new ContextThemeWrapper(context,
-                android.R.style.Theme_Light);
-        String cancel="返回";
-        //String[] choices;
-        //choices = new String[2];
-        //choices[0] = getString(R.string.take_photo);  //拍照
-        //choices[1] = getString(R.string.pick_photo);  //从相册中选择
-        //choices[0] = "拍照";
-        //choices[1] = "从相册中选择";
-        //final ListAdapter adapter = new ArrayAdapter<String>(dialogContext,
-        //        android.R.layout.simple_list_item_1, choices);
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(
-                dialogContext);
-        builder.setTitle("R.string.attachToContact");
-//        builder.setSingleChoiceItems(adapter, -1,
-//                new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        switch (which) {
-//                            case 0:{
-//                                String status=Environment.getExternalStorageState();
-//                                if(status.equals(Environment.MEDIA_MOUNTED)){//判断是否有SD卡
-//                                    doTakePhoto();// 用户点击了从照相机获取
-//                                }
-//                                else{
-//                                    showToast("没有SD卡");
-//                                }
-//                                break;
-//
-//                            }
-//                            case 1:
-//                                doPickPhotoFromGallery();// 从相册中去获取
-//                                break;
-//                        }
-//                    }
-//                });
-
+        this.mFlag = intFlag;
         doPickPhotoFromGallery();// 从相册中去获取
-
-        builder.setNegativeButton(cancel, new DialogInterface.OnClickListener() {
-
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            dialog.dismiss();
-        }
-
-        });
-
-        builder.create().show();
     }
 
     /**
@@ -279,6 +260,22 @@ public class PostNewArticleActivity extends BaseActivity {
                 //缓存用户选择的图片
                 //img = getBitmapByte(photo);
                 //mEditor.setPhotoBitmap(photo);
+
+                switch (mFlag){
+                    case 1:
+                        post_newarticle_pic01_imageview.setImageBitmap(photo);
+                        break;
+                    case 2:
+                        post_newarticle_pic02_imageview.setImageBitmap(photo);
+                        break;
+                    case 3:
+                        post_newarticle_pic03_imageview.setImageBitmap(photo);
+                        break;
+                    case 4:
+                        post_newarticle_pic04_imageview.setImageBitmap(photo);
+                        break;
+                }
+
                 System.out.println("set new photo");
                 break;
             }

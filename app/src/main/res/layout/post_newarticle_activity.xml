@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/id_post_newarticle_layout"
         android:orientation="vertical"
-        android:layout_marginBottom="220dp"
+        android:layout_marginBottom="330dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </LinearLayout>
@@ -17,7 +17,7 @@
         android:layout_alignParentBottom="true"
         android:background="#ecedf0"
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+        android:layout_height="330dp">
 
         <EditText
             android:id="@+id/id_post_newarticle_content_edittext"
@@ -49,6 +49,54 @@
 
         <LinearLayout
             android:orientation="horizontal"
+            android:background="#e2ee8e"
+            android:layout_width="match_parent"
+            android:paddingBottom="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="85dp">
+
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/id_post_newarticle_pic01_imageview"
+                android:src="@drawable/toadd"
+                android:layout_width="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="80dp" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/id_post_newarticle_pic02_imageview"
+                android:src="@drawable/toadd"
+                android:layout_width="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="80dp" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/id_post_newarticle_pic03_imageview"
+                android:src="@drawable/toadd"
+                android:layout_width="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="80dp" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/id_post_newarticle_pic04_imageview"
+                android:src="@drawable/toadd"
+                android:layout_width="0dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="80dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -57,11 +105,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
 
-            <ImageView
-                android:id="@+id/id_post_newarticle_addpic_imageview"
-                android:src="@drawable/tabbar_icon_picture_normal"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
             <TextView
                 android:layout_weight="1"
                 android:layout_width="0dp"
