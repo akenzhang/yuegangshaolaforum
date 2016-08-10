@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.mantianhong.R;
 import com.mantianhong.utiltools.BaseActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -173,11 +174,8 @@ public class PostNewArticleActivity extends BaseActivity {
 
     /*用来标识请求gallery的activity*/
     private static final int PHOTO_PICKED_WITH_DATA = 3021;
-
     /*拍照的照片存储位置*/
     private static final File PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera");
-    //private static final File PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera/Images");
-
     private File mCurrentPhotoFile;//照相机拍照得到的图片
 
     private void doPickPhotoAction(int intFlag) {
@@ -185,7 +183,6 @@ public class PostNewArticleActivity extends BaseActivity {
         this.mFlag = intFlag;
         doPickPhotoFromGallery();// 从相册中去获取
     }
-
 
     public static Intent getTakePickIntent(File f) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE, null);
@@ -195,7 +192,6 @@ public class PostNewArticleActivity extends BaseActivity {
 
     /**
      * 用当前时间给取得的图片命名
-     *
      */
     private String getPhotoFileName() {
         Date date = new Date(System.currentTimeMillis());
@@ -215,16 +211,6 @@ public class PostNewArticleActivity extends BaseActivity {
 
     // 封装请求Gallery的intent
     public static Intent getPhotoPickIntent() {
-//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
-//        intent.setType("image/*");
-//        intent.putExtra("crop", "true");
-//        intent.putExtra("aspectX", 1);
-//        intent.putExtra("aspectY", 1);
-//        intent.putExtra("outputX", 80);
-//        intent.putExtra("outputY", 80);
-//        intent.putExtra("return-data", true);
-//        return intent;
-
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
@@ -245,13 +231,8 @@ public class PostNewArticleActivity extends BaseActivity {
             case PHOTO_PICKED_WITH_DATA: {
                 // 调用Gallery返回的
                 final Bitmap photo = data.getParcelableExtra("data");
+
                 // 下面就是显示照片了
-                //System.out.println(photo);
-
-                //缓存用户选择的图片
-                //img = getBitmapByte(photo);
-                //mEditor.setPhotoBitmap(photo);
-
                 switch (mFlag){
                     case 1:
                         post_newarticle_pic01_imageview.setImageBitmap(photo);
@@ -267,7 +248,14 @@ public class PostNewArticleActivity extends BaseActivity {
                         break;
                 }
 
-                //System.out.println("set new photo");
+                ByteArrayOutputStream output = new ByteArrayOutputStream();//初始化一个流对象
+                photo.compress(Bitmap.CompressFormat.PNG, 50, output);//把bitmap100%高质量压缩 到 output对象里
+                //photo.recycle();//自由选择是否进行回收
+                byte[] imgBytes = output.toByteArray();//转换成功了
+                try {
+                    output.close();
+                } catch (Exception e) {e.printStackTrace();}
+
                 break;
             }
         }
