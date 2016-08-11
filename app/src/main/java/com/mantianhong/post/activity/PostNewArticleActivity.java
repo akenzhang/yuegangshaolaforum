@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
@@ -25,9 +27,16 @@ import android.widget.Toast;
 
 import com.mantianhong.R;
 import com.mantianhong.utiltools.BaseActivity;
+import com.mantianhong.utiltools.DBUtils;
+import com.mantianhong.utiltools.LogUtil;
+import com.mantianhong.utiltools.OkHttpUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -251,10 +260,65 @@ public class PostNewArticleActivity extends BaseActivity {
                 ByteArrayOutputStream output = new ByteArrayOutputStream();//初始化一个流对象
                 photo.compress(Bitmap.CompressFormat.PNG, 50, output);//把bitmap100%高质量压缩 到 output对象里
                 //photo.recycle();//自由选择是否进行回收
-                byte[] imgBytes = output.toByteArray();//转换成功了
+                final byte[] imgBytes = output.toByteArray();//转换成功了
                 try {
                     output.close();
                 } catch (Exception e) {e.printStackTrace();}
+
+//                try {
+//                    Uri uriImageData=null;
+//                    Bundle bundle = data.getExtras();
+//                    Bitmap bitmap = (Bitmap) bundle.get("data");// 获取相机返回的数据，并转换为Bitmap图片格式
+//                    if (data.getData() != null)
+//                    {
+//                        uriImageData = data.getData();
+//                    }
+//                    else {
+//                       uriImageData  = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
+//                    }
+//                }catch (Exception uriEx){
+//                    LogUtil.e(uriEx.getMessage());
+//                }
+
+
+
+
+                //////////////////////////////////////////
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        String actionUrl = "http://www.1316818.com/upload/android_forum";
+                        String end = "\r\n";
+                        String newName = "akenzhang001.jpg";
+                        String twoHyphens = "--";
+                        String boundary = "*****";
+                        try{
+                            URL url =new URL(actionUrl);
+                            HttpURLConnection con=(HttpURLConnection)url.openConnection();
+                            con.setDoInput(true);
+                            con.setDoOutput(true);
+                            con.setUseCaches(false);
+                            con.setRequestMethod("POST");
+                            con.setRequestProperty("Connection", "Keep-Alive");
+                            con.setRequestProperty("Charset", "UTF-8");
+                            con.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
+                            DataOutputStream ds = new DataOutputStream(con.getOutputStream());
+                            ds.writeBytes(twoHyphens + boundary + end);
+                            ds.writeBytes("Content-Disposition: form-data; " + "name=\"file1\";filename=\"" + newName +"\"" + end);
+                            ds.writeBytes(end);
+
+                            ds.write(imgBytes,0,imgBytes.length);
+                            ds.writeBytes(end);
+                            ds.writeBytes(twoHyphens + boundary + twoHyphens + end);
+                            ds.flush();
+                            ds.close();
+                        }catch (Exception e){
+                            LogUtil.e(e.getMessage());
+                        }
+                    }
+                }).start();
+                //////////////////////////////////////////
 
                 break;
             }
