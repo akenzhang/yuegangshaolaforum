@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.view.menu.ExpandedMenuView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -32,10 +33,13 @@ import com.mantianhong.utiltools.DBUtils;
 import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.OkHttpUtils;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -273,32 +277,70 @@ public class PostNewArticleActivity extends BaseActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        String actionUrl = "http://www.1316818.com/Jsonserver2.ashx";
-                        String end = "\r\n";
-                        String newName = "akenzhang001.jpg";
-                        String twoHyphens = "--";
-                        String boundary = "*****";
-                        try{
-                            URL url =new URL(actionUrl);
-                            HttpURLConnection con=(HttpURLConnection)url.openConnection();
-                            con.setDoInput(true);
-                            con.setDoOutput(true);
-                            con.setUseCaches(false);
-                            con.setRequestMethod("POST");
-                            con.setRequestProperty("Connection", "Keep-Alive");
-                            con.setRequestProperty("Charset", "UTF-8");
-                            con.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
-                            DataOutputStream ds = new DataOutputStream(con.getOutputStream());
-                            ds.writeBytes(twoHyphens + boundary + end);
-                            ds.writeBytes("Content-Disposition: form-data; name=\"file1\";filename=\"" + newName +"\"" + end);
-                            ds.writeBytes(end);
-                            ds.write(imgBytes,0,imgBytes.length);
-                            ds.writeBytes(end);
-                            ds.writeBytes(twoHyphens + boundary + twoHyphens + end);
-                            ds.flush();
-                            ds.close();
-                        }catch (Exception e){
-                            LogUtil.e(e.getMessage());
+//                        String actionUrl = "http://www.1316818.com/Jsonserver2.ashx";
+//                        String end = "\r\n";
+//                        String newName = "akenzhang001.jpg";
+//                        String twoHyphens = "--";
+//                        String boundary = "*****";
+//                        try{
+//                            URL url =new URL(actionUrl);
+//                            HttpURLConnection con=(HttpURLConnection)url.openConnection();
+//                            con.setDoInput(true);
+//                            con.setDoOutput(true);
+//                            con.setUseCaches(false);
+//                            con.setRequestMethod("POST");
+//                            con.setRequestProperty("Connection", "Keep-Alive");
+//                            con.setRequestProperty("Charset", "UTF-8");
+//                            con.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
+//                            DataOutputStream ds = new DataOutputStream(con.getOutputStream());
+//                            ds.writeBytes(twoHyphens + boundary + end);
+//                            ds.writeBytes("Content-Disposition: form-data; name=\"file1\";filename=\"" + newName +"\"" + end);
+//                            ds.writeBytes(end);
+//                            ds.write(imgBytes,0,imgBytes.length);
+//                            ds.writeBytes(end);
+//                            ds.writeBytes(twoHyphens + boundary + twoHyphens + end);
+//                            ds.flush();
+//                            ds.close();
+//                        }catch (Exception e){
+//                            LogUtil.e(e.getMessage());
+//                        }
+
+                        try {
+                            String uploadUrl = "http://www.1316818.com/Jsonserver2.ashx";
+                            String newName = String.valueOf(System.currentTimeMillis())+".jpg";
+                            String end = "\r\n";
+                            String twoHyphens = "--";
+                            String boundary = "******";
+                            URL url = new URL(uploadUrl);
+                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                            httpURLConnection.setChunkedStreamingMode(128 * 1024);// 128K
+                            // 允许输入输出流
+                            httpURLConnection.setDoInput(true);
+                            httpURLConnection.setDoOutput(true);
+                            httpURLConnection.setUseCaches(false);
+                            // 使用POST方法
+                            httpURLConnection.setRequestMethod("POST");
+                            httpURLConnection.setRequestProperty("Connection", "Keep-Alive");
+                            httpURLConnection.setRequestProperty("Charset", "UTF-8");
+
+                            httpURLConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+                            DataOutputStream dos = new DataOutputStream(httpURLConnection.getOutputStream());
+                            dos.writeBytes(twoHyphens + boundary + end);
+                            dos.writeBytes("Content-Disposition: form-data; name=\"uploadfile\"; filename=\""+ newName +"\"" + end);
+                            dos.writeBytes(end);
+                            dos.write(imgBytes, 0, imgBytes.length);
+                            dos.writeBytes(end);
+                            dos.writeBytes(twoHyphens + boundary + twoHyphens + end);
+                            dos.flush();
+                            InputStream is = httpURLConnection.getInputStream();
+                            InputStreamReader isr = new InputStreamReader(is, "utf-8");
+                            BufferedReader br = new BufferedReader(isr);
+                            String result = br.readLine();
+
+                            dos.close();
+                            is.close();
+                        }catch (Exception ex){
+                            LogUtil.e(ex.getMessage());
                         }
 
                     }
