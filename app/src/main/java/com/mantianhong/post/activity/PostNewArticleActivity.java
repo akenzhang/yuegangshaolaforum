@@ -273,7 +273,6 @@ public class PostNewArticleActivity extends BaseActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-
                         String actionUrl = "http://www.1316818.com/Jsonserver2.ashx";
                         String end = "\r\n";
                         String newName = "akenzhang001.jpg";
