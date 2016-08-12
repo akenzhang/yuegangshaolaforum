@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -39,6 +40,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by new pc on 8/8/2016.
@@ -245,7 +248,7 @@ public class PostNewArticleActivity extends BaseActivity {
                 switch (mFlag){
                     case 1:
                         post_newarticle_pic01_imageview.setImageBitmap(photo);
-                        break;
+                    break;
                     case 2:
                         post_newarticle_pic02_imageview.setImageBitmap(photo);
                         break;
@@ -259,36 +262,18 @@ public class PostNewArticleActivity extends BaseActivity {
 
                 ByteArrayOutputStream output = new ByteArrayOutputStream();//初始化一个流对象
                 photo.compress(Bitmap.CompressFormat.PNG, 50, output);//把bitmap100%高质量压缩 到 output对象里
-                //photo.recycle();//自由选择是否进行回收
+                //photo.recycle();// 自由选择是否进行回收
                 final byte[] imgBytes = output.toByteArray();//转换成功了
                 try {
                     output.close();
                 } catch (Exception e) {e.printStackTrace();}
-
-//                try {
-//                    Uri uriImageData=null;
-//                    Bundle bundle = data.getExtras();
-//                    Bitmap bitmap = (Bitmap) bundle.get("data");// 获取相机返回的数据，并转换为Bitmap图片格式
-//                    if (data.getData() != null)
-//                    {
-//                        uriImageData = data.getData();
-//                    }
-//                    else {
-//                       uriImageData  = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
-//                    }
-//                }catch (Exception uriEx){
-//                    LogUtil.e(uriEx.getMessage());
-//                }
-
-
 
 
                 //////////////////////////////////////////
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-
-                        String actionUrl = "http://www.1316818.com/upload/android_forum";
+                        String actionUrl = "http://www.1316818.com/Jsonserver2.ashx";
                         String end = "\r\n";
                         String newName = "akenzhang001.jpg";
                         String twoHyphens = "--";
@@ -305,9 +290,8 @@ public class PostNewArticleActivity extends BaseActivity {
                             con.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
                             DataOutputStream ds = new DataOutputStream(con.getOutputStream());
                             ds.writeBytes(twoHyphens + boundary + end);
-                            ds.writeBytes("Content-Disposition: form-data; " + "name=\"file1\";filename=\"" + newName +"\"" + end);
+                            ds.writeBytes("Content-Disposition: form-data; name=\"file1\";filename=\"" + newName +"\"" + end);
                             ds.writeBytes(end);
-
                             ds.write(imgBytes,0,imgBytes.length);
                             ds.writeBytes(end);
                             ds.writeBytes(twoHyphens + boundary + twoHyphens + end);
