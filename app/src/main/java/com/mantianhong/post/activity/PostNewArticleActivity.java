@@ -248,7 +248,7 @@ public class PostNewArticleActivity extends BaseActivity {
                 switch (mFlag){
                     case 1:
                         post_newarticle_pic01_imageview.setImageBitmap(photo);
-                        break;
+                    break;
                     case 2:
                         post_newarticle_pic02_imageview.setImageBitmap(photo);
                         break;
@@ -290,7 +290,7 @@ public class PostNewArticleActivity extends BaseActivity {
                             con.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
                             DataOutputStream ds = new DataOutputStream(con.getOutputStream());
                             ds.writeBytes(twoHyphens + boundary + end);
-                            ds.writeBytes("Content-Disposition: form-data; " + "name=\"file1\";filename=\"" + newName +"\"" + end);
+                            ds.writeBytes("Content-Disposition: form-data; name=\"file1\";filename=\"" + newName +"\"" + end);
                             ds.writeBytes(end);
                             ds.write(imgBytes,0,imgBytes.length);
                             ds.writeBytes(end);
