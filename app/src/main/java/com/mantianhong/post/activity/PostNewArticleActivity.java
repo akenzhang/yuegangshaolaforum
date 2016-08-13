@@ -32,6 +32,7 @@ import com.mantianhong.utiltools.BaseActivity;
 import com.mantianhong.utiltools.DBUtils;
 import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.OkHttpUtils;
+import com.mantianhong.utiltools.PhotoUtil;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -43,8 +44,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -66,6 +69,8 @@ public class PostNewArticleActivity extends BaseActivity {
     private int intContentFlag = -1;
 
     private static int mFlag = -1;
+
+    final List<byte[]> datalist = new ArrayList<>();
 
     @Override
     protected int getLayout() {
@@ -177,12 +182,35 @@ public class PostNewArticleActivity extends BaseActivity {
             }
         });
 
+        //发表功能的实现
+        post_newarticle_release_textview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //这些写将数据保存到数据库和服务器的代码
+                //////////////////////////////////////////
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String newName = String.valueOf(System.currentTimeMillis())+".jpg";
+                        String strTemp = "";
+                        for(int x=0;x<datalist.size();x++)
+                        {
+                            strTemp = String.valueOf(x);
+                            PhotoUtil.uploadPhoto(datalist.get(x),
+                                    "http://www.1316818.com/Jsonserver2.ashx",
+                                    strTemp+newName);
+                        }
+                        datalist.clear();
+                    }
+                }).start();
+                //////////////////////////////////////////
+            }
+        });
+
     }
 
     @Override
-    protected void bindData() {
-
-    }
+    protected void bindData() {}
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -220,23 +248,9 @@ public class PostNewArticleActivity extends BaseActivity {
         try {
             final Intent intent = getPhotoPickIntent();
             startActivityForResult(intent, PHOTO_PICKED_WITH_DATA);
-        } catch (ActivityNotFoundException e) {
-            //Toast.makeText(this, "R.string.photoPickerNotFoundText1",Toast.LENGTH_LONG).show();
-        }
+        } catch (ActivityNotFoundException e) {}
     }
 
-    // 封装请求Gallery的intent
-    public static Intent getPhotoPickIntent() {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 80);
-        intent.putExtra("outputY", 80);
-        intent.putExtra("return-data", true);
-        return intent;
-    }
 
     // 因为调用了Camera和Gally所以要判断他们各自的返回情况,他们启动时是这样的startActivityForResult
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -265,101 +279,26 @@ public class PostNewArticleActivity extends BaseActivity {
                 }
 
                 ByteArrayOutputStream output = new ByteArrayOutputStream();//初始化一个流对象
-                photo.compress(Bitmap.CompressFormat.PNG, 50, output);//把bitmap100%高质量压缩 到 output对象里
+                photo.compress(Bitmap.CompressFormat.PNG, 30, output);//把bitmap100%高质量压缩 到 output对象里
                 //photo.recycle();// 自由选择是否进行回收
                 final byte[] imgBytes = output.toByteArray();//转换成功了
+                datalist.add(imgBytes);
                 try {
                     output.close();
                 } catch (Exception e) {e.printStackTrace();}
-
-
-                //////////////////////////////////////////
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-//                        String actionUrl = "http://www.1316818.com/Jsonserver2.ashx";
-//                        String end = "\r\n";
-//                        String newName = "akenzhang001.jpg";
-//                        String twoHyphens = "--";
-//                        String boundary = "*****";
-//                        try{
-//                            URL url =new URL(actionUrl);
-//                            HttpURLConnection con=(HttpURLConnection)url.openConnection();
-//                            con.setDoInput(true);
-//                            con.setDoOutput(true);
-//                            con.setUseCaches(false);
-//                            con.setRequestMethod("POST");
-//                            con.setRequestProperty("Connection", "Keep-Alive");
-//                            con.setRequestProperty("Charset", "UTF-8");
-//                            con.setRequestProperty("Content-Type", "multipart/form-data;boundary="+boundary);
-//                            DataOutputStream ds = new DataOutputStream(con.getOutputStream());
-//                            ds.writeBytes(twoHyphens + boundary + end);
-//                            ds.writeBytes("Content-Disposition: form-data; name=\"file1\";filename=\"" + newName +"\"" + end);
-//                            ds.writeBytes(end);
-//                            ds.write(imgBytes,0,imgBytes.length);
-//                            ds.writeBytes(end);
-//                            ds.writeBytes(twoHyphens + boundary + twoHyphens + end);
-//                            ds.flush();
-//                            ds.close();
-//                        }catch (Exception e){
-//                            LogUtil.e(e.getMessage());
-//                        }
-
-                        try {
-                            String uploadUrl = "http://www.1316818.com/Jsonserver2.ashx";
-                            String newName = String.valueOf(System.currentTimeMillis())+".jpg";
-                            String end = "\r\n";
-                            String twoHyphens = "--";
-                            String boundary = "******";
-                            URL url = new URL(uploadUrl);
-                            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                            httpURLConnection.setChunkedStreamingMode(128 * 1024);// 128K
-                            // 允许输入输出流
-                            httpURLConnection.setDoInput(true);
-                            httpURLConnection.setDoOutput(true);
-                            httpURLConnection.setUseCaches(false);
-                            // 使用POST方法
-                            httpURLConnection.setRequestMethod("POST");
-                            httpURLConnection.setRequestProperty("Connection", "Keep-Alive");
-                            httpURLConnection.setRequestProperty("Charset", "UTF-8");
-
-                            httpURLConnection.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
-                            DataOutputStream dos = new DataOutputStream(httpURLConnection.getOutputStream());
-                            dos.writeBytes(twoHyphens + boundary + end);
-                            dos.writeBytes("Content-Disposition: form-data; name=\"uploadfile\"; filename=\""+ newName +"\"" + end);
-                            dos.writeBytes(end);
-                            dos.write(imgBytes, 0, imgBytes.length);
-                            dos.writeBytes(end);
-                            dos.writeBytes(twoHyphens + boundary + twoHyphens + end);
-                            dos.flush();
-                            InputStream is = httpURLConnection.getInputStream();
-                            InputStreamReader isr = new InputStreamReader(is, "utf-8");
-                            BufferedReader br = new BufferedReader(isr);
-                            String result = br.readLine();
-
-                            dos.close();
-                            is.close();
-                        }catch (Exception ex){
-                            LogUtil.e(ex.getMessage());
-                        }
-
-                    }
-                }).start();
-                //////////////////////////////////////////
 
                 break;
             }
         }
     }
 
+
     protected void doCropPhoto(File f) {
         try {
             // 启动gallery去剪辑这个照片
             final Intent intent = getCropImageIntent(Uri.fromFile(f));
             startActivityForResult(intent, PHOTO_PICKED_WITH_DATA);
-        } catch (Exception e) {
-            //Toast.makeText(this, "R.string.photoPickerNotFoundText", Toast.LENGTH_LONG).show();
-        }
+        } catch (Exception e) {}
     }
 
     /**
@@ -371,8 +310,21 @@ public class PostNewArticleActivity extends BaseActivity {
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 80);
-        intent.putExtra("outputY", 80);
+        intent.putExtra("outputX", 400);
+        intent.putExtra("outputY", 300);
+        intent.putExtra("return-data", true);
+        return intent;
+    }
+
+    // 封装请求Gallery的intent
+    public static Intent getPhotoPickIntent() {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 400);
+        intent.putExtra("outputY", 300);
         intent.putExtra("return-data", true);
         return intent;
     }
