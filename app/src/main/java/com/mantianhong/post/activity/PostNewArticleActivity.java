@@ -302,7 +302,7 @@ public class PostNewArticleActivity extends BaseActivity {
     }
 
     /**
-     * Constructs an intent for image cropping. 调用剪辑程序
+     *  Constructs an intent for image cropping. 调用剪辑程序
      */
     public static Intent getCropImageIntent(Uri photoUri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
