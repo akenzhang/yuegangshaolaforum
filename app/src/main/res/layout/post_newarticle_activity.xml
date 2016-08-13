@@ -6,7 +6,7 @@
     <LinearLayout
         android:id="@+id/id_post_newarticle_layout"
         android:orientation="vertical"
-        android:layout_marginBottom="390dp"
+        android:layout_marginBottom="290dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </LinearLayout>
@@ -15,9 +15,9 @@
         android:id="@+id/id_post_newarticle_innerlayout"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:background="#dadad9"
+        android:background="#81816d"
         android:layout_width="match_parent"
-        android:layout_height="390dp">
+        android:layout_height="290dp">
 
         <EditText
             android:id="@+id/id_post_newarticle_content_edittext"
@@ -31,7 +31,7 @@
             android:paddingBottom="0dp"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="100dp" />
 
         <EditText
             android:id="@+id/id_post_newarticle_title_edittext"
@@ -47,11 +47,14 @@
             android:layout_width="match_parent"
             android:layout_height="44dp" />
 
+        <!--android:background="#6c0e24"-->
         <LinearLayout
             android:layout_marginBottom="8dp"
             android:orientation="horizontal"
-            android:background="#6c0e24"
+            android:background="#81816d"
             android:layout_width="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="5dp"
             android:paddingBottom="0dp"
             android:layout_height="78dp">
 
