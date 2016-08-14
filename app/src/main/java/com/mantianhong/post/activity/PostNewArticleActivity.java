@@ -186,6 +186,7 @@ public class PostNewArticleActivity extends BaseActivity {
         post_newarticle_release_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //这些写将数据保存到数据库和服务器的代码
                 //////////////////////////////////////////
                 new Thread(new Runnable() {
