@@ -187,6 +187,11 @@ public class PostNewArticleActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
+                /*
+                dnt_createtopic(21,0,@title,0,0,0,@poster,@posterid,getdate(),getdate(),910,'刘一手',0,0,0,'',0,0,0,0,0,0,0,0,0)
+                dnt_createpost1(21,@tid,@fid,0,@poster,@posterid,@title,'',getdate(),@message,'127.1.1.0','',0,1,0,0,0,0,0,0,0)
+                 */
+
                 //这些写将数据保存到数据库和服务器的代码
                 //////////////////////////////////////////
                 new Thread(new Runnable() {
