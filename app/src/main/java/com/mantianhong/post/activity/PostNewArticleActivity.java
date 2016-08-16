@@ -90,7 +90,7 @@ public class PostNewArticleActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.toString().length()>20){
+                if(s.toString().length()>=20){
                     intContentFlag =1;
                     if(intTitleFlag==1){
                         post_newarticle_release_textview.setEnabled(true);
