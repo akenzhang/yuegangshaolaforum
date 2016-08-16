@@ -324,7 +324,8 @@ public class PostNewArticleActivity extends BaseActivity {
                 }
 
                 ByteArrayOutputStream output = new ByteArrayOutputStream();//初始化一个流对象
-                photo.compress(Bitmap.CompressFormat.PNG, 30, output);//把bitmap100%高质量压缩 到 output对象里
+                //photo.compress(Bitmap.CompressFormat.PNG, 30, output);//把bitmap100%高质量压缩 到 output对象里
+                photo.compress(Bitmap.CompressFormat.WEBP, 60, output);//把bitmap100%高质量压缩 到 output对象里
                 //photo.recycle();// 自由选择是否进行回收
                 final byte[] imgBytes = output.toByteArray();//转换成功了
                 datalist.add(imgBytes);
