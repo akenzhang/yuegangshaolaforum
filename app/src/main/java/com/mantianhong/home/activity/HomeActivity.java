@@ -76,8 +76,10 @@ public class HomeActivity extends BaseActivity {
         home_radiobutton_newpost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, PostNewArticleActivity.class);
-                startActivity(intent);
+                if(SharedPreferencesUtils.isLoginConsiderlessVisitor(HomeActivity.this)){
+                    Intent intent = new Intent(HomeActivity.this, PostNewArticleActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

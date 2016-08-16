@@ -15,7 +15,7 @@
         android:id="@+id/id_post_newarticle_innerlayout"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:background="#81816d"
+        android:background="#e8e8e8"
         android:layout_width="match_parent"
         android:layout_height="290dp">
 
@@ -24,7 +24,7 @@
             android:background="@drawable/home_article_comment_bg"
             android:gravity="top"
             android:textSize="12sp"
-            android:hint="请输入帖子内容"
+            android:hint="请输入帖子内容(至少20个字)"
             android:paddingTop="3dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -38,7 +38,7 @@
             android:background="@drawable/home_article_comment_bg"
             android:gravity="top"
             android:textSize="12sp"
-            android:hint="请输入标题"
+            android:hint="请输入标题(至少10个字)"
             android:paddingTop="0dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -110,16 +110,6 @@
             android:layout_height="30dp">
 
             <TextView
-                android:layout_weight="10"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
-
-            <TextView
                 android:id="@+id/id_post_newarticle_release_textview"
                 android:enabled="false"
                 android:layout_gravity="right"
@@ -130,9 +120,25 @@
                 android:textColor="#fdfdfe"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp"
                 android:layout_width="75dp"
                 android:layout_height="30dp" />
+
+            <TextView
+                android:id="@+id/id_post_countletter"
+                android:text="标题还差10字，内容还差20字"
+                android:layout_weight="10"
+                android:textColor="#f9031a"
+                android:gravity="left"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
