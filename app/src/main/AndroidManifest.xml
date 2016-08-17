@@ -28,6 +28,8 @@
 
         <activity android:name="com.mantianhong.home.activity.HomeArticleDetailActivity"/>
 
+        <activity android:name=".me.activity.MineHomeMyArticleActivity" />
+
         <activity android:name="com.mantianhong.home.activity.HomeArticleCommentActivity"
             android:theme="@style/myTransparent"
             android:windowSoftInputMode="adjustResize" />

@@ -176,6 +176,7 @@ public class PostNewArticleActivity extends BaseActivity {
                     String strContent  = post_newarticle_content_edittext.getText().toString();
                     String strTitle  = post_newarticle_title_edittext.getText().toString();
                     String strUsername = SharedPreferencesUtils.getUserNameConsiderlessVisitor(PostNewArticleActivity.this);
+                    String strUserId = SharedPreferencesUtils.getUserIdConsiderlessVisitor(PostNewArticleActivity.this);
 
                     final String newName = String.valueOf(System.currentTimeMillis())+".jpg";
 
@@ -195,7 +196,7 @@ public class PostNewArticleActivity extends BaseActivity {
                     }
 
                     final DialogUtil dia = new DialogUtil(PostNewArticleActivity.this,"正在保存数据......");
-                    String strUrl = "http://www.1316818.com/jsonserver_newpost.ashx?title="+ strTitle +"&message="+ strContent +"&poster="+ strUsername +"&photolist="+strPhotoes;
+                    String strUrl = "http://www.1316818.com/jsonserver_newpost.ashx?title="+ strTitle +"&message="+ strContent +"&poster="+ strUsername +"&photolist="+strPhotoes+"&android_userpwd="+strUserId;
                     new DBUtils() {
                         @Override
                         protected void successRequest(String result) {
