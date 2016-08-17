@@ -71,7 +71,8 @@ public class MineHomeMyArticleActivity extends BaseActivity {
                         ){
                     mPageNo=mAdapter.getCount()/mPagesize+1;  //当前页码
 
-                    if(mPageNo==mPrePageNo){  //除了数据，也从页码的提增上判断是否有更多数据
+                    //除了数据，也从页码的提增上判断是否有更多数据
+                    if(mPageNo==mPrePageNo){
                         mHasmore =false;
                     }
 
