@@ -4,18 +4,14 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.mantianhong.R;
 import com.mantianhong.bean.MyArticleRoot;
 import com.mantianhong.bean.Myarticle;
-import com.mantianhong.bean.MycommentRoot;
 import com.mantianhong.me.adapter.MineMyArticleAdapter;
 import com.mantianhong.utiltools.BaseActivity;
 import com.mantianhong.utiltools.DBUtils;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**

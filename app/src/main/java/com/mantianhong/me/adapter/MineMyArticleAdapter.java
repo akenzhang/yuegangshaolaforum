@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.mantianhong.R;
 import com.mantianhong.bean.Myarticle;
 import com.mantianhong.home.activity.HomeArticleDetailActivity;

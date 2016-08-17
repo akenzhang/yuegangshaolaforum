@@ -39,18 +39,14 @@ public class PostNewArticleActivity extends BaseActivity {
     private EditText post_newarticle_title_edittext;
     private TextView post_newarticle_release_textview;
     private LinearLayout post_newarticle_layout;
-
     private ImageView post_newarticle_pic01_imageview;
     private ImageView post_newarticle_pic02_imageview;
     private ImageView post_newarticle_pic03_imageview;
     private ImageView post_newarticle_pic04_imageview;
     private TextView post_countletter;
-
     private int intTitleFlag = -1;
     private int intContentFlag = -1;
-
     private static int mFlag = -1;
-
     final List<byte[]> datalist = new ArrayList<>();
 
     @Override
