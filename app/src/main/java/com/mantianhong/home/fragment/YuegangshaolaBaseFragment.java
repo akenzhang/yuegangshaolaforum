@@ -6,6 +6,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.mantianhong.utiltools.DBUtils;
 import com.mantianhong.utiltools.LazyLoadBaseFragment;
 import com.mantianhong.utiltools.LogUtil;
 import com.squareup.okhttp.Request;
@@ -96,34 +97,20 @@ public abstract class YuegangshaolaBaseFragment extends LazyLoadBaseFragment {
                                 hasmore=false;
                             }
 
-                            //加载数据，提示对话框
-                            //final DialogUtil dialog2 = new DialogUtil(YuegangshaolaBaseFragment.this.getFragmentContext(),"正在加载数据......");
-                            //LogUtil.e("intPageNext:"+String.valueOf(intPageNext));
                             String strRequestUrl = "http://www.1316818.com/jsonserver_gethomenews.ashx?fid=" + getFids() + "&newspageno=" + String.valueOf(intPageNext) + "&newspagesize=" + NEWS_PAGE_SIZE;
-                            OkHttpUtils.getAsync(strRequestUrl, new OkHttpUtils.DataCallBack() {
+                            new DBUtils() {
                                 @Override
-                                public void requestFailure(Request request, IOException e) {
-                                    //数据加载失败，也要关闭对话框
-                                    //if(dialog2!=null) {
-                                    //    dialog2.closeDialog();
-                                    //}
-                                }
-
-                                @Override
-                                public void requestSuccess(String result) {
-                                    //通过Gson解析返回的字符串，并将数据存入mListArticle内
+                                protected void successRequest(String result) {
                                     Gson gson = new Gson();
                                     Root root = gson.fromJson(result, Root.class);
                                     articleset = root.getArticleset();
                                     List<Article> moreListArticle = articleset.getArticle();
                                     mListArticle.addAll(moreListArticle);
                                     adapter.notifyDataSetChanged();
-
-                                    //if(dialog2!=null) {
-                                    //    dialog2.closeDialog();
-                                    //}
                                 }
-                            });
+                            }.getAsync(strRequestUrl);
+
+
                         }
                     }
                 }
