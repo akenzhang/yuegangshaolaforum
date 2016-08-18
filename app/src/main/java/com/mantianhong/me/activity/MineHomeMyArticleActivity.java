@@ -76,20 +76,21 @@ public class MineHomeMyArticleActivity extends BaseActivity {
                     new DBUtils() {
                         @Override
                         protected void successRequest(String result) {
+                            if(!result.contains("找不到记录")) {
+                                Gson gson = new Gson();
+                                MyArticleRoot root = gson.fromJson(result, MyArticleRoot.class);
+                                List<Myarticle> mListNew = root.getMyarticle(); //将新的数据存入mListNew内
+                                mList.addAll(mListNew); //将新的数据mListNew加入到mList内
+                                mAdapter.notifyDataSetChanged(); //通知adapter更新数据
 
-                            Gson gson = new Gson();
-                            MyArticleRoot root = gson.fromJson(result, MyArticleRoot.class);
-                            List<Myarticle> mListNew =root.getMyarticle(); //将新的数据存入mListNew内
-                            mList.addAll(mListNew); //将新的数据mListNew加入到mList内
-                            mAdapter.notifyDataSetChanged(); //通知adapter更新数据
-
-                            //判断是否有未加载的数据
-                            if(mListNew.size()<mPagesize){
-                                mHasmore =false;
-                            }else{
-                                mHasmore =true;
+                                //判断是否有未加载的数据
+                                if (mListNew.size() < mPagesize) {
+                                    mHasmore = false;
+                                } else {
+                                    mHasmore = true;
+                                }
+                                mPrePageNo = mPageNo; //对前也页码进行标识
                             }
-                            mPrePageNo = mPageNo; //对前也页码进行标识
 
                         }
                     }.getAsync(strGetMyArticleMore);
@@ -113,19 +114,21 @@ public class MineHomeMyArticleActivity extends BaseActivity {
             @Override
             protected void successRequest(String result) {
 
-                Gson gson = new Gson();
-                MyArticleRoot root = gson.fromJson(result,MyArticleRoot.class);
-                mList = root.getMyarticle();
-                mAdapter = new MineMyArticleAdapter(mList,R.layout.mine_fragment_myarticledetails,MineHomeMyArticleActivity.this);
-                mine_fragment_myarticle.setAdapter(mAdapter);
+                if(!result.contains("找不到记录")) {
+                    Gson gson = new Gson();
+                    MyArticleRoot root = gson.fromJson(result, MyArticleRoot.class);
+                    mList = root.getMyarticle();
+                    mAdapter = new MineMyArticleAdapter(mList, R.layout.mine_fragment_myarticledetails, MineHomeMyArticleActivity.this);
+                    mine_fragment_myarticle.setAdapter(mAdapter);
 
-                //判断是否有未加载的数据
-                if(mList.size()<mPagesize){
-                    mHasmore =false;
-                }else{
-                    mHasmore =true;
+                    //判断是否有未加载的数据
+                    if (mList.size() < mPagesize) {
+                        mHasmore = false;
+                    } else {
+                        mHasmore = true;
+                    }
+                    mPrePageNo = mPageNo;
                 }
-                mPrePageNo = mPageNo;
             }
         }.getAsync(strGetMyArticle);
 
