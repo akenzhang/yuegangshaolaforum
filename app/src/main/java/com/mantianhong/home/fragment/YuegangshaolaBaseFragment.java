@@ -99,7 +99,7 @@ public abstract class YuegangshaolaBaseFragment extends LazyLoadBaseFragment {
                             //加载数据，提示对话框
                             //final DialogUtil dialog2 = new DialogUtil(YuegangshaolaBaseFragment.this.getFragmentContext(),"正在加载数据......");
                             //LogUtil.e("intPageNext:"+String.valueOf(intPageNext));
-                            String strRequestUrl = "http://www.1316818.com/jsonserver.aspx?fid=" + getFids() + "&newspageno=" + String.valueOf(intPageNext) + "&newspagesize=" + NEWS_PAGE_SIZE;
+                            String strRequestUrl = "http://www.1316818.com/jsonserver_gethomenews.ashx?fid=" + getFids() + "&newspageno=" + String.valueOf(intPageNext) + "&newspagesize=" + NEWS_PAGE_SIZE;
                             OkHttpUtils.getAsync(strRequestUrl, new OkHttpUtils.DataCallBack() {
                                 @Override
                                 public void requestFailure(Request request, IOException e) {
@@ -145,7 +145,7 @@ public abstract class YuegangshaolaBaseFragment extends LazyLoadBaseFragment {
 
         try {
             String strFid = getFids();
-            String strRequestUrl = "http://www.1316818.com/jsonserver.aspx?fid=" + strFid + "&newspageno=" + intPageNext + "&newspagesize=" + NEWS_PAGE_SIZE;  //为了加快速度，第一次加载6条
+            String strRequestUrl = "http://www.1316818.com/jsonserver_gethomenews.ashx?fid=" + strFid + "&newspageno=" + intPageNext + "&newspagesize=" + NEWS_PAGE_SIZE;  //为了加快速度，第一次加载6条
 
             //弹出提示对话框
             final DialogUtil dialog1 = new DialogUtil(YuegangshaolaBaseFragment.this.getFragmentContext(), "正在加载数据......");
