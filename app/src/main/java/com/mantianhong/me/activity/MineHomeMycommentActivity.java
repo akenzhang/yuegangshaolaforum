@@ -24,6 +24,7 @@ public class MineHomeMycommentActivity extends BaseActivity {
 
     private TextView mine_fragment_mycomment_back;
     private ListView mine_fragment_mycomment;
+    private TextView mine_fragment_norecord;
 
     private List<Mycomment> mList;
     private int mLastItem = 1;
@@ -43,6 +44,8 @@ public class MineHomeMycommentActivity extends BaseActivity {
 
         mine_fragment_mycomment_back = (TextView) this.findViewById(R.id.id_mine_fragment_mycomment_back);
         mine_fragment_mycomment = (ListView) this.findViewById(R.id.id_mine_fragment_mycomment);
+        mine_fragment_norecord = (TextView) this.findViewById(R.id.id_mine_fragment_norecord02);
+        mine_fragment_norecord.setVisibility(View.GONE);
 
     }
 
@@ -91,6 +94,8 @@ public class MineHomeMycommentActivity extends BaseActivity {
                                 }
 
                                 mAdapter.notifyDataSetChanged(); //通知adapter更新数据
+                            }else{
+                                mine_fragment_norecord.setVisibility(View.VISIBLE);
                             }
                         }
                     }.getAsync(url);
@@ -126,6 +131,8 @@ public class MineHomeMycommentActivity extends BaseActivity {
                     //将数据绑定到mine_fragment_mycomment
                     mAdapter = new MineMycommentAdapter(mList,R.layout.mine_fragment_mycommentdetails,MineHomeMycommentActivity.this);
                     mine_fragment_mycomment.setAdapter(mAdapter);
+                }else{
+                    mine_fragment_norecord.setVisibility(View.VISIBLE);
                 }
 
             }

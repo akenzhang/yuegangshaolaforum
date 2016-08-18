@@ -21,6 +21,7 @@ public class MineHomeMyArticleActivity extends BaseActivity {
 
     private TextView mine_fragment_myarticle_back;
     private ListView mine_fragment_myarticle;
+    private TextView mine_fragment_norecord;
 
     private List<Myarticle> mList;
     private MineMyArticleAdapter mAdapter;
@@ -42,6 +43,8 @@ public class MineHomeMyArticleActivity extends BaseActivity {
 
         mine_fragment_myarticle_back = (TextView) this.findViewById(R.id.id_mine_fragment_myarticle_back);
         mine_fragment_myarticle = (ListView) this.findViewById(R.id.id_mine_fragment_myarticle);
+        mine_fragment_norecord = (TextView) this.findViewById(R.id.id_mine_fragment_norecord);
+        mine_fragment_norecord.setVisibility(View.GONE);
 
     }
 
@@ -90,6 +93,8 @@ public class MineHomeMyArticleActivity extends BaseActivity {
                                     mHasmore = true;
                                 }
                                 mPrePageNo = mPageNo; //对前也页码进行标识
+                            }else{
+                                mine_fragment_norecord.setVisibility(View.VISIBLE);
                             }
 
                         }
@@ -128,6 +133,8 @@ public class MineHomeMyArticleActivity extends BaseActivity {
                         mHasmore = true;
                     }
                     mPrePageNo = mPageNo;
+                }else{
+                    mine_fragment_norecord.setVisibility(View.VISIBLE);
                 }
             }
         }.getAsync(strGetMyArticle);

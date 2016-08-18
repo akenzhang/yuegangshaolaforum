@@ -22,6 +22,8 @@ public class MineHomeTakenoteActivity extends BaseActivity {
 
     private TextView mine_fragment_takenote_back;
     private ListView mine_fragment_takenote;
+    private TextView mine_fragment_norecord;
+
     private List<Takenote> mList;
     private static int mPageNo = 1;
     private static int mPrePageNo = 1;
@@ -41,6 +43,8 @@ public class MineHomeTakenoteActivity extends BaseActivity {
 
         mine_fragment_takenote_back = (TextView) this.findViewById(R.id.id_mine_fragment_takenote_back);
         mine_fragment_takenote = (ListView) this.findViewById(R.id.id_mine_fragment_takenote);
+        mine_fragment_norecord = (TextView) this.findViewById(R.id.id_mine_fragment_norecord03);
+        mine_fragment_norecord.setVisibility(View.GONE);
 
     }
 
@@ -86,6 +90,8 @@ public class MineHomeTakenoteActivity extends BaseActivity {
                                     mPrePageNo = mPageNo;
                                     mList.addAll(mListNew);
                                     mAdapter.notifyDataSetChanged();
+                                }else{
+                                    mine_fragment_norecord.setVisibility(View.VISIBLE);
                                 }
                             }
                         }.getAsync(url);
@@ -127,6 +133,8 @@ public class MineHomeTakenoteActivity extends BaseActivity {
                         //绑定数据
                         mAdapter = new MineTakenoteAdapter(mList, R.layout.mine_fragment_takenotedetails, MineHomeTakenoteActivity.this);
                         mine_fragment_takenote.setAdapter(mAdapter);
+                    }else{
+                        mine_fragment_norecord.setVisibility(View.VISIBLE);
                     }
                 }
             }.getAsync(url);

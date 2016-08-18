@@ -21,4 +21,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 
+    <TextView
+        android:id="@+id/id_mine_fragment_norecord02"
+        android:text="没有相关记录"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
