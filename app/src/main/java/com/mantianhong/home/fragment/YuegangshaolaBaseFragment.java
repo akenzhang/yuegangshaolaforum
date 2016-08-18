@@ -78,7 +78,6 @@ public abstract class YuegangshaolaBaseFragment extends LazyLoadBaseFragment {
                 //mydy>4表示需要拖动到一定的高度才提示
                 if(mydy>=4){
                     if(newState==RecyclerView.SCROLL_STATE_IDLE) {
-                        //LogUtil.e("findLastVisibleItemPosition() + a1:"+(mLayoutManager.findLastVisibleItemPosition() + a1)+"  getTotalrowcont():"+articleset.getTotalrowcont());
                         if (!hasmore && newState == RecyclerView.SCROLL_STATE_IDLE && mLayoutManager.findLastVisibleItemPosition() + 1 >= Integer.valueOf(articleset.getTotalrowcont())) {
                             //弹出提示对话框
                             DialogUtil.showDialog(YuegangshaolaBaseFragment.this.getFragmentContext(),R.layout.home_fragment_loadall_dialogackground,2000);
@@ -109,8 +108,6 @@ public abstract class YuegangshaolaBaseFragment extends LazyLoadBaseFragment {
                                     adapter.notifyDataSetChanged();
                                 }
                             }.getAsync(strRequestUrl);
-
-
                         }
                     }
                 }
