@@ -14,7 +14,7 @@ public class HomeDefaultFragmentRedian extends YuegangshaolaBaseFragment {
 
     @Override
     protected String getFids() {
-        return "99";
+        return "99"; //表示最新的前30条新闻
     }
 
     @Override
