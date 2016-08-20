@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.mantianhong.R;
 import com.mantianhong.post.activity.PostNewArticleActivity;
@@ -17,7 +16,7 @@ import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.mantianhong.contact.fragment.ContactHomeFragment;
 import com.mantianhong.home.adapter.HomeActivityPagerAdapter;
 import com.mantianhong.home.fragment.HomeDefaultFragment;
-import com.mantianhong.login.activity.LoginMainActivity;
+import com.mantianhong.login.LoginMainActivity;
 import com.mantianhong.me.fragment.MineHomeFragment;
 import com.mantianhong.video.fragment.VideoHomeFragment;
 

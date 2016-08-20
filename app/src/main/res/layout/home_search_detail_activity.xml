@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_margin="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/id_home_search_detail_img"
+        android:src="@drawable/xh_01"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/id_home_search_detail_linelayout"
+        android:layout_marginLeft="15dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/id_home_search_detail_title"
+            android:text="标题"
+            android:layout_marginTop="8dp"
+            android:textColor="#080000"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/id_home_search_detail_postdatetime"
+            android:text="发表时间"
+            android:textSize="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

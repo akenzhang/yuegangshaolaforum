@@ -36,7 +36,7 @@ public class MineHomeMycommentActivity extends BaseActivity {
 
     @Override
     protected int getLayout() {
-        return R.layout.mine_fragment_mycomment;
+        return R.layout.me_fragment_mycomment;
     }
 
     @Override
@@ -129,7 +129,7 @@ public class MineHomeMycommentActivity extends BaseActivity {
                     }
 
                     //将数据绑定到mine_fragment_mycomment
-                    mAdapter = new MineMycommentAdapter(mList,R.layout.mine_fragment_mycommentdetails,MineHomeMycommentActivity.this);
+                    mAdapter = new MineMycommentAdapter(mList,R.layout.me_fragment_mycommentdetails,MineHomeMycommentActivity.this);
                     mine_fragment_mycomment.setAdapter(mAdapter);
                 }else{
                     mine_fragment_norecord.setVisibility(View.VISIBLE);

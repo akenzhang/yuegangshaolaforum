@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.mantianhong.login.activity.LoginMainActivity;
+import com.mantianhong.login.LoginMainActivity;
 
 /**
  * Created by AKENZHANG on 2016/7/25.

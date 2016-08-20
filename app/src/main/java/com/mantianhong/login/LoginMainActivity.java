@@ -1,4 +1,4 @@
-package com.mantianhong.login.activity;
+package com.mantianhong.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,16 +29,12 @@ import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.mantianhong.home.activity.HomeActivity;
 
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;

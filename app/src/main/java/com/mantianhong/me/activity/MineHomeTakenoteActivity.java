@@ -35,7 +35,7 @@ public class MineHomeTakenoteActivity extends BaseActivity {
 
     @Override
     protected int getLayout() {
-        return R.layout.mine_fragment_takenote;
+        return R.layout.me_fragment_takenote;
     }
 
     @Override
@@ -131,7 +131,7 @@ public class MineHomeTakenoteActivity extends BaseActivity {
                         mPrePageNo = mPageNo;
 
                         //绑定数据
-                        mAdapter = new MineTakenoteAdapter(mList, R.layout.mine_fragment_takenotedetails, MineHomeTakenoteActivity.this);
+                        mAdapter = new MineTakenoteAdapter(mList, R.layout.me_fragment_takenotedetails, MineHomeTakenoteActivity.this);
                         mine_fragment_takenote.setAdapter(mAdapter);
                     }else{
                         mine_fragment_norecord.setVisibility(View.VISIBLE);

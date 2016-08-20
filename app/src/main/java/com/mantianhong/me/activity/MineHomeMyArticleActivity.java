@@ -35,7 +35,7 @@ public class MineHomeMyArticleActivity extends BaseActivity {
 
     @Override
     protected int getLayout() {
-        return R.layout.mine_fragment_myarticle;
+        return R.layout.me_fragment_myarticle;
     }
 
     @Override
@@ -123,7 +123,7 @@ public class MineHomeMyArticleActivity extends BaseActivity {
                     Gson gson = new Gson();
                     MyArticleRoot root = gson.fromJson(result, MyArticleRoot.class);
                     mList = root.getMyarticle();
-                    mAdapter = new MineMyArticleAdapter(mList, R.layout.mine_fragment_myarticledetails, MineHomeMyArticleActivity.this);
+                    mAdapter = new MineMyArticleAdapter(mList, R.layout.me_fragment_myarticledetails, MineHomeMyArticleActivity.this);
                     mine_fragment_myarticle.setAdapter(mAdapter);
 
                     //判断是否有未加载的数据

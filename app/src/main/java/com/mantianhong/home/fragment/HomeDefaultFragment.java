@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.mantianhong.R;
+import com.mantianhong.home.activity.HomeSearchActivity;
 import com.mantianhong.utiltools.CustomViewPager;
 import com.mantianhong.utiltools.LazyLoadBaseFragment;
 import com.mantianhong.utiltools.LogUtil;
@@ -80,7 +81,8 @@ public class HomeDefaultFragment extends LazyLoadBaseFragment {
         home_fragment_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"正在开发中，搜索功能.....",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(),HomeSearchActivity.class);
+                getActivity().startActivity(intent);
             }
         });
     }

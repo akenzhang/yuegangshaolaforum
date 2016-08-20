@@ -24,9 +24,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".login.activity.LoginMainActivity" android:theme="@style/commonStyle" />
+        <activity android:name=".login.LoginMainActivity" android:theme="@style/commonStyle" />
 
         <activity android:name="com.mantianhong.home.activity.HomeArticleDetailActivity"/>
+
+        <activity android:name=".home.activity.HomeSearchActivity" />
 
         <activity android:name=".me.activity.MineHomeMyArticleActivity" />
 

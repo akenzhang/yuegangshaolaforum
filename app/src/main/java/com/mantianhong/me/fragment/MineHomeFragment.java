@@ -53,7 +53,7 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
 
     @Override
     protected int getLayout() {
-        return R.layout.mine_fragment_home;
+        return R.layout.me_fragment_home;
     }
 
     @Override
@@ -113,7 +113,7 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
         };
 
         blLoginState = SharedPreferencesUtils.getLoginStateConsiderlessVisitor(MineHomeFragment.this.getContext());
-        adapter = new MineDataAdapter(blLoginState,datalist,R.layout.mine_fragment_home_listviewdetail,root.getContext());
+        adapter = new MineDataAdapter(blLoginState,datalist,R.layout.me_fragment_home_listviewdetail,root.getContext());
         mine_fragment_listview.setAdapter(adapter);
     }
 
@@ -123,7 +123,7 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
         mine_fragment_loginstate.setVisibility(View.GONE);
 
         blLoginState = SharedPreferencesUtils.getLoginStateConsiderlessVisitor(MineHomeFragment.this.getContext());
-        adapter = new MineDataAdapter(blLoginState,datalist,R.layout.mine_fragment_home_listviewdetail,root.getContext());
+        adapter = new MineDataAdapter(blLoginState,datalist,R.layout.me_fragment_home_listviewdetail,root.getContext());
         mine_fragment_listview.setAdapter(adapter);
     }
 
@@ -147,7 +147,7 @@ public class MineHomeFragment extends LazyLoadBaseFragment {
                 mine_fragment_loginstate.setVisibility(View.GONE);
 
                 blLoginState = SharedPreferencesUtils.getLoginStateConsiderlessVisitor(MineHomeFragment.this.getContext());
-                adapter = new MineDataAdapter(blLoginState,datalist,R.layout.mine_fragment_home_listviewdetail,root.getContext());
+                adapter = new MineDataAdapter(blLoginState,datalist,R.layout.me_fragment_home_listviewdetail,root.getContext());
                 mine_fragment_listview.setAdapter(adapter);
             }
         });
