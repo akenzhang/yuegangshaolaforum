@@ -67,10 +67,10 @@ public class HomeSearchActivity extends BaseActivity {
             @Override
             protected void successRequest(String result) {
 
-                Gson gson = new Gson();
-                MysearchRoot root = gson.fromJson(result,MysearchRoot.class);
-
                 if(!result.contains("找不到记录")){
+                    Gson gson = new Gson();
+                    MysearchRoot root = gson.fromJson(result,MysearchRoot.class);
+
                     HomeSearchActivityAdapter adapter = new HomeSearchActivityAdapter(mList,R.layout.home_search_detail_activity,HomeSearchActivity.this);
                     home_search_listview.setAdapter(adapter);
                 }
