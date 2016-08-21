@@ -151,7 +151,7 @@ public class HomeSearchActivity extends BaseActivity {
                         }else{
                             home_search_status.setVisibility(View.VISIBLE);
                             home_search_listview.setVisibility(View.GONE);
-                            home_search_status.setText("找不到相关记录，请从新换一个新的关键词尝试下");
+                            home_search_status.setText("找不到相关记录，请换一个新的关键词尝试下");
                         }
 
                     }
