@@ -9,6 +9,7 @@
         android:id="@+id/id_home_search_detail_img"
         android:src="@drawable/xh_01"
         android:layout_width="40dp"
+        android:layout_marginLeft="5dp"
         android:layout_height="wrap_content" />
 
     <LinearLayout
