@@ -121,7 +121,7 @@ public class HomeSearchActivity extends BaseActivity {
                 }
 
                 //获得mList数据
-                String strSQL ="http://www.1316818.com/jsonserver_search.ashx?keyword="+ strKeyword +"&pageno="+ String.valueOf(mPageNo) +"&pagesize="+String.valueOf(mPagesize);
+                String strSQL ="http://www.1316818.com/jsonserver_search.ashx?keyword="+ strKeyword +"&pageno=1&pagesize="+String.valueOf(mPagesize);
                 new DBUtils() {
                     @Override
                     protected void successRequest(String result) {
@@ -134,13 +134,14 @@ public class HomeSearchActivity extends BaseActivity {
                             mAdapter = new HomeSearchActivityAdapter(mList,R.layout.home_search_detail_activity,HomeSearchActivity.this);
                             home_search_listview.setAdapter(mAdapter);
 
+                            mPageNo = 1;
+
                             //判断是否有未加载的数据
                             if(mList.size()<mPagesize){
                                 mHasmore =false;
                             }else{
                                 mHasmore =true;
                             }
-                            mPrePageNo = mPageNo; //对前也页码进行标识
 
                         }
 
