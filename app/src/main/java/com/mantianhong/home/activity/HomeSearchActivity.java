@@ -29,6 +29,7 @@ public class HomeSearchActivity extends BaseActivity {
     private EditText home_search_edittext;
     private Button home_search_button;
     private ListView home_search_listview;
+    private TextView home_search_status;
 
     private List<Mysearch> mList;
     private int mPagesize = 12;
@@ -49,11 +50,13 @@ public class HomeSearchActivity extends BaseActivity {
         home_search_edittext = (EditText) this.findViewById(R.id.id_home_search_edittext);
         home_search_button = (Button) this.findViewById(R.id.id_home_search_button);
         home_search_listview = (ListView) this.findViewById(R.id.id_home_search_listview);
+        home_search_status = (TextView) this.findViewById(R.id.id_home_search_status);
     }
 
     @Override
     protected void initVariable() {
-
+        home_search_status.setVisibility(View.VISIBLE);
+        home_search_listview.setVisibility(View.GONE);
     }
 
     @Override
@@ -127,6 +130,9 @@ public class HomeSearchActivity extends BaseActivity {
                     protected void successRequest(String result) {
 
                         if(!result.contains("找不到记录")){
+                            home_search_status.setVisibility(View.GONE);
+                            home_search_listview.setVisibility(View.VISIBLE);
+
                             Gson gson = new Gson();
                             MysearchRoot root = gson.fromJson(result,MysearchRoot.class);
                             mList = root.getMysearch();
@@ -142,7 +148,10 @@ public class HomeSearchActivity extends BaseActivity {
                             }else{
                                 mHasmore =true;
                             }
-
+                        }else{
+                            home_search_status.setVisibility(View.VISIBLE);
+                            home_search_listview.setVisibility(View.GONE);
+                            home_search_status.setText("找不到相关记录，请从新换一个新的关键词尝试下");
                         }
 
                     }

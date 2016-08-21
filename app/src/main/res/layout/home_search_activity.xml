@@ -42,6 +42,14 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:layout_marginTop="50dp"
+        android:padding="8dp"
+        android:id="@+id/id_home_search_status"
+        android:text="输入1~2个字的简短关键词搜索，如搜索：皮水，脆皮，上色，配方等找到相关文章"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
     <ListView
         android:id="@+id/id_home_search_listview"
         android:background="#e9e7e7"
