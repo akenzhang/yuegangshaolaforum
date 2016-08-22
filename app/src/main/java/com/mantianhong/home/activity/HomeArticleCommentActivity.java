@@ -35,6 +35,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
     private LinearLayout home_article_comment_layout;
     private EditText home_article_comment_edittext;
     private TextView home_article_comment_textview;
+    private TextView home_article_comment_status;
 
     @Override
     protected int getLayout() {
@@ -47,6 +48,7 @@ public class HomeArticleCommentActivity extends BaseActivity {
         home_article_comment_layout = (LinearLayout) this.findViewById(R.id.id_home_article_comment_layout);
         home_article_comment_edittext = (EditText) this.findViewById(R.id.id_home_article_comment_edittext);
         home_article_comment_textview = (TextView) this.findViewById(R.id.id_home_article_comment_textview);
+        home_article_comment_status = (TextView) this.findViewById(R.id.id_home_article_comment_status);
     }
 
     @Override
@@ -158,13 +160,14 @@ public class HomeArticleCommentActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.toString().length()>0){
+                if(s.toString().length()>=5){
                     home_article_comment_textview.setEnabled(true);
                     home_article_comment_textview.setBackgroundColor(Color.parseColor("#828285"));
-
+                    home_article_comment_status.setText("");
                 }else {
                     home_article_comment_textview.setEnabled(false);
                     home_article_comment_textview.setBackgroundColor(Color.parseColor("#d1d1d5"));
+                    home_article_comment_status.setText("还差 "+ String.valueOf(5-s.toString().length()) +" 个字...");
                 }
             }
         });
