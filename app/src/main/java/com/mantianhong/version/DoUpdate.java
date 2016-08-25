@@ -47,7 +47,7 @@ public class DoUpdate {
                     info =  VersionHelper.getUpdataInfo(is);
 
                     String strVersion = info.getVersion();
-                    Toast.makeText(mContext,"最新的版本号是："+info.getVersion(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext,"最新的版本号是："+info.getVersion(),Toast.LENGTH_SHORT).show();
 
                     if(info.getVersion().equals(versionname)){
                         //Log.i(TAG,"版本号相同无需升级");
