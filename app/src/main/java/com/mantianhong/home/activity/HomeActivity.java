@@ -64,11 +64,14 @@ public class HomeActivity extends BaseActivity {
     protected void initVariable() {
         if(isLogin) return;
 
-
         // 检查是否有SD卡的相关权限
-        int permission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        try {
+            int permission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+            }
+        }catch (Exception ex){
+            LogUtil.e(ex.getMessage());
         }
 
         home_tab = (RadioGroup) this.findViewById(R.id.id_home_tab);
