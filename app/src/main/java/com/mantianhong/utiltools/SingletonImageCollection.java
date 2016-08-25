@@ -15,6 +15,7 @@ import java.util.Map;
 public class SingletonImageCollection {
 
     private static Map picCollection;
+    public static String msg="";
 
     private static class LazyHolder {
         private static final SingletonImageCollection INSTANCE = new SingletonImageCollection();

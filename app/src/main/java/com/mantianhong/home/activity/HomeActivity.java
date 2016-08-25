@@ -1,23 +1,33 @@
 package com.mantianhong.home.activity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.mantianhong.R;
 import com.mantianhong.post.activity.PostNewArticleActivity;
 import com.mantianhong.utiltools.BaseActivity;
 import com.mantianhong.utiltools.CustomViewPager;
 import com.mantianhong.utiltools.LogUtil;
+import com.mantianhong.utiltools.MyConstants;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
 import com.mantianhong.contact.fragment.ContactHomeFragment;
 import com.mantianhong.home.adapter.HomeActivityPagerAdapter;
 import com.mantianhong.home.fragment.HomeDefaultFragment;
 import com.mantianhong.login.LoginMainActivity;
 import com.mantianhong.me.fragment.MineHomeFragment;
+import com.mantianhong.utiltools.SingletonImageCollection;
+import com.mantianhong.version.DoUpdate;
+import com.mantianhong.version.VersionHelper;
 import com.mantianhong.video.fragment.VideoHomeFragment;
 
 public class HomeActivity extends BaseActivity {
@@ -44,9 +54,22 @@ public class HomeActivity extends BaseActivity {
         home_radiobutton_newpost = (RadioButton) this.findViewById(R.id.id_home_radiobutton_newpost);
     }
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @Override
     protected void initVariable() {
         if(isLogin) return;
+
+
+        // 检查是否有SD卡的相关权限
+        int permission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        }
 
         home_tab = (RadioGroup) this.findViewById(R.id.id_home_tab);
         home_customviewpage = (CustomViewPager) this.findViewById(R.id.id_home_customviewpage);
@@ -127,6 +150,9 @@ public class HomeActivity extends BaseActivity {
         //将HomeActivityPagerAdapter实力赋值给相应的ViewPager
         home_customviewpage.setAdapter(adapter);
 
+        //检查现在的版本号
+        DoUpdate.update(this,handler);
+
     }
 
     private Boolean isLogin(){
@@ -142,5 +168,38 @@ public class HomeActivity extends BaseActivity {
 
         return true;
     }
+
+
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+
+    public final Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MyConstants.UPDATA_CLIENT:
+                    //对话框通知用户升级程序
+                    DoUpdate.showUpdataDialog(HomeActivity.this,handler);
+                    break;
+                case MyConstants.GET_UNDATAINFO_ERROR:
+                    //服务器超时
+                    Toast.makeText(getApplicationContext(), "获取服务器更新信息失败", Toast.LENGTH_SHORT).show();
+                    //LoginMain();
+                    break;
+                case MyConstants.DOWN_ERROR:
+                    //下载apk失败
+                    Toast.makeText(getApplicationContext(), "下载新版本失败:"+SingletonImageCollection.msg, Toast.LENGTH_SHORT).show();
+                    //LoginMain();
+                    break;
+            }
+        }
+    };
+
+    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
 
 }

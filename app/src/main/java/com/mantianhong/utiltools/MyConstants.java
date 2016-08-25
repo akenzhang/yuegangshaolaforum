@@ -22,6 +22,11 @@ public class MyConstants {
     //QQ登录，QQ分享,QQ空间分享
     public static final String APP_ID="1105434609";
 
+    //检查版本号
+    public static final int UPDATA_CLIENT = 1000001;
+    public static final int GET_UNDATAINFO_ERROR = 1000002;
+    public static final int DOWN_ERROR = 1000003;
+
 
 
 }
