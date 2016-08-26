@@ -125,25 +125,6 @@ public class HomeActivity extends BaseActivity {
         });
     }
 
-    @Override
-    protected void bindData() {
-
-        if(isLogin) return;
-
-        LogUtil.e("HomeActivity==>bindData()==>创建主页、视频、联系和我菜单");
-
-        //实例化 HomeActivityPagerAdapter
-        HomeActivityPagerAdapter adapter = new HomeActivityPagerAdapter(getSupportFragmentManager(),fragments);
-
-        home_customviewpage.setOffscreenPageLimit(0);
-        //将HomeActivityPagerAdapter实力赋值给相应的ViewPager
-        home_customviewpage.setAdapter(adapter);
-
-        //检查现在的版本号
-        DoUpdate.update(this,handler);
-
-    }
-
     private Boolean isLogin(){
         isLogin=false;
         //如能找到曾经登录的痕迹，就默认登录，不再需要提示登录界面
@@ -158,15 +139,33 @@ public class HomeActivity extends BaseActivity {
         return true;
     }
 
+    @Override
+    protected void bindData() {
+
+        //检查现在的版本号
+        DoUpdate.update(this,handler);
+
+        if(isLogin) return;
+
+        LogUtil.e("HomeActivity==>bindData()==>创建主页、视频、联系和我菜单");
+
+        //实例化 HomeActivityPagerAdapter
+        HomeActivityPagerAdapter adapter = new HomeActivityPagerAdapter(getSupportFragmentManager(),fragments);
+
+        home_customviewpage.setOffscreenPageLimit(0);
+        //将HomeActivityPagerAdapter实力赋值给相应的ViewPager
+        home_customviewpage.setAdapter(adapter);
+
+    }
+
 
     //////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////////////////////
+    //////////////////////// 更新版本的代码 //////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
 
     public final Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
             super.handleMessage(msg);
             switch (msg.what) {
                 case MyConstants.UPDATA_CLIENT:
@@ -176,12 +175,10 @@ public class HomeActivity extends BaseActivity {
                 case MyConstants.GET_UNDATAINFO_ERROR:
                     //服务器超时
                     Toast.makeText(getApplicationContext(), "获取服务器更新信息失败", Toast.LENGTH_SHORT).show();
-                    //LoginMain();
                     break;
                 case MyConstants.DOWN_ERROR:
                     //下载apk失败
-                    Toast.makeText(getApplicationContext(), "下载新版本失败:"+SingletonImageCollection.msg, Toast.LENGTH_SHORT).show();
-                    //LoginMain();
+                    Toast.makeText(getApplicationContext(), "下载新版本失败", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
