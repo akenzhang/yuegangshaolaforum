@@ -173,16 +173,12 @@ public class DoUpdate {
     //安装apk
     public static void installApk(File file,Context context) {
 
-        try {
-            Intent intent = new Intent();
-            //执行动作
-            intent.setAction(Intent.ACTION_VIEW);
-            //执行的数据类型
-            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-            context.startActivity(intent);
-        }catch (Exception e){
-            String strMsg = e.getMessage();
-        }
+        Intent intent = new Intent();
+        //执行动作
+        intent.setAction(Intent.ACTION_VIEW);
+        //执行的数据类型
+        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+        context.startActivity(intent);
 
     }
 
