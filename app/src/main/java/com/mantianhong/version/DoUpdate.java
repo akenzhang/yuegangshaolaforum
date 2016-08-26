@@ -22,7 +22,6 @@ import java.net.URL;
 打开 build.gradle ===> versionName "1.2",修改这里的versionName
 打开www.1316818.com/androidversion.xml, 修改 <version>1.2</version>
 如果两者不一致，就会检查提示新版本更新
-
  */
 
 /**
