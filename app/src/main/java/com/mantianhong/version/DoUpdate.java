@@ -6,14 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Message;
-import android.widget.Toast;
-
 import com.mantianhong.R;
-import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.MyConstants;
-import com.mantianhong.utiltools.SingletonImageCollection;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -69,7 +64,6 @@ public class DoUpdate {
 
 
     }
-
 
     /*
 	 *
@@ -132,7 +126,6 @@ public class DoUpdate {
     public static File getFileFromServer(String path, ProgressDialog pd,Context mContext) throws Exception{
 
         //如果相等的话表示当前的sdcard挂载在手机上并且是可用的
-//        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
             URL url = new URL(path);
             HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(5000);
@@ -143,9 +136,7 @@ public class DoUpdate {
                 pd.setMax(conn.getContentLength());
                 InputStream is = conn.getInputStream();
                 //File file = new File(Environment.getExternalStorageDirectory(), File.separator + "updata.apk");
-                //File file = new File(mContext.getCacheDir(), File.separator + "updata.apk"); //不适用物理的SDCard位置，而是使用cache dir
-                //File file = new File(mContext.getExternalCacheDir(), File.separator + "updata.apk"); //不适用物理的SDCard位置，而是使用cache dir
-                File file = new File(Environment.getDownloadCacheDirectory(), File.separator + "updata.apk"); //不适用物理的SDCard位置，而是使用cache dir
+                File file = new File(mContext.getExternalCacheDir(), File.separator + "updata.apk"); //不适用物理的SDCard位置，而是使用cache dir
 
                 if (!file.exists()) {
                     file.createNewFile();
@@ -169,9 +160,6 @@ public class DoUpdate {
                 conn.disconnect();
                 return file;
             }
-//        }else{
-//            return null;
-//        }
 
         return null;
     }
@@ -179,19 +167,12 @@ public class DoUpdate {
     //安装apk
     public static void installApk(File file,Context mContext) {
 
-//        File file01 = new File(context.getCacheDir()+File.separator + "updata.apk");
-//        if(!file01.exists()){
-//            LogUtil.e(context.getCacheDir()+File.separator + "updata.apk");
-//        }
-
-
         Intent intent = new Intent();
         //执行动作
         intent.setAction(Intent.ACTION_VIEW);
         //执行的数据类型
         intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
         mContext.startActivity(intent);
-
 
     }
 
