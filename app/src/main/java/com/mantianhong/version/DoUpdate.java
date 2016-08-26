@@ -6,7 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Message;
+import android.widget.Toast;
+
 import com.mantianhong.R;
 import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.MyConstants;
@@ -140,7 +143,9 @@ public class DoUpdate {
                 pd.setMax(conn.getContentLength());
                 InputStream is = conn.getInputStream();
                 //File file = new File(Environment.getExternalStorageDirectory(), File.separator + "updata.apk");
-                File file = new File(mContext.getCacheDir(), File.separator + "updata.apk"); //不适用物理的SDCard位置，而是使用cache dir
+                //File file = new File(mContext.getCacheDir(), File.separator + "updata.apk"); //不适用物理的SDCard位置，而是使用cache dir
+                //File file = new File(mContext.getExternalCacheDir(), File.separator + "updata.apk"); //不适用物理的SDCard位置，而是使用cache dir
+                File file = new File(Environment.getDownloadCacheDirectory(), File.separator + "updata.apk"); //不适用物理的SDCard位置，而是使用cache dir
 
                 if (!file.exists()) {
                     file.createNewFile();
@@ -148,7 +153,7 @@ public class DoUpdate {
 
                 FileOutputStream fos = new FileOutputStream(file);
                 BufferedInputStream bis = new BufferedInputStream(is);
-                byte[] buffer = new byte[64];
+                byte[] buffer = new byte[128];
                 int len;
                 int total = 0;
                 while ((len = bis.read(buffer)) != -1) {
@@ -172,19 +177,21 @@ public class DoUpdate {
     }
 
     //安装apk
-    public static void installApk(File file,Context context) {
+    public static void installApk(File file,Context mContext) {
 
 //        File file01 = new File(context.getCacheDir()+File.separator + "updata.apk");
 //        if(!file01.exists()){
 //            LogUtil.e(context.getCacheDir()+File.separator + "updata.apk");
 //        }
 
+
         Intent intent = new Intent();
         //执行动作
         intent.setAction(Intent.ACTION_VIEW);
         //执行的数据类型
         intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-        context.startActivity(intent);
+        mContext.startActivity(intent);
+
 
     }
 
