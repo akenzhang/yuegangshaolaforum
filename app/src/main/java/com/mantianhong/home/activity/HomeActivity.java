@@ -54,25 +54,25 @@ public class HomeActivity extends BaseActivity {
         home_radiobutton_newpost = (RadioButton) this.findViewById(R.id.id_home_radiobutton_newpost);
     }
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
+//    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+//    private static String[] PERMISSIONS_STORAGE = {
+//            Manifest.permission.READ_EXTERNAL_STORAGE,
+//            Manifest.permission.WRITE_EXTERNAL_STORAGE
+//    };
 
     @Override
     protected void initVariable() {
         if(isLogin) return;
 
         // 检查是否有SD卡的相关权限
-        try {
-            int permission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
-            }
-        }catch (Exception ex){
-            LogUtil.e(ex.getMessage());
-        }
+//        try {
+//            int permission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//            if (permission != PackageManager.PERMISSION_GRANTED) {
+//                requestPermissions(PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+//            }
+//        }catch (Exception ex){
+//            LogUtil.e(ex.getMessage());
+//        }
 
         home_tab = (RadioGroup) this.findViewById(R.id.id_home_tab);
         home_customviewpage = (CustomViewPager) this.findViewById(R.id.id_home_customviewpage);

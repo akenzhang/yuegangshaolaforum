@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
 import android.os.Message;
-import android.widget.Toast;
 import com.mantianhong.R;
 import com.mantianhong.utiltools.MyConstants;
 import com.mantianhong.utiltools.SingletonImageCollection;
@@ -49,10 +47,7 @@ public class DoUpdate {
                     String strVersion = info.getVersion();
                     //Toast.makeText(mContext,"最新的版本号是："+info.getVersion(),Toast.LENGTH_SHORT).show();
 
-                    if(info.getVersion().equals(versionname)){
-                        //Log.i(TAG,"版本号相同无需升级");
-                        //LoginMain();
-                    }else{
+                    if(!info.getVersion().equals(versionname)){
                         //Log.i(TAG,"版本号不同 ,提示用户升级 ");
                         Message msg = new Message();
                         msg.what = MyConstants.UPDATA_CLIENT;
@@ -89,7 +84,6 @@ public class DoUpdate {
         //当点确定按钮时从服务器上下载 新的apk 然后安装
         builer.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                //Log.i(TAG,"下载apk,更新");
                 downLoadApk(mContext,handler);
             }
         });
@@ -126,7 +120,6 @@ public class DoUpdate {
                     msg.what = MyConstants.DOWN_ERROR;
                     handler.sendMessage(msg);
                     SingletonImageCollection.msg = String.valueOf(e.getMessage());
-                    //e.printStackTrace();
                 }
             }}.start();
     }
@@ -135,66 +128,62 @@ public class DoUpdate {
     public static File getFileFromServer(String path, ProgressDialog pd,Context mContext) throws Exception{
 
         //如果相等的话表示当前的sdcard挂载在手机上并且是可用的
-        //if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)){
-        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-
+//        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
             URL url = new URL(path);
             HttpURLConnection conn =  (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(5000);
-            //获取到文件的大小
-            pd.setMax(conn.getContentLength());
-            InputStream is = conn.getInputStream();
-            //File file = new File(Environment.getExternalStorageDirectory(), "updata.apk");
-            //String extr = Environment.getExternalStorageDirectory().toString();
-            File file = new File(Environment.getExternalStorageDirectory(),  File.separator + "updata.apk");
-            if (!file.exists())
-            {
-                file.createNewFile();
+            conn.setRequestMethod("GET");
+
+            if(conn.getResponseCode() == 200) {
+                //获取到文件的大小
+                pd.setMax(conn.getContentLength());
+                InputStream is = conn.getInputStream();
+                //File file = new File(Environment.getExternalStorageDirectory(), File.separator + "updata.apk");
+                File file = new File(mContext.getCacheDir(), File.separator + "updata.apk"); //不适用物理的SDCard位置，而是使用cache dir
+
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                FileOutputStream fos = new FileOutputStream(file);
+                BufferedInputStream bis = new BufferedInputStream(is);
+                byte[] buffer = new byte[64];
+                int len;
+                int total = 0;
+                while ((len = bis.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len);
+                    total += len;
+                    //获取当前下载量
+                    pd.setProgress(total);
+                }
+                fos.flush();
+                bis.close();
+                fos.close();
+                is.close();
+                conn.disconnect();
+                return file;
             }
+//        }else{
+//            return null;
+//        }
 
-            //取得SD卡文件路径
-
-//            File path001 = Environment.getExternalStorageDirectory();
-//            StatFs sf = new StatFs(path001.getPath());
-//            long blockSize = sf.getBlockSize();
-//            long freeBlocks = sf.getAvailableBlocks();
-//            SingletonImageCollection.msg = String.valueOf((freeBlocks * blockSize)/1024 /1024);
-
-
-            //File sd = Environment.getExternalStorageDirectory();
-            //boolean can_write = sd.canWrite();
-            //Toast.makeText(mContext,String.valueOf(can_write),Toast.LENGTH_SHORT).show();
-            //SingletonImageCollection.msg = String.valueOf(can_write);
-
-            FileOutputStream fos = new FileOutputStream(file);
-            BufferedInputStream bis = new BufferedInputStream(is);
-            byte[] buffer = new byte[1024];
-            int len ;
-            int total=0;
-            while((len =bis.read(buffer))!=-1){
-                fos.write(buffer, 0, len);
-                total+= len;
-                //获取当前下载量
-                pd.setProgress(total);
-            }
-            fos.close();
-            bis.close();
-            is.close();
-            return file;
-        }
-        else{
-            return null;
-        }
+        return null;
     }
 
     //安装apk
     public static void installApk(File file,Context context) {
-        Intent intent = new Intent();
-        //执行动作
-        intent.setAction(Intent.ACTION_VIEW);
-        //执行的数据类型
-        intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-        context.startActivity(intent);
+
+        try {
+            Intent intent = new Intent();
+            //执行动作
+            intent.setAction(Intent.ACTION_VIEW);
+            //执行的数据类型
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            context.startActivity(intent);
+        }catch (Exception e){
+            String strMsg = e.getMessage();
+        }
+
     }
 
 
