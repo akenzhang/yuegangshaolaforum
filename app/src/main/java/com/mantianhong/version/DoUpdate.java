@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Message;
 import com.mantianhong.R;
+import com.mantianhong.utiltools.LogUtil;
 import com.mantianhong.utiltools.MyConstants;
 import com.mantianhong.utiltools.SingletonImageCollection;
 import java.io.BufferedInputStream;
@@ -119,7 +120,7 @@ public class DoUpdate {
                     Message msg = new Message();
                     msg.what = MyConstants.DOWN_ERROR;
                     handler.sendMessage(msg);
-                    SingletonImageCollection.msg = String.valueOf(e.getMessage());
+                    //SingletonImageCollection.msg = String.valueOf(e.getMessage());
                 }
             }}.start();
     }
@@ -172,6 +173,11 @@ public class DoUpdate {
 
     //安装apk
     public static void installApk(File file,Context context) {
+
+//        File file01 = new File(context.getCacheDir()+File.separator + "updata.apk");
+//        if(!file01.exists()){
+//            LogUtil.e(context.getCacheDir()+File.separator + "updata.apk");
+//        }
 
         Intent intent = new Intent();
         //执行动作
