@@ -128,9 +128,6 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void bindData() {
 
-        //检查现在的版本号
-        DoUpdate.update(this,handler);
-
         if(isLogin) return;
 
         LogUtil.e("HomeActivity==>bindData()==>创建主页、视频、联系和我菜单");
@@ -141,6 +138,9 @@ public class HomeActivity extends BaseActivity {
         home_customviewpage.setOffscreenPageLimit(0);
         //将HomeActivityPagerAdapter实力赋值给相应的ViewPager
         home_customviewpage.setAdapter(adapter);
+
+        //检查现在的版本号
+        DoUpdate.update(this,handler);
 
     }
 
