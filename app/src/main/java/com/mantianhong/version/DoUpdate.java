@@ -118,7 +118,7 @@ public class DoUpdate {
                 try {
                     File file = getFileFromServer(info.getUrl(), pd,context);
                     String strDownurl = info.getUrl();
-                    sleep(3000);
+                    sleep(2000);
                     installApk(file,context);
                     pd.dismiss(); //结束掉进度条对话框
                 } catch (Exception e) {
