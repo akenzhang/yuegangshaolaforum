@@ -54,7 +54,6 @@ public class DoUpdate {
                     String strVersion = info.getVersion();
 
                     if(!info.getVersion().equals(versionname)){
-                        //Log.i(TAG,"版本号不同 ,提示用户升级 ");
                         Message msg = new Message();
                         msg.what = MyConstants.UPDATA_CLIENT;
                         handler.sendMessage(msg);
