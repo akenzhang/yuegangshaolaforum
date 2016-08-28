@@ -44,7 +44,7 @@ public class UploadUtil {
             conn.setReadTimeout(TIME_OUT);
             conn.setConnectTimeout(TIME_OUT);
             conn.setDoInput(true); // 允许输入流
-            conn.setDoOutput(true); // 允许输出流
+            conn.setDoOutput(true); //允许输出流
             conn.setUseCaches(false); // 不允许使用缓存
             conn.setRequestMethod("POST"); // 请求方式
             conn.setRequestProperty("Charset", CHARSET); // 设置编码
