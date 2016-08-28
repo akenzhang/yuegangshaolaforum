@@ -8,13 +8,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Message;
 import com.mantianhong.R;
+import com.mantianhong.utiltools.DBUtils;
+import com.mantianhong.utiltools.DateTimeUtil;
+import com.mantianhong.utiltools.IPUtil;
 import com.mantianhong.utiltools.MyConstants;
+import com.mantianhong.utiltools.SharedPreferencesUtils;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 
 /*
@@ -22,6 +28,8 @@ import java.net.URL;
 打开 build.gradle ===> versionName "1.2",修改这里的versionName
 打开www.1316818.com/androidversion.xml, 修改 <version>1.2</version>
 如果两者不一致，就会检查提示新版本更新
+
+同时保证服务器上的两个文件的版本一致
  */
 
 /**
@@ -172,6 +180,13 @@ public class DoUpdate {
 
     //安装apk
     public static void installApk(File file,Context mContext) {
+
+//        //此处将用户下载的记录保存下来
+//        HashMap<String,String> hasmap = new HashMap<String,String>();
+//        hasmap.put("ip", IPUtil.getIP(mContext));
+//        hasmap.put("datetime", DateTimeUtil.getDateString());
+//        hasmap.put("username", SharedPreferencesUtils.getUserNameIncludingVisitor(mContext));
+//        DBUtils.SaveToDB("http://www.1316818.com/jsonserver_downloads.ashx",hasmap);
 
         Intent intent = new Intent();
         //执行动作

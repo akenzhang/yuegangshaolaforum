@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">红满天烧腊论坛</string>
     <string name="versionnumber">1.1</string>
-    <string name="serverurl">http://www.1316818.com/androidversion.xml</string>
+    <string name="serverurl">http://www.1316818.com/upload/appDownload/androidversion.xml</string>
 </resources>
