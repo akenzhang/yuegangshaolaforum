@@ -20,6 +20,7 @@ import com.mantianhong.R;
 import com.mantianhong.utiltools.BaseActivity;
 import com.mantianhong.utiltools.DBUtils;
 import com.mantianhong.utiltools.DialogUtil;
+import com.mantianhong.utiltools.EmailUtils;
 import com.mantianhong.utiltools.PhotoUtil;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
 
@@ -170,8 +171,8 @@ public class PostNewArticleActivity extends BaseActivity {
 
                 if(SharedPreferencesUtils.isLoginConsiderlessVisitor(PostNewArticleActivity.this)){
                     String strContent  = post_newarticle_content_edittext.getText().toString();
-                    String strTitle  = post_newarticle_title_edittext.getText().toString();
-                    String strUsername = SharedPreferencesUtils.getUserNameConsiderlessVisitor(PostNewArticleActivity.this);
+                    final String strTitle  = post_newarticle_title_edittext.getText().toString();
+                    final String strUsername = SharedPreferencesUtils.getUserNameConsiderlessVisitor(PostNewArticleActivity.this);
                     String strUserId = SharedPreferencesUtils.getUserIdConsiderlessVisitor(PostNewArticleActivity.this);
 
                     final String newName = String.valueOf(System.currentTimeMillis())+".jpg";
@@ -218,6 +219,12 @@ public class PostNewArticleActivity extends BaseActivity {
                                 }
                             }).start();
                             //////////////////////////////////////////
+
+                            //发邮件通知我有匿名的新信息
+                            final String strMailTitle = "【粤港烧腊论坛新帖子发表】";
+                            String strContent = "<br/><br/>用户 ["+ strUsername +"] 刚刚发表新文章：【"+ strTitle +"】<br/>";
+                            EmailUtils.sendMail(strMailTitle,strContent);
+
                         }
                     }.getAsync(strUrl);
                 }
@@ -292,7 +299,6 @@ public class PostNewArticleActivity extends BaseActivity {
         } catch (ActivityNotFoundException e) {}
     }
 
-
     // 因为调用了Camera和Gally所以要判断他们各自的返回情况,他们启动时是这样的startActivityForResult
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != RESULT_OK)
@@ -333,7 +339,6 @@ public class PostNewArticleActivity extends BaseActivity {
             }
         }
     }
-
 
     protected void doCropPhoto(File f) {
         try {
