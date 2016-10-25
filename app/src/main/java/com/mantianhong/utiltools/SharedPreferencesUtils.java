@@ -10,6 +10,8 @@ import android.text.TextUtils;
 
 import com.mantianhong.login.LoginMainActivity;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by AKENZHANG on 2016/7/25.
  */
