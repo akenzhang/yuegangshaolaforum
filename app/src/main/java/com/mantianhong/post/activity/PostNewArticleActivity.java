@@ -22,6 +22,7 @@ import com.mantianhong.utiltools.DBUtils;
 import com.mantianhong.utiltools.DialogUtil;
 import com.mantianhong.utiltools.PhotoUtil;
 import com.mantianhong.utiltools.SharedPreferencesUtils;
+import com.mantianhong.utiltools.TextUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -192,7 +193,7 @@ public class PostNewArticleActivity extends BaseActivity {
                     }
 
                     final DialogUtil dia = new DialogUtil(PostNewArticleActivity.this,"正在保存数据......");
-                    String strUrl = "http://www.1316818.com/jsonserver_newpost.ashx?title="+ strTitle +"&message="+ strContent +"&poster="+ strUsername +"&photolist="+strPhotoes+"&android_userpwd="+strUserId;
+                    String strUrl = "http://www.1316818.com/jsonserver_newpost.ashx?title="+ TextUtil.urlEncode(strTitle) +"&message="+  TextUtil.urlEncode(strContent) +"&poster="+ (strUsername) +"&photolist="+ TextUtil.urlEncode(strPhotoes)+"&android_userpwd="+ TextUtil.urlEncode(strUserId);
                     new DBUtils() {
                         @Override
                         protected void successRequest(String result) {

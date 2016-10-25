@@ -3,6 +3,7 @@ package com.mantianhong.utiltools;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -11,6 +12,16 @@ import java.util.List;
  * Created by new pc on 2016/7/14.
  */
 public class TextUtil {
+
+    public static String urlEncode(String strValue){
+        try {
+            String str = new String(strValue.getBytes(), "UTF-8");
+            str = URLEncoder.encode(str, "UTF-8");
+            return str;
+        }catch (Exception ex){}
+
+        return "";
+    }
 
     public static String parseJason(String strResult){
         return strResult.replace("$@111111@$","<").replace("$@222222@$","/>").replace("$@333333@$",">").replace("$@444444@$","\"").replace("$@555555@$","\''");

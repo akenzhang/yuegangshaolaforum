@@ -97,11 +97,11 @@ public class HomeArticleCommentActivity extends BaseActivity {
                     parms.put("pid_comment",String.valueOf(intPid));
                 }
                 parms.put("tid_comment",String.valueOf(intTid));
-                parms.put("message_comment",strComment);
+                parms.put("message_comment", TextUtil.urlEncode(strComment));
                 parms.put("uniqueCode_comment",struniqueCode);
                 parms.put("ip_comment", IPUtil.getIP(HomeArticleCommentActivity.this));
-                parms.put("city_comment", SharedPreferencesUtils.getUserNameIncludingVisitor(HomeArticleCommentActivity.this)); // 取得用户名字
-                parms.put("android_userpwd_comment",SharedPreferencesUtils.getUserIdConsiderlessVisitor(HomeArticleCommentActivity.this)); //取得密码
+                parms.put("city_comment",  TextUtil.urlEncode(SharedPreferencesUtils.getUserNameIncludingVisitor(HomeArticleCommentActivity.this))); // 取得用户名字
+                parms.put("android_userpwd_comment", TextUtil.urlEncode(SharedPreferencesUtils.getUserIdConsiderlessVisitor(HomeArticleCommentActivity.this))); //取得密码
 
                 //发邮件通知我有匿名的新信息
                 final String strMailTitle = "【粤港烧腊论坛手机匿名评论】";
